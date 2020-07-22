@@ -9,9 +9,35 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}.o",
+                "${fileDirname}/${fileBasenameNoExtension}",
                 "-I",
                 "${workspaceFolder}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "C++ build catch test",
+            "command": "/usr/local/bin/g++",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "${workspaceFolder}/tests/unit_tests.o",
+                "-I",
+                "${workspaceFolder}",
+                "-std=c++14",
+                "-Wall"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -28,6 +54,6 @@
             "label": "echo",
             "type": "shell",
             "command": "echo ${workspaceFolder}"
-          }        
+        }
     ]
 }

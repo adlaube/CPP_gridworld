@@ -2,7 +2,10 @@
 #define MDP_HPP
 
 #include <cstdint>
-#include <Array3d.hpp>
+#include <string>
+#include <src/Array3d.hpp>
+#include <src/Parser.hpp>
+
 
 typedef uint16_t STATE_ID;
 typedef uint16_t ACTION_ID;
@@ -36,17 +39,20 @@ class MDP{
         }; //maximum (reward) or minimum(cost)  
 
     public:
+
+        MDP(const std::string filepath);
         STATE_ID get_num_of_states(){
             return num_of_states;
         }
 
-        Array3d<double> get_state_transition_matrix(){
-            return state_transition_matrix;
-        }      
+        //would require copy constructor
+        // Array3d<double> get_state_transition_matrix(){
+        //     return state_transition_matrix;
+        // }      
         
-        Array3d<double> get_reward_structure(){
-            return reward_structure;
-        }            
+        // Array3d<double> get_reward_structure(){
+        //     return reward_structure;
+        // }            
 
         float get_discount_rate()
         {

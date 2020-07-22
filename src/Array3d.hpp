@@ -15,8 +15,9 @@ class Array3d{
         data(new T[x_length*y_length*z_length]){
         }
 
-        //delete default constructor
-        Array3d() = delete;
+        Array3d():
+        data(nullptr){
+        }
 
         //delete default copy constructor
         Array3d(const Array3d& a3d) = delete;
