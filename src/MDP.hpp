@@ -22,6 +22,8 @@ class MDP{
 
     private:
         Array3d<double> state_transition_matrix; //flat matrix instead of 3d (action,state,next_state)
+        
+        //Alternative    std::tuple<size_t, double> sampleSR(size_t s,size_t a) const;   // From a state-action pair, return a new state-reward pair
         Array3d<double> reward_structure; //flat matrix instead of 3d (action,start_state,next_state)
 
         STATE_ID num_of_states;
