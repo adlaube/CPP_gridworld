@@ -17,7 +17,7 @@ class PolicyIteration: public Solver{
     private:
 
         uint16_t iteration_cnt;
-        std::vector<double> value_function;
+        Array3d<double> value_function;
         std::vector<int> policy_mapping;    
         MDP &mdp; //reference to the MDP to be solved, set in constructor, disable all other constructors
         void updatePolicy(MDP& mdp);

@@ -2,7 +2,7 @@
 #define MDP_HPP
 
 #include <cstdint>
-#include <vector>
+#include <Array3d.hpp>
 
 typedef uint16_t STATE_ID;
 typedef uint16_t ACTION_ID;
@@ -21,8 +21,8 @@ R: <action> : <start-state> : <end-state> : <observation> %f
 class MDP{
 
     private:
-        std::vector<double> state_transition_matrix; //flat matrix instead of 3d (action,state,next_state)
-        std::vector<double> reward_structure; //flat matrix instead of 3d (action,start_state,next_state)
+        Array3d<double> state_transition_matrix; //flat matrix instead of 3d (action,state,next_state)
+        Array3d<double> reward_structure; //flat matrix instead of 3d (action,start_state,next_state)
 
         STATE_ID num_of_states;
         enum actions : unsigned int;
@@ -38,11 +38,11 @@ class MDP{
             return num_of_states;
         }
 
-        std::vector<double> get_state_transition_matrix(){
+        Array3d<double> get_state_transition_matrix(){
             return state_transition_matrix;
         }      
         
-        std::vector<double> get_reward_structure(){
+        Array3d<double> get_reward_structure(){
             return reward_structure;
         }            
 
