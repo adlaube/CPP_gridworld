@@ -11,12 +11,12 @@ class Array3d{
 
     public:
         Array3d(std::size_t x_length, std::size_t y_length, std::size_t z_length): 
-        dimensions{x_length,y_length,z_length},
-        data(new T[x_length*y_length*z_length]){
+        dimensions_{x_length,y_length,z_length},
+        data_(new T[x_length*y_length*z_length]){
         }
 
         Array3d():
-        data(nullptr){
+        data_(nullptr){
         }
 
         //delete default copy constructor
@@ -26,30 +26,30 @@ class Array3d{
         Array3d& operator=(const Array3d& a3d) = delete;
 
         ~Array3d(){
-            delete [] data;
+            delete [] data_;
         }
 
         
         T& operator()(std::size_t x,std::size_t y,std::size_t z) const{
-            if(x>=dimensions[0] || y >=dimensions[1] || z>=dimensions[2]){
+            if(x>=dimensions_[0] || y >=dimensions_[1] || z>=dimensions_[2]){
                 throw std::out_of_range("bad index when accessing Array3d object");
             }
             else{
-                return data[z + y * dimensions[1] + x * dimensions[1] * dimensions[2]];
+                return data_[z + y * dimensions_[1] + x * dimensions_[1] * dimensions_[2]];
             }
         }
         T& operator()(std::size_t x,std::size_t y,std::size_t z) {
-            if(x>=dimensions[0] || y >=dimensions[1] || z>=dimensions[2]){
+            if(x>=dimensions_[0] || y >=dimensions_[1] || z>=dimensions_[2]){
                 throw std::out_of_range("bad index when accessing Array3d object");
             }
             else{
-                return data[z + y * dimensions[1] + x * dimensions[1] * dimensions[2]];
+                return data_[z + y * dimensions_[1] + x * dimensions_[1] * dimensions_[2]];
             }
         }        
 
     private:
-        std::size_t dimensions[3];
-        T* data;
+        std::size_t dimensions_[3];
+        T* data_;
 
 };
 

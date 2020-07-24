@@ -5,5 +5,5 @@
 
 int solve(std::string filepath){
 
-    
+    return 1;
 }

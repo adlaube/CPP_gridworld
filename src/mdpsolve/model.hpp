@@ -3,12 +3,12 @@
 
 #include <cstdint>
 #include <string>
-#include <array3d.hpp>
-#include <parser.hpp>
 #include <fstream>
 #include <iostream>
 #include <sstream>
 
+#include "array3d.hpp"
+//#include "parser.hpp"
 
 typedef uint16_t STATE_ID;
 typedef uint16_t ACTION_ID;
