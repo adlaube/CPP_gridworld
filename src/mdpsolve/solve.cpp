@@ -5,5 +5,7 @@
 
 int solve(std::string filepath){
 
+    Model newmdp(filepath);
+
     return 1;
 }

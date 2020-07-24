@@ -1,6 +1,9 @@
 //parse cmd line args and calls solve from mdpsolve lib
+#include "mdpsolve/solve.hpp"
+#include <string>
 
 int main(){
 
-    int a = 1;
+    std::string filepath = "./data/4x3.95.POMDP";
+    solve(filepath);
 }

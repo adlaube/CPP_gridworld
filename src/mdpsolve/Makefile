@@ -1,12 +1,13 @@
 CXXFLAGS = -Wall -std=c++14
-GCC = g++
+CXX = g++
 
 libmdpsolve.a: solve.o model.o
 	ar rcs libmdpsolve.a solve.o model.o
 
-solve.o: solve.cpp
+solve.o: solve.hpp
 
-model.o: model.cpp array3d.hpp
+model.o: array3d.hpp model.hpp
+
 .PHONY: clean
 clean:
 	rm -f *.o *.a

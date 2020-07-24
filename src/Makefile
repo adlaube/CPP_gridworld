@@ -1,7 +1,7 @@
-objects = mdpsolve.o
-
 CXXFLAGS = -Wall -std=c++14
-GCC = g++
+CXX = g++
+
+objects = mdpsolve.o
 
 BIN_DIR = ../bin/
 LIB_DIR = ./mdpsolve/
