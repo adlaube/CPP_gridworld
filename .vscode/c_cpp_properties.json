@@ -4,6 +4,7 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceFolder}/src/**",
+                "${workspaceFolder}/**",
                 "${default}"
             ],
             "defines": [],
@@ -14,6 +15,7 @@
             "intelliSenseMode": "clang-x64",
             "browse": {
                 "path": [
+                    "${workspaceFolder}/**",
                     "${workspaceFolder}/src/**"
                 ]            
         }            

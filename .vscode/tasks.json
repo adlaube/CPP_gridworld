@@ -36,6 +36,12 @@
                 "${workspaceFolder}/tests/unit_tests.o",
                 "-I",
                 "${workspaceFolder}/src",
+                "-I",
+                "${workspaceFolder}/",
+                "-L",
+                "./src/mdpsolve",
+                "-l",
+                "mdpsolve",
                 "-std=c++14",
                 "-Wall"
             ],
