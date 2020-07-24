@@ -1,5 +1,5 @@
 #include "include/catch.hpp"
-#include "MDP.hpp"
+#include "model.hpp"
 #include <iostream>
 
 TEST_CASE("test mdp parsing"){

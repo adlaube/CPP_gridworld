@@ -1,10 +1,10 @@
-#ifndef MDP_HPP
-#define MDP_HPP
+#ifndef MODEL_HPP
+#define MODEL_HPP
 
 #include <cstdint>
 #include <string>
-#include <src/Array3d.hpp>
-#include <src/Parser.hpp>
+#include <array3d.hpp>
+#include <parser.hpp>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -24,7 +24,7 @@ R: <action> : <start-state> : <end-state> : <observation> %f
 
 //matrix name(sizeX, std::vector<double>(sizeY));
 
-class MDP{
+class Model{
 
     private:
         Array3d<double> state_transition_matrix; //flat matrix instead of 3d (action,state,next_state)
@@ -43,7 +43,7 @@ class MDP{
 
     public:
 
-        MDP(const std::string filepath);
+        Model(const std::string filepath);
         STATE_ID get_num_of_states(){
             return num_of_states;
         }

@@ -1,7 +1,7 @@
-#include "MDP.hpp"
+#include "model.hpp"
 
 
-MDP::MDP(const std::string filepath){
+Model::Model(const std::string filepath){
 
     std::ifstream inputstream;
 

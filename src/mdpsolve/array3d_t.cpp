@@ -2,7 +2,7 @@
 #include "include/catch.hpp"
 
 
-#include "Array3d.hpp"
+#include "array3d.hpp"
 
 TEST_CASE("Test Array3d"){
 

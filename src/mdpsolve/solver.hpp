@@ -2,13 +2,13 @@
 #define SOLVER_HPP
 
 #include <vector>
-#include "MDP.hpp"
+#include "model.hpp"
 #include <cstdint>
 
 class Solver{  
 
     public:
-        virtual void solve(MDP& mdp, uint16_t max_number_of_iterations) = 0;
+        virtual void solve(model& mdp, uint16_t max_number_of_iterations) = 0;
         
 };
 
