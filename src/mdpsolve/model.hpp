@@ -5,6 +5,9 @@
 #include <string>
 #include <src/Array3d.hpp>
 #include <src/Parser.hpp>
+#include <fstream>
+#include <iostream>
+#include <sstream>
 
 
 typedef uint16_t STATE_ID;
