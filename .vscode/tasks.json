@@ -35,18 +35,18 @@
                 "${fileDirname}/${fileBasenameNoExtension}",
                 "${workspaceFolder}/tests/unit_tests.o",
                 "-I",
-                "${workspaceFolder}/src",
+                "${fileDirname}",
                 "-I",
                 "${workspaceFolder}/",
                 "-L",
-                "./src/mdpsolve",
+                "${fileDirname}",
                 "-l",
                 "mdpsolve",
                 "-std=c++14",
                 "-Wall"
             ],
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": "${fileDirname}"
             },
             "problemMatcher": [
                 "$gcc"
@@ -60,6 +60,11 @@
             "label": "echo",
             "type": "shell",
             "command": "echo ${workspaceFolder}"
+        },
+        {
+            "label": "make",
+            "type": "shell",
+            "command": "cd src && make"
         }
     ]
 }

@@ -1,4 +1,4 @@
-CXXFLAGS = -Wall -std=c++14
+CXXFLAGS = -Wall -std=c++14 -g
 CXX = g++
 
 libmdpsolve.a: solve.o model.o

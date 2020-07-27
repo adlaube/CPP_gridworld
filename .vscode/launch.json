@@ -16,6 +16,19 @@
             "externalConsole": false,
             "MIMode": "lldb",
             "preLaunchTask": "C/C++: g++ build active file"
+        },
+        {
+            "name": "g++ - make and debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/${fileBasenameNoExtension}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "make"
         }
     ]
 }

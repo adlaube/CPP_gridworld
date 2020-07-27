@@ -1,4 +1,4 @@
-CXXFLAGS = -Wall -std=c++14
+CXXFLAGS = -Wall -std=c++14 -g
 CXX = g++
 
 objects = mdpsolve.o
@@ -7,7 +7,7 @@ BIN_DIR = ../bin/
 LIB_DIR = ./mdpsolve/
 
 mdpsolve: libmdpsolve.a $(objects)
-	g++ $(objects) -L$(LIB_DIR) -o $(BIN_DIR)mdpsolve -lmdpsolve
+	g++ $(objects) -L$(LIB_DIR) -o $(BIN_DIR)mdpsolve -lmdpsolve -g
 
 mdpsolve.o: mdpsolve.cpp
 
