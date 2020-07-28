@@ -11,7 +11,10 @@ class Array3d{
 
     public:
         Array3d(std::size_t x_length, std::size_t y_length, std::size_t z_length): 
-        dimensions_{x_length,y_length,z_length},
+        xdim_(x_length),
+        ydim_(y_length),
+        zdim_(z_length),
+        length_(x_length*y_length*z_length),
         data_(new T[x_length*y_length*z_length]){
         }
 
@@ -19,11 +22,36 @@ class Array3d{
         data_(nullptr){
         }
 
-        //delete default copy constructor
-        Array3d(const Array3d& a3d) = delete;
+        friend void swap(Array3d& a1, Array3d& a2) {
+        using std::swap;
+        swap(a1.data_, a2.data_);
+        }        
 
-        //delete default assignment constructor
-        Array3d& operator=(const Array3d& a3d) = delete;
+        //default copy constructor
+        Array3d(const Array3d& a3d) = delete;
+        // xdim_(a3d.xdim_),
+        // ydim_(a3d.ydim_),
+        // zdim_(a3d.zdim_),
+        // length_(a3d.length_),
+        // data_(a3d.data_? new T[length_] : nullptr){
+        //     if(data_){
+        //         std::copy(a3d.data_,a3d.data_ + a3d.length_,data_);
+        //     }            
+        // }
+
+        //define move assignment operator
+        Array3d& operator=(Array3d&& a3d){
+            std::cout<<"move assignment"<<std::endl;
+            xdim_ = a3d.xdim_;
+            ydim_ = a3d.ydim_;
+            zdim_ = a3d.zdim_;
+            length_ = a3d.length_;
+            data_ = a3d.data_;
+            a3d.data_ = nullptr;
+            return *this;
+        }
+
+
 
         ~Array3d(){
             delete [] data_;
@@ -31,24 +59,28 @@ class Array3d{
 
         
         T& operator()(std::size_t x,std::size_t y,std::size_t z) const{
-            if(x>=dimensions_[0] || y >=dimensions_[1] || z>=dimensions_[2]){
+            if(x>=xdim_ || y >=ydim_ || z>=zdim_){
                 throw std::out_of_range("bad index when accessing Array3d object");
             }
             else{
-                return data_[z + y * dimensions_[1] + x * dimensions_[1] * dimensions_[2]];
+                return data_[z + y * ydim_ + x * ydim_ * zdim_];
             }
         }
         T& operator()(std::size_t x,std::size_t y,std::size_t z) {
-            if(x>=dimensions_[0] || y >=dimensions_[1] || z>=dimensions_[2]){
+            if(x>=xdim_ || y >=ydim_ || z>=zdim_){
                 throw std::out_of_range("bad index when accessing Array3d object");
             }
             else{
-                return data_[z + y * dimensions_[1] + x * dimensions_[1] * dimensions_[2]];
+                return data_[z + y * ydim_ + x * ydim_ * zdim_];
             }
         }        
 
     private:
-        std::size_t dimensions_[3];
+        std::size_t xdim_;
+        std::size_t ydim_;
+        std::size_t zdim_;
+                        
+        std::size_t length_;
         T* data_;
 
 };

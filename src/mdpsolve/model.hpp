@@ -6,6 +6,8 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <cstring>
+#include <vector>
 
 #include "array3d.hpp"
 //#include "parser.hpp"
@@ -27,25 +29,31 @@ R: <action> : <start-state> : <end-state> : <observation> %f
 class Model{
 
     private:
-        Array3d<double> state_transition_matrix; //flat matrix instead of 3d (action,state,next_state)
         
+        void SetArrays();        //std::unique_ptr<Array3d<double>> state_transition_matrix_;
+        void AddTransition(); //eine action hinzufügen
         //Alternative    std::tuple<size_t, double> sampleSR(size_t s,size_t a) const;   // From a state-action pair, return a new state-reward pair
-        Array3d<double> reward_structure; //flat matrix instead of 3d (action,start_state,next_state)
+        Array3d<double> state_transition_matrix_;
+        Array3d<double> reward_matrix_; //flat matrix instead of 3d (action,start_state,next_state)
 
-        STATE_ID num_of_states;
-        enum actions : unsigned int;
-        float discount_rate;
+        STATE_ID num_of_states_;
+        ACTION_ID num_of_actions_;
+
+        std::vector<std::string> action_strings;
+
+        float discount_rate_;
 
         enum optimizationGoal{
             OPT_MAXIMIZE,
             OPT_MINIMIZE
-        }; //maximum (reward) or minimum(cost)  
+        } optGoal_;
 
     public:
 
+        
         Model(const std::string filepath);
         STATE_ID get_num_of_states(){
-            return num_of_states;
+            return num_of_states_;
         }
 
         //would require copy constructor
@@ -59,7 +67,7 @@ class Model{
 
         float get_discount_rate()
         {
-            return discount_rate;
+            return discount_rate_;
         }        
 };
 
