@@ -1,0 +1,6 @@
+aktuelles Parsen ist sehr effizient aber dann muss das Parsen zweistufig passieren
+
+1. "Meta daten holen"
+2. Init array
+3. Daten schreiben (array referenzen übergeben)
+

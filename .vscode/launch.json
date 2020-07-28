@@ -18,10 +18,10 @@
             "preLaunchTask": "C/C++: g++ build active file"
         },
         {
-            "name": "g++ - make and debug",
+            "name": "g++ make and debug mdpsolve",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/${fileBasenameNoExtension}",
+            "program": "${workspaceFolder}/bin/mdpsolve",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

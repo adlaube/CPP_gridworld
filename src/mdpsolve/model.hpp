@@ -8,6 +8,7 @@
 #include <sstream>
 #include <cstring>
 #include <vector>
+#include <cassert>
 
 #include "array3d.hpp"
 //#include "parser.hpp"
@@ -32,21 +33,22 @@ class Model{
         
         void SetArrays();        //std::unique_ptr<Array3d<double>> state_transition_matrix_;
         void AddTransition(); //eine action hinzufügen
+        void CheckConsistency();
         //Alternative    std::tuple<size_t, double> sampleSR(size_t s,size_t a) const;   // From a state-action pair, return a new state-reward pair
         Array3d<double> state_transition_matrix_;
         Array3d<double> reward_matrix_; //flat matrix instead of 3d (action,start_state,next_state)
 
-        STATE_ID num_of_states_;
-        ACTION_ID num_of_actions_;
-
-        std::vector<std::string> action_strings;
-
-        float discount_rate_;
+        float discount_rate_ = 0;
+        STATE_ID num_of_states_ = 0;
+        ACTION_ID num_of_actions_ = 0;
+        std::vector<std::string> action_strings; 
+     
 
         enum optimizationGoal{
             OPT_MAXIMIZE,
-            OPT_MINIMIZE
-        } optGoal_;
+            OPT_MINIMIZE,
+            OPT_UNDEFINED
+        } optGoal_ = OPT_UNDEFINED;
 
     public:
 

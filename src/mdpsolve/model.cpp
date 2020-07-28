@@ -8,14 +8,17 @@ void Model::SetArrays(){
 
 }
 
+void Model::CheckConsistency(){
+
+    assert(num_of_states_ != 0);
+    assert(num_of_actions_ != 0);
+    assert(optGoal_ != OPT_UNDEFINED);
+}
+
 Model::Model(const std::string filepath){
 
 
     std::ifstream inputstream;
-    num_of_actions_ = 2;
-    num_of_states_ = 2;
-    SetArrays();
-
     //error handling?
     inputstream.open(filepath,std::ios::in);
     
@@ -57,31 +60,38 @@ Model::Model(const std::string filepath){
                 std::string action_string = key; //line with action
                 std::string value;
                 ACTION_ID action_cnt = 0;
+                std::getline(iss,value,' '); //skip first blank
                 while(std::getline(iss,value,' ')){ 
                     action_strings.push_back(value);
                     action_cnt++;
                 }
-                // ptr_actions_ = std::make_unique<std::string>(num_of_actions_);
-                // action_cnt = 0;
-                // char* action_chars = &action_string[0];
-                // char * value_buff;
-                // value_buff = std::strtok(action_chars," ");
-                // while(value_buff != NULL){
-                //     ptr_actions_.get()[action_cnt] = value_buff;
-                //     value_buff = strtok(NULL," ");
-                // }
+                num_of_actions_ = action_cnt;
             }         
             if (key == "T"){
+                CheckConsistency();
+                SetArrays();
                 std::string value;
+                std::getline(iss,value,' '); //skip first blank
+                                
                 std::getline(iss,value);
-                num_of_states_ = std::atoi(value.c_str());   
-            }
-            if (key == "states"){
-                std::string value;
-                std::getline(iss,value);
-                num_of_states_ = std::atoi(value.c_str());   
-            }      
-            
+                ACTION_ID action_idx = 0;
+                
+                for (auto string : action_strings){
+                    if(string == value){
+                        for (STATE_ID state_idx = 0;state_idx<num_of_states_;state_idx++){
+                            std::getline(inputstream,line); //access next line
+                            std::istringstream iss( line );
+                            int i = 0;
+                            while(std::getline(iss,value,' ')){
+                                state_transition_matrix_(action_idx,state_idx,i) = atof(value.c_str());
+                                i++;
+                            }
+                        }
+                        
+                    }
+                    action_idx++;
+                }
+            }           
         }
     }
     //end of parse
