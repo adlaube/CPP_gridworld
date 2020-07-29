@@ -1,7 +1,7 @@
 #include "model.hpp"
 
 
-struct ModelData* Model::SetArrays(){
+void Model::SetArrays(){
 
     model_data_.state_transition_matrix = Array3d<double>((std::size_t)model_params_.num_of_actions,
                                                          (std::size_t)model_params_.num_of_states,
@@ -9,8 +9,6 @@ struct ModelData* Model::SetArrays(){
     model_data_.reward_matrix = Array3d<double>((std::size_t)model_params_.num_of_actions,
                                                          (std::size_t)model_params_.num_of_states,
                                                          (std::size_t)model_params_.num_of_states);
-
-    return &model_data_;
 }
 
 void Model::CheckConsistency(std::string key){
@@ -25,8 +23,9 @@ void Model::CheckConsistency(std::string key){
 
 Model::Model(const std::string filepath, Parser parser){
 
-    //parser.parseParams(filepath,&model_params_);
-    //parser.parseParams(filepath,&model_params_);
+    parser.parseParams(filepath,&model_params_);
+    CheckConsistency("");
+    SetArrays();
+    parser.parseData(filepath,&model_data_);
 
-    //end of parse
 }

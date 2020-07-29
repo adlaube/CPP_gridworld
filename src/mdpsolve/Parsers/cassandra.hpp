@@ -16,6 +16,9 @@ class Cassandra : public Parser{
         void parseParams (std::string filepath, struct ModelParams* model_params);
         void parseData(std::string filepath, struct ModelData* model_data);
 
+    private:
+        void parseTransitionMatrix(std::istringstream iss);
+        void parseRewardMatrix(std::istringstream iss);
 };
 
 
