@@ -6,6 +6,7 @@
 class Parser{
 
     public:
+        virtual ~Parser(){};
         virtual void parseParams(std::string filepath, struct ModelParams *model_params) = 0;
         virtual void parseData(std::string filepath, struct ModelData *model_data,struct ModelParams *model_params) = 0;
 

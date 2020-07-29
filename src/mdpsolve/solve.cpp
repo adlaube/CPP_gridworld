@@ -5,7 +5,8 @@
 
 int solve(std::string filepath){
 
-    Parser* parser = new Cassandra();
+    Cassandra ca;
+    Parser* parser = (Parser *) &ca;
     
     Model newmdp(filepath,parser);
 

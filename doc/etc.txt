@@ -1,6 +1,12 @@
-aktuelles Parsen ist sehr effizient aber dann muss das Parsen zweistufig passieren
+Factory design pattern - könnte Sinn machen!
 
-1. "Meta daten holen"
-2. Init array
-3. Daten schreiben (array referenzen übergeben)
+Ich will, dass nur die Parser Implementierung geändert wird
+
+also hat der Parser sich bei der Factory über factory.add("parsername") zu registrieren
+
+so will ich das auch für alle anderen Abstraktionen
+
+vllt globale Factory für alles? 
+
+Evtl auch Klasse wie Run der alle Module als Member hat und die Factory steuert
 
