@@ -16,7 +16,7 @@ class Model{
         void CheckConsistency(std::string key);         
 
     public:
-        Model(const std::string filepath, Parser parser);
+        Model(const std::string filepath, Parser* parser);
         
 };
 

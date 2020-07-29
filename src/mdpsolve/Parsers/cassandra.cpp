@@ -1,28 +1,25 @@
 #include "cassandra.hpp"
 
-void parseRewardMatrix(std::istringstream iss,struct ModelData *model_data,struct ModelParams *model_params){
+void parseRewardMatrix(std::istringstream* iss,struct ModelData *model_data,struct ModelParams *model_params){
 
     std::string value;
     ACTION_ID action_idx = DEF_ACTION_UNDEF;
     STATE_ID start_state_idx = DEF_STATE_UNDEF;
     STATE_ID next_state_idx = DEF_STATE_UNDEF;
-
-    std::getline(iss,value,':');
-
+    std::getline(*iss,value,':');
     if (value==" * "){
         action_idx = DEF_ACTION_ALL;
     }
     
-    std::getline(iss,value,':');
+    std::getline(*iss,value,':');
     start_state_idx = atoi(value.c_str());
-    std::getline(iss,value,':');
-
+    std::getline(*iss,value,':');
     if (value==" * "){
         next_state_idx = DEF_STATE_ALL;
     }
 
-    std::getline(iss,value,'*');//skip observation, we have full observability in a MDP
-    std::getline(iss,value); 
+    std::getline(*iss,value,'*');//skip observation, we have full observability in a MDP
+    std::getline(*iss,value); 
     if(action_idx == DEF_ACTION_ALL && next_state_idx == DEF_STATE_ALL)
     {
         for (action_idx=0; action_idx<model_params->num_of_actions;action_idx++){
@@ -34,20 +31,19 @@ void parseRewardMatrix(std::istringstream iss,struct ModelData *model_data,struc
 
 }
 
-void parseTransitionMatrix(std::istringstream iss,std::ifstream inputstream,struct ModelData *model_data,struct ModelParams *model_params){
+void parseTransitionMatrix(std::ifstream* inputstream,struct ModelData *model_data,struct ModelParams *model_params){
 
-    std::string value
-    std::getline(iss,value,' '); //skip first blank    
-    std::getline(iss,value);
+    std::string value;
+    std::getline(*inputstream,value,' '); //skip first blank    
+    std::getline(*inputstream,value);
     ACTION_ID action_idx = 0;
 
     for (auto string : model_params->action_strings){
         if(string == value){
             for (STATE_ID state_idx = 0;state_idx<model_params->num_of_states;state_idx++){
-                std::getline(inputstream,line); //access next line
-                std::istringstream iss( line );
-                int i = 0;
-                while(std::getline(iss,value,' ')){
+                std::getline(*inputstream,value); //access next line
+                STATE_ID i = 0;
+                while(std::getline(*inputstream,value,' ')){
                     model_data->state_transition_matrix(action_idx,state_idx,i) = atof(value.c_str());
                     i++;
                 }
@@ -74,11 +70,11 @@ void Cassandra::parseData(std::string filepath, struct ModelData *model_data,str
 
         if(key[0] != '#')
         {         
+            //processes multiple lines
             if (key == "T"){
-                //call
-
+                parseTransitionMatrix(&inputstream,model_data,model_params);
             }  
-
+            //processes one line
             if (key == "R"){
 
                 //call

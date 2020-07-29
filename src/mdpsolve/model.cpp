@@ -21,11 +21,11 @@ void Model::CheckConsistency(std::string key){
     if(key=="actions" || checkAll == true) assert(model_params_.num_of_actions != 0);
 }
 
-Model::Model(const std::string filepath, Parser parser){
+Model::Model(const std::string filepath, Parser* parser){
 
-    parser.parseParams(filepath,&model_params_);
+    parser->parseParams(filepath,&model_params_);
     CheckConsistency("");
     SetArrays();
-    parser.parseData(filepath,&model_data_);
+    parser->parseData(filepath,&model_data_,&model_params_);
 
 }
