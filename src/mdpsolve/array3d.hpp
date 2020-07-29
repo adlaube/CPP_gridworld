@@ -41,7 +41,7 @@ class Array3d{
 
         //define move assignment operator
         Array3d& operator=(Array3d&& a3d){
-            std::cout<<"move assignment"<<std::endl;
+            //std::cout<<"move assignment"<<std::endl;
             xdim_ = a3d.xdim_;
             ydim_ = a3d.ydim_;
             zdim_ = a3d.zdim_;

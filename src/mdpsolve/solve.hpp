@@ -1,7 +1,15 @@
 #ifndef SOLVE_HPP
 #define SOLVE_HPP
-#include "model.hpp"
+
+
 #include <string>
+
+#include "Environments/gridWorld.hpp"
+//#include "Evaluations/monteCarlo.hpp"
+//#include "Solvers/policyIteration.hpp"
+//#include "Policies/greedy.hpp"
+#include "Parsers/cassandra.hpp"
+#include "model.hpp"
 
 int solve(std::string filepath);
 

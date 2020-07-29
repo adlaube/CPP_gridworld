@@ -1,13 +1,16 @@
-CXXFLAGS = -Wall -std=c++14 -g
+CXXFLAGS = -Wall -std=c++14 -g 
 CXX = g++
 
-libmdpsolve.a: solve.o model.o
-	ar rcs libmdpsolve.a solve.o model.o
+PARSER_DIR =./Parsers/
 
-solve.o: solve.hpp
+libmdpsolve.a: solve.o model.o $(PARSER_DIR)cassandra.o
+	ar rcs libmdpsolve.a solve.o model.o $(PARSER_DIR)cassandra.o
+solve.o:$(PARSER_DIR)cassandra.hpp types.hpp model.hpp
+model.o:array3d.hpp parser.hpp types.hpp
 
-model.o: array3d.hpp model.hpp
+$(PARSER_DIR)cassandra.o:
+	$(MAKE) -C $(PARSER_DIR)
 
 .PHONY: clean
 clean:
-	rm -f *.o *.a
+	rm -f *.o *.a; $(MAKE) -C $(PARSER_DIR) clean

@@ -1,8 +1,8 @@
 #ifndef GREEDY_HPP
 #define GREEDY_HPP
 
-#include "Policy.hpp"
-#include "MDP.hpp"
+#include "policy.hpp"
+#include "model.hpp"
 #include <cstdint>
 
 

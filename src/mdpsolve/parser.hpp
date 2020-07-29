@@ -1,17 +1,19 @@
 #ifndef PARSER_HPP
 #define PARSER_HPP
 
-//std::tuple<size_t, size_t, const Array3d &, const DumbMatrix3D &, double>;
+#include "types.hpp"
 
 class Parser{
 
     public:
-        virtual void parse(std::ifstream);
+        void parseParams(std::string filepath, struct ModelParams *model_params){
+
+        };
+        void parseData(std::string filepath, struct ModelData *model_data){
+
+        };
     
     private:
-
-
-
 
 };
 

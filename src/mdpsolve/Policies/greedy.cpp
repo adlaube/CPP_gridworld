@@ -1,4 +1,4 @@
-#include "Greedy.hpp"
+#include "greedy.hpp"
 
 
 //iterate over all states, 

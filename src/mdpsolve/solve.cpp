@@ -1,11 +1,12 @@
 //acts as interface of lib, provides solve() function
-
+//hier kommen argparse rein
 
 #include "solve.hpp"
 
 int solve(std::string filepath){
 
-    Model newmdp(filepath);
+    Cassandra parser;
+    Model newmdp(filepath,parser);
 
     return 1;
 }
