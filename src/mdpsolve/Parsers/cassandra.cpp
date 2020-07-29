@@ -1,6 +1,6 @@
 #include "cassandra.hpp"
 
-void parseRewardMatrix(std::istringstream* iss,struct ModelData *model_data,struct ModelParams *model_params){
+void Cassandra::parseRewardMatrix(std::istringstream* iss,struct ModelData *model_data,struct ModelParams *model_params){
 
     std::string value;
     ACTION_ID action_idx = DEF_ACTION_UNDEF;
@@ -31,7 +31,7 @@ void parseRewardMatrix(std::istringstream* iss,struct ModelData *model_data,stru
 
 }
 
-void parseTransitionMatrix(std::ifstream* inputstream,struct ModelData *model_data,struct ModelParams *model_params){
+void Cassandra::parseTransitionMatrix(std::ifstream* inputstream,struct ModelData *model_data,struct ModelParams *model_params){
 
     std::string value;
     std::getline(*inputstream,value,' '); //skip first blank    
