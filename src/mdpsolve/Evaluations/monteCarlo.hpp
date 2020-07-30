@@ -3,7 +3,7 @@
 
 #include "../evaluation.hpp"
 #include <random>
-#include "model.hpp"
+#include "../model.hpp"
 
 //use current policy until reach terminal state or until toggling has been detected
 //exploring start - not possible for all environments
@@ -15,9 +15,9 @@ class MonteCarlo : public Evaluation{
     private:
         //std::mt19937 engine;
         //std::uniform_int_distribution<unsigned long> distribution;
-    void evaluatePolicyAtState(Model& mdp, std::vector<double>& value_function, STATE_ID state, ACTION_ID selected_action);
+    void evaluatePolicyAtState(const Model& mdp, std::vector<double>& value_function, STATE_ID state, ACTION_ID selected_action);
     public:
-    void evaluatePolicy(Model& mdp, std::vector<double>& value_function, std::vector<STATE_ID>& policy_mapping, uint16_t max_iterations) override;
+    void evaluatePolicy(const Model& mdp, std::vector<double>& value_function, std::vector<STATE_ID>& policy_mapping, uint16_t max_iterations) override;
 
     /*
         assumes a deterministic policy, this is also a constrain used by the MDP

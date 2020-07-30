@@ -5,6 +5,7 @@
 #include "../solver.hpp"
 #include "../evaluation.hpp"
 #include "../policy.hpp"
+#include "../model.hpp"
 
 class PolicyIteration: public Solver{
 

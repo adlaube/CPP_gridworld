@@ -3,12 +3,20 @@
 
 #include "solve.hpp"
 
-int solve(std::string filepath){
+int run_mdpsolve(std::string filepath){
 
-    Cassandra ca;
-    
+    Cassandra parser;
+    MonteCarlo eval;
+    Greedy policy;
+    PolicyIteration solver(eval,policy);
+
+
     Model newmdp;
-    newmdp.InitModel(filepath,ca);
+    newmdp.InitModel(filepath,parser);
+
+    solver.solve(newmdp,(uint16_t) 100);
+    
+
 
     return 1;
 }

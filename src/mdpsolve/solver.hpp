@@ -9,6 +9,7 @@ class Solver{
 
     public:
         virtual void solve(const Model& model, uint16_t max_number_of_iterations) = 0;
+        virtual ~Solver(){};
         
 };
 

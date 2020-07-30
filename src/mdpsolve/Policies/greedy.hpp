@@ -1,14 +1,14 @@
 #ifndef GREEDY_HPP
 #define GREEDY_HPP
 
-#include "policy.hpp"
-#include "model.hpp"
+#include "../policy.hpp"
+#include "../model.hpp"
 #include <cstdint>
 
 
 class Greedy : public Policy{
     public:
-        void updatePolicy(Model& mdp, std::vector<double>& value_function,std::vector<STATE_ID>& policy_mapping, uint16_t max_iterations) override;
+        void updatePolicy(const Model& mdp, std::vector<double>& value_function,std::vector<STATE_ID>& policy_mapping, uint16_t max_iterations) override;
 };
 
 #endif
