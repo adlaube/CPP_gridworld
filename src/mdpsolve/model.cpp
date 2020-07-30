@@ -3,29 +3,35 @@
 
 void Model::SetArrays(){
 
-    model_data_.state_transition_matrix = Array3d<double>((std::size_t)model_params_.num_of_actions,
-                                                         (std::size_t)model_params_.num_of_states,
-                                                         (std::size_t)model_params_.num_of_states);
-    model_data_.reward_matrix = Array3d<double>((std::size_t)model_params_.num_of_actions,
-                                                         (std::size_t)model_params_.num_of_states,
-                                                         (std::size_t)model_params_.num_of_states);
+    state_transition_matrix = Array3d<double>((std::size_t)num_of_actions,
+                                                         (std::size_t)num_of_states,
+                                                         (std::size_t)num_of_states);
+    reward_matrix = Array3d<double>((std::size_t)num_of_actions,
+                                                         (std::size_t)num_of_states,
+                                                         (std::size_t)num_of_states);
 }
 
-void Model::CheckConsistency(std::string key){
+void Model::CheckConsistency(const std::string key){
 
     bool checkAll = false;
     if(key=="") checkAll = true;
-    if(key=="discount" || checkAll ==true) assert(0 < model_params_.discount_rate && model_params_.discount_rate<=1);
-    if(key=="values" || checkAll == true) assert(model_params_.optGoal != OPT_UNDEFINED);
-    if(key=="states" || checkAll == true) assert(model_params_.num_of_states!= 0);
-    if(key=="actions" || checkAll == true) assert(model_params_.num_of_actions != 0);
+    if(key=="discount" || checkAll ==true) assert(0 < discount_rate && discount_rate<=1);
+    if(key=="values" || checkAll == true) assert(optGoal != OPT_UNDEFINED);
+    if(key=="states" || checkAll == true) assert(num_of_states!= 0);
+    if(key=="actions" || checkAll == true) assert(num_of_actions != 0);
 }
 
-Model::Model(const std::string filepath, Parser* parser){
+/*
+hier wäre es vllt gut das File zu öffnen und dann den stream zu übergeben
+und vor dem 2ten Aufruf zurückzusetzen?
+Erstmal so lassen!
+*/
 
-    parser->parseParams(filepath,&model_params_);
+void Model::InitModel(const std::string filepath, const Parser& parser){
+    
+    parser.parseParams(filepath,*this);
     CheckConsistency("");
     SetArrays();
-    parser->parseData(filepath,&model_data_,&model_params_);
+    parser.parseData(filepath,*this);
 
 }

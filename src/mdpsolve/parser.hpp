@@ -1,15 +1,16 @@
 #ifndef PARSER_HPP
 #define PARSER_HPP
 
-#include "types.hpp"
+#include "model.hpp"
+
+class Model; //forward declaration
 
 class Parser{
 
     public:
         virtual ~Parser(){};
-        virtual void parseParams(std::string filepath, struct ModelParams *model_params) = 0;
-        virtual void parseData(std::string filepath, struct ModelData *model_data,struct ModelParams *model_params) = 0;
-
+        virtual void parseParams(std::string filepath, Model& model) const = 0;
+        virtual void parseData(std::string filepath, Model& model) const = 0;
 };
 
 

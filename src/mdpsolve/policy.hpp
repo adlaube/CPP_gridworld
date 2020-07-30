@@ -7,7 +7,7 @@
 class Policy{
 
     public:
-        virtual void updatePolicy(model& mdp, std::vector<double> value_function, uint16_t max_iterations) = 0;
+        virtual void updatePolicy(Model* mdp, std::vector<double> value_function, uint16_t max_iterations) = 0;
         
 };
 

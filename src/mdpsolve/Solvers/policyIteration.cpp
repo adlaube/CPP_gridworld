@@ -1,7 +1,9 @@
-#include "PolicyIteration.hpp"
+#include "policyIteration.hpp"
 
-void PolicyIteration::solve(MDP& mdp, uint16_t max_number_of_iterations){
+void PolicyIteration::solve(const Model& model){
 
-    //init value function
-    value_function = std::vector<mdp->num_
+    //LOOP
+    eval->evaluatePolicy();
+    updater->updatePolicy();
+    
 }

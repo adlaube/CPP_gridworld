@@ -1,6 +1,6 @@
 #include "cassandra.hpp"
 
-void Cassandra::parseRewardMatrix(std::istringstream* iss,struct ModelData *model_data,struct ModelParams *model_params){
+void Cassandra::parseRewardMatrix(std::istringstream* iss,Model& model) const{
 
     std::string value;
     ACTION_ID action_idx = DEF_ACTION_UNDEF;
@@ -22,29 +22,29 @@ void Cassandra::parseRewardMatrix(std::istringstream* iss,struct ModelData *mode
     std::getline(*iss,value); 
     if(action_idx == DEF_ACTION_ALL && next_state_idx == DEF_STATE_ALL)
     {
-        for (action_idx=0; action_idx<model_params->num_of_actions;action_idx++){
-            for(next_state_idx=0;next_state_idx<model_params->num_of_states;next_state_idx++){
-                model_data->reward_matrix(action_idx,start_state_idx,next_state_idx) = atof(value.c_str());
+        for (action_idx=0; action_idx<model.num_of_actions;action_idx++){
+            for(next_state_idx=0;next_state_idx<model.num_of_states;next_state_idx++){
+                model.reward_matrix(action_idx,start_state_idx,next_state_idx) = atof(value.c_str());
             }
         }
     }     
 
 }
 
-void Cassandra::parseTransitionMatrix(std::ifstream* inputstream,struct ModelData *model_data,struct ModelParams *model_params){
+void Cassandra::parseTransitionMatrix(std::ifstream* inputstream,Model& model) const{
 
     std::string value;
     std::getline(*inputstream,value,' '); //skip first blank    
     std::getline(*inputstream,value);
     ACTION_ID action_idx = 0;
 
-    for (auto string : model_params->action_strings){
+    for (auto string : model.action_strings){
         if(string == value){
-            for (STATE_ID state_idx = 0;state_idx<model_params->num_of_states;state_idx++){
+            for (STATE_ID state_idx = 0;state_idx<model.num_of_states;state_idx++){
                 std::getline(*inputstream,value); //access next line
                 STATE_ID i = 0;
                 while(std::getline(*inputstream,value,' ')){
-                    model_data->state_transition_matrix(action_idx,state_idx,i) = atof(value.c_str());
+                    model.state_transition_matrix(action_idx,state_idx,i) = atof(value.c_str());
                     i++;
                 }
             }
@@ -55,7 +55,7 @@ void Cassandra::parseTransitionMatrix(std::ifstream* inputstream,struct ModelDat
 }
 
 //error handling
-void Cassandra::parseData(std::string filepath, struct ModelData *model_data,struct ModelParams *model_params){
+void Cassandra::parseData(std::string filepath, Model& model) const{
          
     std::string line;
     std::ifstream inputstream;
@@ -72,7 +72,7 @@ void Cassandra::parseData(std::string filepath, struct ModelData *model_data,str
         {         
             //processes multiple lines
             if (key == "T"){
-                parseTransitionMatrix(&inputstream,model_data,model_params);
+                parseTransitionMatrix(&inputstream,model);
             }  
             //processes one line
             if (key == "R"){
@@ -83,7 +83,7 @@ void Cassandra::parseData(std::string filepath, struct ModelData *model_data,str
     }    
 }
 
-void Cassandra::parseParams(std::string filepath, struct ModelParams *model_params){
+void Cassandra::parseParams(std::string filepath, Model& model) const{
     
     std::ifstream inputstream;
     inputstream.open(filepath,std::ios::in);
@@ -96,22 +96,22 @@ void Cassandra::parseParams(std::string filepath, struct ModelParams *model_para
             if (key == "discount"){
                 std::string value;
                 std::getline(iss,value);
-                model_params->discount_rate = std::atof(value.c_str());
+                model.discount_rate = std::atof(value.c_str());
             }
             if (key == "values"){
                 std::string value;
                 std::getline(iss,value);
                 if(value == " reward"){
-                    model_params->optGoal = OPT_MAXIMIZE;
+                    model.optGoal = OPT_MAXIMIZE;
                 }
                 else if(value == " cost"){
-                    model_params->optGoal = OPT_MINIMIZE;
+                    model.optGoal = OPT_MINIMIZE;
                 }
             }            
             if (key == "states"){
                 std::string value;
                 std::getline(iss,value);
-                model_params->num_of_states = std::atoi(value.c_str()); 
+                model.num_of_states = std::atoi(value.c_str()); 
             }
             if (key == "actions"){ //count whitespaces and alloc accordingly
                 std::string action_string = key; //line with action
@@ -119,10 +119,10 @@ void Cassandra::parseParams(std::string filepath, struct ModelParams *model_para
                 ACTION_ID action_cnt = 0;
                 std::getline(iss,value,' '); //skip first blank
                 while(std::getline(iss,value,' ')){ 
-                    model_params->action_strings.push_back(value);
+                    model.action_strings.push_back(value);
                     action_cnt++;
                 }
-                model_params->num_of_actions = action_cnt;
+                model.num_of_actions = action_cnt;
             }   
         }                     
     }                    

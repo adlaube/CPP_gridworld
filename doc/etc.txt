@@ -1,3 +1,15 @@
+Checkliste
+
+Exceptions überall prüfen
+
+
+Low Prio
+- state und action size auf enum oder sogar template umbauen
+
+
+
+
+
 Factory design pattern - könnte Sinn machen!
 
 Ich will, dass nur die Parser Implementierung geändert wird
@@ -9,4 +21,7 @@ so will ich das auch für alle anderen Abstraktionen
 vllt globale Factory für alles? 
 
 Evtl auch Klasse wie Run der alle Module als Member hat und die Factory steuert
+
+1. alles fertig machen
+2. factories einbinden
 

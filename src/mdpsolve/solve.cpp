@@ -6,9 +6,9 @@
 int solve(std::string filepath){
 
     Cassandra ca;
-    Parser* parser = (Parser *) &ca;
     
-    Model newmdp(filepath,parser);
+    Model newmdp;
+    newmdp.InitModel(filepath,ca);
 
     return 1;
 }

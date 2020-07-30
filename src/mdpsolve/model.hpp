@@ -1,22 +1,47 @@
 #ifndef MODEL_HPP
 #define MODEL_HPP
 
+#include <string>
 #include <cassert>
+#include <vector>
 
 #include "parser.hpp"
-#include "types.hpp"
+#include "array3d.hpp"
+
+class Parser; //forward declaration
+
+typedef uint16_t STATE_ID;
+typedef uint16_t ACTION_ID;
+
+#define DEF_ACTION_UNDEF    UINT16_MAX
+#define DEF_ACTION_ALL      (DEF_ACTION_UNDEF - 1)
+
+#define DEF_STATE_UNDEF     UINT16_MAX
+#define DEF_STATE_ALL       (DEF_STATE_UNDEF - 1)
+
+enum optimizationGoal{
+    OPT_MAXIMIZE,
+    OPT_MINIMIZE,
+    OPT_UNDEFINED
+};  
 
 
 class Model{
 
     private:
-        ModelData model_data_;
-        ModelParams model_params_;
         void SetArrays();
-        void CheckConsistency(std::string key);         
+        void CheckConsistency(const std::string key);         
 
     public:
-        Model(const std::string filepath, Parser* parser);
+        Array3d<double> state_transition_matrix;
+        Array3d<double> reward_matrix;    
+        float discount_rate = 0;
+        STATE_ID num_of_states = 0;
+        ACTION_ID num_of_actions = 0;
+        std::vector<std::string> action_strings; 
+        enum optimizationGoal optGoal = OPT_UNDEFINED;
+
+        void InitModel(const std::string filepath, const Parser& parser);
         
 };
 

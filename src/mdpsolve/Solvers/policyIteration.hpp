@@ -2,24 +2,22 @@
 #define POLICYITERATION_HPP
 
 #include <vector>
-#include "Solver.hpp"
-#include "MDP.hpp"
-#include "Evaluation.hpp"
-#include "Policy.hpp"
+#include "../solver.hpp"
+#include "../evaluation.hpp"
+#include "../policy.hpp"
 
 class PolicyIteration: public Solver{
 
     public:
-        void solve(MDP& mdp, uint16_t max_number_of_iterations) override;
+        void solve(const Model& model, uint16_t max_number_of_iterations) override;
 
-        PolicyIteration(Evaluation& eval, Policy& update);
+        PolicyIteration(Evaluation* eval, Policy* updater);
 
     private:
 
         uint16_t iteration_cnt;
         Array3d<double> value_function;
-        std::vector<int> policy_mapping;    
-        MDP &mdp; //reference to the MDP to be solved, set in constructor, disable all other constructors
+        std::vector<int> policy_mapping;  
         void updatePolicy(MDP& mdp);
         void evaluatePolicy(MDP& mdp);    
 
