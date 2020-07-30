@@ -5,21 +5,21 @@
 //iterate for each state over all possible actions, 
 //iterate for each action over all possible following states
 
-void Greedy::updatePolicy(MDP& mdp, std::vector<double> value_function, std::vector<double> policy_mapping){
+void Greedy::updatePolicy(Model& mdp, std::vector<double>& value_function,std::vector<STATE_ID>& policy_mapping, uint16_t max_iterations){
 
-    uint16_t num_of_states = mdp.get_num_of_states();
+    uint16_t num_of_states = mdp.num_of_states;
     uint16_t selected_action;
     double reward, state_probability,total_reward, highest_reward;
-    ACTION_ID best_action;
+    ACTION_ID best_action_idx;
 
     for (STATE_ID current_state = 0;current_state<num_of_states;current_state++){
-        for(ACTION_ID action_idx = 0,best_action=0;action_idx<num_){
+        for(ACTION_ID action_idx = 0,best_action_idx=0;action_idx<mdp.num_of_actions;action_idx++){
             total_reward = 0;
             for(STATE_ID state_idx = 0;state_idx<num_of_states;state_idx++){
 
-                state_probability = mdp.get_state_transition_matrix()[action_idx*(num_of_states*num_of_states)+state_idx+num_of_states];
-                reward = 0;
-                total_reward = total_reward + state_probability * (reward +  
+                state_probability = mdp.state_transition_matrix(action_idx,current_state,state_idx);
+                reward = mdp.reward_matrix(action_idx,current_state,state_idx);
+                total_reward = total_reward + state_probability * (reward + value_function[state_idx]);
             }
             //init highest reward with reward of first action
             if(action_idx==0){
@@ -27,11 +27,11 @@ void Greedy::updatePolicy(MDP& mdp, std::vector<double> value_function, std::vec
             }
 
             if(total_reward > highest_reward){
-                best_action = action_idx;
+                best_action_idx = action_idx;
             }            
         }
         //set best action as new action
-        policy_mapping[current_state] = action_idx;
+        policy_mapping[current_state] = best_action_idx;
         
     }
 }

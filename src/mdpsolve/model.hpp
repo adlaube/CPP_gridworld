@@ -10,8 +10,8 @@
 
 class Parser; //forward declaration
 
-typedef uint16_t STATE_ID;
-typedef uint16_t ACTION_ID;
+typedef std::size_t STATE_ID;
+typedef std::size_t ACTION_ID;
 
 #define DEF_ACTION_UNDEF    UINT16_MAX
 #define DEF_ACTION_ALL      (DEF_ACTION_UNDEF - 1)

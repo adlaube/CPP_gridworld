@@ -3,12 +3,12 @@
 
 void Model::SetArrays(){
 
-    state_transition_matrix = Array3d<double>((std::size_t)num_of_actions,
-                                                         (std::size_t)num_of_states,
-                                                         (std::size_t)num_of_states);
-    reward_matrix = Array3d<double>((std::size_t)num_of_actions,
-                                                         (std::size_t)num_of_states,
-                                                         (std::size_t)num_of_states);
+    state_transition_matrix =   Array3d<double>(num_of_actions,
+                                                num_of_states,
+                                                num_of_states);
+    reward_matrix =             Array3d<double>(num_of_actions,
+                                                num_of_states,
+                                                num_of_states);
 }
 
 void Model::CheckConsistency(const std::string key){

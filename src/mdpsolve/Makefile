@@ -2,6 +2,9 @@ CXXFLAGS = -Wall -std=c++14 -g
 CXX = g++
 
 PARSER_DIR =./Parsers/
+EVAL_DIR = ./Evaluations/
+POLICY_DIR = ./Policies/
+SOLVER_DIR = ./Solvers/
 
 libmdpsolve.a: solve.o model.o $(PARSER_DIR)cassandra.o
 	ar rcs libmdpsolve.a solve.o model.o $(PARSER_DIR)cassandra.o

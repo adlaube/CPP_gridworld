@@ -1,20 +1,14 @@
-#include "MonteCarlo.hpp"
+#include "monteCarlo.hpp"
 
-void MonteCarlo::evaluatePolicyAtState(MDP& mdp, std::vector<double> value_function, STATE_ID state, std::vector<double> policy_mapping) {
+void MonteCarlo::evaluatePolicyAtState(Model& mdp, std::vector<double>& value_function, STATE_ID state, ACTION_ID selected_action ) {
 
-    double V_new;
-    STATE_ID num_of_states = mdp.get_num_of_states();
-    uint16_t selected_action = policy_mapping[state];
-    std::vector<double>::iterator iterStart = mdp.get_state_transition_matrix().begin() + (selected_action*(num_of_states*num_of_states) + state * num_of_states);
-    std::vector<double>::iterator iterEnd = iterStart + num_of_states;  
-    double transition_probability;
-    STATE_ID state_idx = 0;
+    double V_new,transition_probability;
+    STATE_ID num_of_states = mdp.num_of_states;    
 
-    for (auto pointer = iterStart;pointer<iterEnd;pointer++){
-        transition_probability = *pointer;
+    for (STATE_ID state_idx = 0;state_idx<num_of_states;state_idx++){
+        transition_probability = mdp.state_transition_matrix(selected_action,state,state_idx);
         //Bellman equation
-        V_new = V_new + transition_probability*(mdp.get_reward_structure()[selected_action*num_of_states] + mdp.get_discount_rate() *  value_function[state_idx]);
-        state_idx++;
+        V_new = V_new + transition_probability*(mdp.reward_matrix(selected_action,state,state) + mdp.discount_rate *  value_function[state_idx]);
     }
 
     value_function[state] = V_new;
@@ -22,10 +16,11 @@ void MonteCarlo::evaluatePolicyAtState(MDP& mdp, std::vector<double> value_funct
 }
 
 
-void MonteCarlo::evaluatePolicy(MDP& mdp, std::vector<double> value_function, uint16_t max_iterations){
+void MonteCarlo::evaluatePolicy(Model& mdp, std::vector<double>& value_function, std::vector<STATE_ID>& policy_mapping, uint16_t max_iterations){
     
     STATE_ID current_state;
-    STATE_ID num_of_states = mdp.get_num_of_states();
+    STATE_ID num_of_states = mdp.num_of_states;
+    ACTION_ID selected_action;
             
     uint16_t iteration_cnt;
     
@@ -33,7 +28,8 @@ void MonteCarlo::evaluatePolicy(MDP& mdp, std::vector<double> value_function, ui
 
         for(STATE_ID state_idx = 0; state_idx < num_of_states;state_idx++)
         {
-            evaluatePolicyAtState(mdp,value_function,state_idx);
+            selected_action = policy_mapping[state_idx];
+            evaluatePolicyAtState(mdp,value_function,state_idx,selected_action);
         }
 
         iteration_cnt++;

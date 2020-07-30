@@ -9,7 +9,7 @@ class Evaluation{
 
 
     public:
-        virtual void evaluatePolicy(const Model& model, std::vector<double> value_function, uint16_t max_iterations) = 0;
+        virtual void evaluatePolicy(Model& mdp, std::vector<double>& value_function, std::vector<STATE_ID>& policy_mapping, uint16_t max_iterations) = 0;
         
 };
 
