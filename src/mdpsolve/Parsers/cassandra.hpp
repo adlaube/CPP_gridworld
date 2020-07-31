@@ -10,6 +10,8 @@
 
 #include "../parser.hpp"
 
+//Parser kann selbst setArrays und CheckConsistency aufrufen, müssen dann halt public sein
+
 class Cassandra : public Parser{
 
     public:

@@ -1,13 +1,15 @@
 //acts as interface of lib, provides solve() function
 //hier kommen argparse rein
+//vllt noch nen besserer name für das file
+
 
 #include "solve.hpp"
 
 int run_mdpsolve(std::string filepath){
 
-    Cassandra parser;
-    MonteCarlo eval;
-    Greedy policy;
+    const Cassandra parser;
+    const MonteCarlo eval;
+    const Greedy policy;
     PolicyIteration solver;
 
     Model newmdp;
