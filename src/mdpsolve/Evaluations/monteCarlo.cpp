@@ -19,9 +19,8 @@ void MonteCarlo::evaluatePolicyAtState(const Model& mdp, std::vector<double>& va
 void MonteCarlo::evaluatePolicy(const Model& mdp, std::vector<double>& value_function, std::vector<STATE_ID>& policy_mapping, uint16_t max_iterations) const{
     
     STATE_ID num_of_states = mdp.num_of_states;
+    uint16_t iteration_cnt = 0;
     ACTION_ID selected_action;
-            
-    uint16_t iteration_cnt;
     
     while(iteration_cnt < max_iterations){
 

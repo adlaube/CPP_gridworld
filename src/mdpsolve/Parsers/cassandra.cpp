@@ -1,4 +1,15 @@
 #include "cassandra.hpp"
+/*
+bool Cassandra::readDoubleFromString(std::string in_string, double& out_double){
+    char* end_ptr;
+    errno = 0;
+    double result = strtod(in_string.c_str(), &end_ptr);
+    if (errno != 0 || *end_ptr != '\0') {
+        fprintf(stderr, "the value could not be represented as a double exactly\n");
+    }
+
+}
+*/
 
 void Cassandra::parseRewardMatrix(std::istringstream* iss,Model& model) const{
 
@@ -31,33 +42,31 @@ void Cassandra::parseRewardMatrix(std::istringstream* iss,Model& model) const{
 
 }
 
-void Cassandra::parseTransitionMatrix(std::ifstream* inputstream,Model& model) const{
+void Cassandra::parseTransitionMatrix(std::ifstream* inputstream,Model& model,const ACTION_ID action) const{
 
-    std::string value;
-    std::getline(*inputstream,value,' '); //skip first blank    
-    std::getline(*inputstream,value);
-    ACTION_ID action_idx = 0;
-
-    for (auto string : model.action_strings){
-        if(string == value){
-            for (STATE_ID state_idx = 0;state_idx<model.num_of_states;state_idx++){
-                std::getline(*inputstream,value); //access next line
-                STATE_ID i = 0;
-                while(std::getline(*inputstream,value,' ')){
-                    model.state_transition_matrix(action_idx,state_idx,i) = atof(value.c_str());
-                    i++;
-                }
-            }
-            
+    std::string value, line;
+    
+    double probability;
+    for (STATE_ID state_idx = 0;state_idx<model.num_of_states;state_idx++){
+        std::getline(*inputstream,line); //access next line
+        std::istringstream iss(line);
+        STATE_ID i = 0;
+        while(std::getline(iss,value,' ')){ //&& value){
+            model.state_transition_matrix(action,state_idx,i) = atof(value.c_str());
+            i++;
         }
-        action_idx++;
-    } 
+        if(i != model.num_of_states){
+            throw("invalid transition matrix");
+        }
+    }
+
 }
 
 //error handling
 void Cassandra::parseData(std::string filepath, Model& model) const{
          
     std::string line;
+    std::string value;
     std::ifstream inputstream;
     inputstream.open(filepath,std::ios::in);
     
@@ -72,12 +81,20 @@ void Cassandra::parseData(std::string filepath, Model& model) const{
         {         
             //processes multiple lines
             if (key == "T"){
-                parseTransitionMatrix(&inputstream,model);
+                std::getline(iss,value,' '); //skip first blank    
+                std::getline(iss,value);
+                auto result = std::find(model.action_strings.begin(),model.action_strings.end(),value);
+                if(result == model.action_strings.end()){
+                    throw("invalid action");
+                }
+                ACTION_ID action = result - model.action_strings.begin();
+                parseTransitionMatrix(&inputstream,model,action);
             }  
             //processes one line
             if (key == "R"){
 
                 //call
+                parseRewardMatrix(&iss,model);
             }                     
         }
     }    
