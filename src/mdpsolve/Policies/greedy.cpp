@@ -5,7 +5,7 @@
 //iterate for each state over all possible actions, 
 //iterate for each action over all possible following states
 
-void Greedy::updatePolicy(const Model& mdp, std::vector<double>& value_function,std::vector<STATE_ID>& policy_mapping, uint16_t max_iterations){
+void Greedy::updatePolicy(const Model& mdp, std::vector<double>& value_function,std::vector<STATE_ID>& policy_mapping, uint16_t max_iterations) const{
 
     uint16_t num_of_states = mdp.num_of_states;
     double reward, state_probability,total_reward, highest_reward;

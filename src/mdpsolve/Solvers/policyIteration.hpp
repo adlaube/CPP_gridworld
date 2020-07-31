@@ -10,17 +10,12 @@
 class PolicyIteration: public Solver{
 
     public:
-        void solve(const Model& model, uint16_t max_number_of_iterations) override;
-
-        PolicyIteration(const Evaluation& eval, const Policy& updater);
+        void solve(const Model& model, const Evaluation& eval, const Policy& updater, const uint16_t max_number_of_iterations) override;
 
     private:
-
-        Evaluation& eval;
-        Policy& updater;
-        uint16_t iteration_cnt = 0;
-        std::vector<double> value_function; 
-        std::vector<unsigned long> policy_mapping;  
+        uint16_t iteration_cnt_ = 0;
+        std::vector<double> value_function_; 
+        std::vector<unsigned long> policy_mapping_;  
 };
 
 #endif

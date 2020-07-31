@@ -1,6 +1,6 @@
 #include "monteCarlo.hpp"
 
-void MonteCarlo::evaluatePolicyAtState(const Model& mdp, std::vector<double>& value_function, STATE_ID state, ACTION_ID selected_action ) {
+void MonteCarlo::evaluatePolicyAtState(const Model& mdp, std::vector<double>& value_function, STATE_ID state, ACTION_ID selected_action ) const {
 
     double V_new,transition_probability;
     STATE_ID num_of_states = mdp.num_of_states;    
@@ -16,7 +16,7 @@ void MonteCarlo::evaluatePolicyAtState(const Model& mdp, std::vector<double>& va
 }
 
 
-void MonteCarlo::evaluatePolicy(const Model& mdp, std::vector<double>& value_function, std::vector<STATE_ID>& policy_mapping, uint16_t max_iterations){
+void MonteCarlo::evaluatePolicy(const Model& mdp, std::vector<double>& value_function, std::vector<STATE_ID>& policy_mapping, uint16_t max_iterations) const{
     
     STATE_ID num_of_states = mdp.num_of_states;
     ACTION_ID selected_action;

@@ -15,9 +15,9 @@ class MonteCarlo : public Evaluation{
     private:
         //std::mt19937 engine;
         //std::uniform_int_distribution<unsigned long> distribution;
-    void evaluatePolicyAtState(const Model& mdp, std::vector<double>& value_function, STATE_ID state, ACTION_ID selected_action);
+    void evaluatePolicyAtState(const Model& mdp, std::vector<double>& value_function, STATE_ID state, ACTION_ID selected_action) const;
     public:
-    void evaluatePolicy(const Model& mdp, std::vector<double>& value_function, std::vector<STATE_ID>& policy_mapping, uint16_t max_iterations) override;
+    void evaluatePolicy(const Model& mdp, std::vector<double>& value_function, std::vector<STATE_ID>& policy_mapping, uint16_t max_iterations) const override;
 
     /*
         assumes a deterministic policy, this is also a constrain used by the MDP

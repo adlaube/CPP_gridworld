@@ -6,5 +6,5 @@
 int main(){
 
     std::string filepath = "./data/4x3.95.POMDP";
-    solve(filepath);
+    run_mdpsolve(filepath);
 }
