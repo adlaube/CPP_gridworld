@@ -1,6 +1,14 @@
 Checkliste
 
 Exceptions überall prüfen
+factories
+stochastic and deterministic policy unterstützen?
+mehr design patterns? Build pattern
+mehr library denke
+useable types: std::vector<TYPE> muss funktionieren, braucht default constructor
+static asserts
+header only vs compiled (https://www.youtube.com/watch?v=hcHUZE6buzE 45:00)
+
 
 
 Low Prio
@@ -25,3 +33,4 @@ Evtl auch Klasse wie Run der alle Module als Member hat und die Factory steuert
 1. alles fertig machen
 2. factories einbinden
 
+Falls Optionen weggelassen werden, sollen im Programm Standardwerte festgelegt sein, die da-für verwendet werden. Außerdem soll beim Aufruf mit der Option „-?“ eine „Usage“-Meldungausgegeben werden, d. h. eine Auflistung der verfügbaren Optionen mit ihren Bedeutungen.Erwartet wird ein strukturierter Umgang mit den verfügbaren Parametern. Definieren Sie ei-ne geeignete Datenstruktur, die einen Parameter beschreibt und den Umgang damit erleichtert.Für die verfügbaren Parameter soll dann eine entsprechende Tabelle angelegt werden, die mitHilfe einer Initialisierung gefüllt wird. Das Verarbeiten der Parameter soll dann tabellengesteu-ert erfolgen

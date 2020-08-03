@@ -10,8 +10,9 @@
 class Solver{  
 
     public:
-        virtual void solve(const Model& model, const Evaluation& eval, const Policy& updater, const uint16_t max_number_of_iterations) = 0;
+        virtual void solve(const Model& model, Evaluation& eval, Policy& updater, const uint16_t max_number_of_iterations) = 0;
         virtual ~Solver(){};
+    protected:
         
 };
 

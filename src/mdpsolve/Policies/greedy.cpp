@@ -5,7 +5,7 @@
 //iterate for each state over all possible actions, 
 //iterate for each action over all possible following states
 
-void Greedy::updatePolicy(const Model& mdp, std::vector<double>& value_function,std::vector<STATE_ID>& policy_mapping, uint16_t max_iterations) const{
+void Greedy::updatePolicy(const Model& mdp, const Evaluation& eval, uint16_t max_iterations) {
 
     uint16_t num_of_states = mdp.num_of_states;
     double reward, state_probability,total_reward, highest_reward;
@@ -17,7 +17,7 @@ void Greedy::updatePolicy(const Model& mdp, std::vector<double>& value_function,
 
                 state_probability = mdp.state_transition_matrix(action_idx,current_state,state_idx);
                 reward = mdp.reward_matrix(action_idx,current_state,state_idx);
-                total_reward = total_reward + state_probability * (reward + value_function[state_idx]);
+                total_reward = total_reward + state_probability * (reward + eval.getValueOfState(state_idx));
             }
             //init highest reward with reward of first action
             if(action_idx==0){
@@ -28,8 +28,14 @@ void Greedy::updatePolicy(const Model& mdp, std::vector<double>& value_function,
                 best_action_idx = action_idx;
             }   
             //set best action as new action
-            policy_mapping[current_state] = best_action_idx;                     
+            policy_mapping_(0,0,current_state) = best_action_idx;                     
         }
     }
+}
+
+ACTION_ID Greedy::getActionOfState(STATE_ID state_idx) {
+
+    return (ACTION_ID) policy_mapping_(0,0,state_idx);
+
 }
 

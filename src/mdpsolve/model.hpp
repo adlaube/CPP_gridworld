@@ -4,6 +4,7 @@
 #include <string>
 #include <cassert>
 #include <vector>
+#include <tuple>
 
 #include "parser.hpp"
 #include "array3d.hpp"
@@ -12,6 +13,8 @@ class Parser; //forward declaration
 
 typedef std::size_t STATE_ID;
 typedef std::size_t ACTION_ID;
+
+using MODEL_SIZE = std::tuple<STATE_ID,ACTION_ID>;
 
 #define DEF_ACTION_UNDEF    UINT16_MAX
 #define DEF_ACTION_ALL      (DEF_ACTION_UNDEF - 1)
@@ -41,7 +44,7 @@ class Model{
         std::vector<std::string> action_strings; 
         enum optimizationGoal optGoal = OPT_UNDEFINED;
 
-        void InitModel(const std::string filepath, const Parser& parser);
+        MODEL_SIZE InitModel(const std::string filepath, const Parser& parser);
         
 };
 

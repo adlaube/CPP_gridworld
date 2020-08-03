@@ -7,13 +7,14 @@
 
 int run_mdpsolve(std::string filepath){
 
-    const Cassandra parser;
-    const MonteCarlo eval;
-    const Greedy policy;
+    Cassandra parser;
+    MonteCarlo eval;
     PolicyIteration solver;
 
     Model newmdp;
-    newmdp.InitModel(filepath,parser);
+    MODEL_SIZE sizes = newmdp.InitModel(filepath,parser);
+
+    Greedy policy((STATE_ID) 1, (ACTION_ID) 1);
 
     solver.solve(newmdp,eval,policy,(uint16_t) 100);
 

@@ -8,7 +8,8 @@
 
 class Greedy : public Policy{
     public:
-        void updatePolicy(const Model& mdp, std::vector<double>& value_function,std::vector<STATE_ID>& policy_mapping, uint16_t max_iterations) const override;
+        void updatePolicy(const Model& mdp, const Evaluation& eval, uint16_t max_iterations) override;
+        ACTION_ID getActionOfState(STATE_ID state_idx) override;
 };
 
 #endif
