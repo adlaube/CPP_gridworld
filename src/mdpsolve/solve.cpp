@@ -8,18 +8,17 @@
 int run_mdpsolve(std::string filepath){
 
     Cassandra parser;
-    MonteCarlo eval;
     PolicyIteration solver;
-
     Model newmdp;
     newmdp.InitModel(filepath,parser);
 
-    auto factoryinstance = Factory<Policy,PolicyConstructor>::getInstance();
-    Policy* policy = factoryinstance.createInstance("greedy",newmdp);
+    auto policyFactory = Factory<Policy,Constructor<Policy>>::getInstance();
+    Policy* policy = policyFactory.createInstance("greedy",newmdp);
 
+    auto evaluationFactory = Factory<Evaluation,Constructor<Evaluation>>::getInstance();
+    Evaluation* eval = evaluationFactory.createInstance("montecarlo",newmdp);    
 
-
-    solver.solve(newmdp,eval,*policy,(uint16_t) 100);
+    solver.solve(newmdp,*eval,*policy,(uint16_t) 100);
 
     return 1;
 }

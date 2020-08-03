@@ -21,9 +21,10 @@ class MonteCarlo : public Evaluation{
     void evaluatePolicy(const Model& mdp, const Policy &policy, uint16_t max_iterations) override;
     double getValueOfState(STATE_ID state) const override;
 
-    /*
-        assumes a deterministic policy, this is also a constrain used by the MDP
-    */
+    MonteCarlo(const Model& model):
+        Evaluation(model){
+            
+        }
 
     
 };

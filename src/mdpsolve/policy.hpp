@@ -17,8 +17,8 @@ class Policy{
 
         Policy (const Model& model) {//assign since copy constructor is not implemented
             policy_mapping_ =  Array3d<double>(1,
-                                                model.num_of_states,
-                                                model.num_of_actions);                                           
+                                                model.num_of_actions,
+                                                model.num_of_states);                                       
         }
 
     protected:  

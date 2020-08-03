@@ -1,12 +1,12 @@
 #include "../factory.hpp"
-#include "policyConstructor.hpp"
+#include "../constructor.hpp"
 #include "greedy.hpp"
 
-class GreedyConstructor final: public PolicyConstructor{
+class GreedyConstructor final: public Constructor<Policy>{
 
     public:
         GreedyConstructor(){
-            Factory<Policy,PolicyConstructor>& factory(Factory<Policy,PolicyConstructor>::getInstance());
+            Factory<Policy,Constructor<Policy>>& factory(Factory<Policy,Constructor<Policy>>::getInstance());
             factory.add("greedy",this);
         }
 

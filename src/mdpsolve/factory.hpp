@@ -5,15 +5,20 @@
 #include <map>
 #include "model.hpp"
 
+// using POLICY_FACTORY = Factory<Policy,Constructor<Policy>>;
+// using EVALUATION_FACTORY = Factory<Evaluation,Constructor<Evaluation>>;
+// using PARSER_FACTORY = Factory<Parser,Constructor<Parser>>;
+// using SOLVER_FACTORY = Factory<Solver,Constructor<Solver>>;
+
 template<typename T, typename Tconstruct>
 class Factory{
 
     public:
+
         static Factory& getInstance(){
             static Factory factory;
             return factory;
-        }
-
+        }    
         T* createInstance(const std::string name, const Model& model){
 
             Tconstruct* constructorInstance = nullptr;
@@ -36,10 +41,6 @@ class Factory{
         }
 
     private:
-        void FindInstance(const std::string name, Tconstruct* constructor_instance){
-
-      
-        }    
 
         std::map<std::string,Tconstruct*> supportedTypes;
 };

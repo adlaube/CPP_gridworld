@@ -8,7 +8,7 @@
 #include "Environments/gridWorld.hpp"
 #include "Evaluations/monteCarlo.hpp"
 #include "Solvers/policyIteration.hpp"
-#include "Policies/policyConstructor.hpp"
+#include "constructor.hpp"
 #include "policy.hpp"
 #include "factory.hpp"
 #include "Parsers/cassandra.hpp"
