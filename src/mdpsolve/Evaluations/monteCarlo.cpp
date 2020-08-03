@@ -8,10 +8,10 @@ void MonteCarlo::evaluatePolicyAtState(const Model& mdp, STATE_ID state, ACTION_
     for (STATE_ID state_idx = 0;state_idx<num_of_states;state_idx++){
         transition_probability = mdp.state_transition_matrix(selected_action,state,state_idx);
         //Bellman equation
-        V_new = V_new + transition_probability*(mdp.reward_matrix(selected_action,state,state) + mdp.discount_rate *  value_function[state_idx]);
+        V_new = V_new + transition_probability*(mdp.reward_matrix(selected_action,state,state) + mdp.discount_rate *  value_function_[state_idx]);
     }
 
-    value_function[state] = V_new;
+    value_function_[state] = V_new;
 
 }
 
@@ -27,7 +27,7 @@ void MonteCarlo::evaluatePolicy(const Model& mdp, const Policy &policy, uint16_t
         for(STATE_ID state_idx = 0; state_idx < num_of_states;state_idx++)
         {
             selected_action = policy.getActionOfState(state_idx);
-            evaluatePolicyAtState(mdp,value_function,state_idx,selected_action);
+            evaluatePolicyAtState(mdp,state_idx,selected_action);
         }
 
         iteration_cnt++;
@@ -35,8 +35,8 @@ void MonteCarlo::evaluatePolicy(const Model& mdp, const Policy &policy, uint16_t
             
 }  
 
-double MonteCarlo::getValueOfState(STATE_ID state){
+double MonteCarlo::getValueOfState(STATE_ID state) const{
 
-    return value_function[state];
+    return value_function_[state];
 }
 

@@ -5,6 +5,8 @@
 #include "policy.hpp"
 #include <cstdint>
 
+class Policy; //forward declaration
+
 class Evaluation{
 
 
@@ -13,11 +15,11 @@ class Evaluation{
         virtual double getValueOfState(STATE_ID state)const = 0;        
         virtual ~Evaluation(){};
 
-        Evaluation(STATE_ID num_of_states):
-        value_function_(std::vector<double>(num_of_states)){            
+        Evaluation(const Model& model):
+            value_function_(std::vector<double>(model.num_of_states)){            
         }
 
-        Evaluation(){}
+        Evaluation() = delete;
 
     protected:
         std::vector<double> value_function_; 

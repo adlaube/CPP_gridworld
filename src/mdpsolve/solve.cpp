@@ -12,11 +12,14 @@ int run_mdpsolve(std::string filepath){
     PolicyIteration solver;
 
     Model newmdp;
-    MODEL_SIZE sizes = newmdp.InitModel(filepath,parser);
+    newmdp.InitModel(filepath,parser);
 
-    Greedy policy((STATE_ID) 1, (ACTION_ID) 1);
+    auto factoryinstance = Factory<Policy,PolicyConstructor>::getInstance();
+    Policy* policy = factoryinstance.createInstance("greedy",newmdp);
 
-    solver.solve(newmdp,eval,policy,(uint16_t) 100);
+
+
+    solver.solve(newmdp,eval,*policy,(uint16_t) 100);
 
     return 1;
 }

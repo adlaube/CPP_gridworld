@@ -33,7 +33,7 @@ void Greedy::updatePolicy(const Model& mdp, const Evaluation& eval, uint16_t max
     }
 }
 
-ACTION_ID Greedy::getActionOfState(STATE_ID state_idx) {
+ACTION_ID Greedy::getActionOfState(STATE_ID state_idx) const {
 
     return (ACTION_ID) policy_mapping_(0,0,state_idx);
 

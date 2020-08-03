@@ -45,8 +45,7 @@ void Cassandra::parseRewardMatrix(std::istringstream* iss,Model& model) const{
 void Cassandra::parseTransitionMatrix(std::ifstream* inputstream,Model& model,const ACTION_ID action) const{
 
     std::string value, line;
-    
-    double probability;
+
     for (STATE_ID state_idx = 0;state_idx<model.num_of_states;state_idx++){
         std::getline(*inputstream,line); //access next line
         std::istringstream iss(line);
