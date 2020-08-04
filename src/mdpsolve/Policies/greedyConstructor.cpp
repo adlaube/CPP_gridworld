@@ -3,6 +3,9 @@
 #include "../policy.hpp"
 #include "greedy.hpp"
 
+using POLICY_CONSTRUCTOR = Constructor<Policy>;
+using POLICY_FACTORY = Factory<Policy,POLICY_CONSTRUCTOR>;  
+
 class GreedyConstructor final: public Constructor<Policy>{
 
     public:

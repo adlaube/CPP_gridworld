@@ -3,11 +3,14 @@
 #include "../parser.hpp"
 #include "cassandra.hpp"
 
-class CassandraConstructor final: public Constructor<Parser>{
+using PARSER_CONSTRUCTOR = Constructor<Parser>;
+using PARSER_FACTORY = Factory<Parser,PARSER_CONSTRUCTOR>;
+
+class CassandraConstructor final: public PARSER_CONSTRUCTOR{
 
     public:
         CassandraConstructor(){
-            Factory<Parser,Constructor<Parser>>& factory(Factory<Parser,Constructor<Parser>>::getInstance());
+            PARSER_FACTORY& factory(PARSER_FACTORY::getInstance());
             factory.add("cassandra",this);
         }
 

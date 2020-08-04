@@ -3,16 +3,17 @@
 
 
 #include <string>
+#include <cstdint>
 
 namespace MdpSolve{
 
     struct Params{
-
-        std::string filepath;
-        std::string parser;
-        std::string eval;
-        std::string policy;
-        std::string solver;
+        std::string filepath_;
+        std::string parser_;
+        std::string eval_;
+        std::string policy_;
+        std::string solver_;
+        std::size_t iteration_cnt_;
     };
 
 

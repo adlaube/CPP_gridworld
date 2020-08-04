@@ -3,11 +3,14 @@
 #include "../evaluation.hpp"
 #include "monteCarlo.hpp"
 
-class MonteCarloConstructor final: public Constructor<Evaluation>{
+using EVALUATION_CONSTRUCTOR = Constructor<Evaluation>;
+using EVALUATION_FACTORY = Factory<Evaluation,EVALUATION_CONSTRUCTOR>;
+
+class MonteCarloConstructor final: public EVALUATION_CONSTRUCTOR{
 
     public:
         MonteCarloConstructor(){
-            Factory<Evaluation,Constructor<Evaluation>>& factory(Factory<Evaluation,Constructor<Evaluation>>::getInstance());
+            EVALUATION_FACTORY& factory(EVALUATION_FACTORY::getInstance());
             factory.add("montecarlo",this);
         }
 

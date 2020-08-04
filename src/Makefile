@@ -11,7 +11,6 @@ example_src = $(EXAMPLE_DIR)gridworld.cpp
 example_obj=$(example_src:.cpp=.o)
 
 cppsrc= $(wildcard mdpsolve/*.cpp)\
-		$(wildcard mdpsolve/Environments/*.cpp)\
 		$(wildcard mdpsolve/Evaluations/*.cpp) \
 		$(wildcard mdpsolve/Policies/*.cpp) \
 		$(wildcard mdpsolve/Solvers/*.cpp) \
@@ -20,14 +19,14 @@ obj=$(cppsrc:.cpp=.o)
 
 #all load in order to avoid dropping the static for registration
 example: $(lib) $(example_obj) 
-	$(CXX) $(example_obj) -L. -o $(BIN_DIR)$@ -Wl,-all_load -lmdpsolve
-	mv $(lib) $(LIB_DIR)
+	$(CXX) $(example_obj) -L. -o $(BIN_DIR)$@ -Wl,-all_load -lmdpsolve $(CXXFLAGS)
+	cp $(lib) $(LIB_DIR)
 
-libmdpsolve.a: $(obj)
-	ar rcs libmdpsolve.a $(obj)
+$(lib): $(obj)
+	ar rcs $(lib) $(obj)
 	
 	#$(CXX) -o $@ $^ $(CXXFLAGS)
 
 .PHONY:clean
 clean:
-	rm -f $(obj) $(example_obj) $(BIN_DIR)example $(LIB_DIR)$(lib) 
+	rm -f $(obj) $(example_obj) $(BIN_DIR)example $(LIB_DIR)$(lib) $(lib)

@@ -6,6 +6,13 @@
 int main(){
 
     MdpSolve::Params params;
-    std::string filepath = "./data/4x3.95.POMDP";
+    
+    params.filepath_        = "./data/4x3.95.POMDP";
+    params.parser_          = "cassandra";
+    params.eval_            = "montecarlo";
+    params.policy_          = "greedy";
+    params.solver_          = "policyiteration";
+    params.iteration_cnt_   = 100;    
+    
     MdpSolve::solve_single_mdp(params);
 }
