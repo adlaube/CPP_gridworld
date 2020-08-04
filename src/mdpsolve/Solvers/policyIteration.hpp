@@ -11,9 +11,11 @@
 class PolicyIteration : public Solver{
 
     public:
-        void solve(const Model& model, Evaluation& eval, Policy& updater, const uint16_t max_number_of_iterations) override;
-    private:
-        uint16_t iteration_cnt_ = 0;
+        void solve(Evaluation& eval, Policy& updater, const uint16_t max_number_of_iterations) override;
+        PolicyIteration(Model& model):
+            Solver(model){
+
+            }        
 };
 
 #endif
