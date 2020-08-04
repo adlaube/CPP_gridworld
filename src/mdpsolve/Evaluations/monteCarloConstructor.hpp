@@ -16,3 +16,6 @@ class MonteCarloConstructor final: public Constructor<Evaluation>{
         }
 };
 
+
+static inline MonteCarloConstructor monte_carlo_constructor;
+
