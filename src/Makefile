@@ -1,10 +1,15 @@
-CXXFLAGS = -Wall -std=c++17 -g
+BIN_DIR = ../bin/
+EXAMPLE_DIR = ../examples/
+LIB_DIR = ../lib/
+SRC_DIR = ./mdpsolve/
+
+CXXFLAGS = -Wall -std=c++17 -g -I$(SRC_DIR)
 CXX = g++
 
-BIN_DIR = ../bin/
-LIB_DIR = .
+lib = libmdpsolve.a
+example_src = $(EXAMPLE_DIR)gridworld.cpp
+example_obj=$(example_src:.cpp=.o)
 
- #$(wildcard ./*.cpp)
 cppsrc= $(wildcard mdpsolve/*.cpp)\
 		$(wildcard mdpsolve/Environments/*.cpp)\
 		$(wildcard mdpsolve/Evaluations/*.cpp) \
@@ -14,14 +19,15 @@ cppsrc= $(wildcard mdpsolve/*.cpp)\
 obj=$(cppsrc:.cpp=.o)
 
 #all load in order to avoid dropping the static for registration
-mdpsolve: mdpsolve.o libmdpsolve.a
-	$(CXX) mdpsolve.o -o $@ -L $(LIB_DIR) -o $(BIN_DIR)mdpsolve -Wl,-all_load -lmdpsolve
-
+example: $(lib) $(example_obj) 
+	$(CXX) $(example_obj) -L. -o $(BIN_DIR)$@ -Wl,-all_load -lmdpsolve
+	mv $(lib) $(LIB_DIR)
 
 libmdpsolve.a: $(obj)
 	ar rcs libmdpsolve.a $(obj)
+	
 	#$(CXX) -o $@ $^ $(CXXFLAGS)
 
 .PHONY:clean
 clean:
-	rm -f $(obj) $(BIN_DIR)mdpsolve	libmdpsolve.a mdpsolve.o
+	rm -f $(obj) $(example_obj) $(BIN_DIR)example $(LIB_DIR)$(lib) 

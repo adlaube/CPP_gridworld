@@ -1,13 +1,11 @@
 Checkliste
 
 Exceptions überall prüfen
-factories
-stochastic and deterministic policy unterstützen?
-mehr design patterns? Build pattern
 mehr library denke
 useable types: std::vector<TYPE> muss funktionieren, braucht default constructor
 static asserts
 header only vs compiled (https://www.youtube.com/watch?v=hcHUZE6buzE 45:00)
+namespaces nutzen, evtl für types.hpp MDPtypes::..
 
 
 

@@ -12,14 +12,12 @@ using SOLVER_CONSTRUCTOR = Constructor<Solver>;
 using PARSER_FACTORY = Factory<Parser,PARSER_CONSTRUCTOR>;
 using POLICY_FACTORY = Factory<Policy,POLICY_CONSTRUCTOR>;
 using EVALUATION_FACTORY = Factory<Evaluation,EVALUATION_CONSTRUCTOR>;
-using SOLVER_FACTORY = Factory<Solver,SOLVER_CONSTRUCTOR>;  
+using SOLVER_FACTORY = Factory<Solver,SOLVER_CONSTRUCTOR>; 
 
-
-
-int run_mdpsolve(std::string filepath){
+int MdpSolve::solve_single_mdp(const MdpSolve::Params& params){
 
     Model newmdp;
-
+    std::string filepath = "whatever";
     auto parserFactory = PARSER_FACTORY::getInstance();
     Parser* parser = parserFactory.createInstance("cassandra",newmdp);
     parser->parseFile(filepath);
@@ -33,7 +31,7 @@ int run_mdpsolve(std::string filepath){
     auto solverFactory = SOLVER_FACTORY::getInstance();
     Solver* solver = solverFactory.createInstance("policyiteration",newmdp);        
 
-    //solver.solve(newmdp,*eval,*policy,(uint16_t) 100);
+    solver->solve(*eval,*policy,(uint16_t) 100);
 
     return 1;
 }

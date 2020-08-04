@@ -1,10 +1,11 @@
 //parse cmd line args and calls solve from mdpsolve lib
 #include <string>
-#include "mdpsolve/solve.hpp"
+#include "interface.hpp"
 
 
 int main(){
 
+    MdpSolve::Params params;
     std::string filepath = "./data/4x3.95.POMDP";
-    run_mdpsolve(filepath);
+    MdpSolve::solve_single_mdp(params);
 }
