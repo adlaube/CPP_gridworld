@@ -10,9 +10,8 @@ class Evaluation; //forward declaration
 class Policy{
 
     public:
+        virtual ~Policy(){}    
         virtual void updatePolicy(const Model& mdp, const Evaluation& eval, uint16_t max_iterations) = 0;
-        virtual ~Policy(){}
-
         virtual ACTION_ID getActionOfState(STATE_ID state_idx) const = 0;
 
         Policy (const Model& model) {//assign since copy constructor is not implemented

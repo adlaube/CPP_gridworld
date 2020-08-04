@@ -9,8 +9,14 @@ class Parser{
 
     public:
         virtual ~Parser(){};
-        virtual void parseParams(std::string filepath, Model& model) const = 0;
-        virtual void parseData(std::string filepath, Model& model) const = 0;
+        virtual void parseFile(std::string filepath) = 0;
+        Parser(Model& model):
+            model_(model){
+
+            }
+        Parser() = delete;
+    protected:
+        Model& model_;       
 };
 
 

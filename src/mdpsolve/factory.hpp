@@ -5,11 +5,6 @@
 #include <map>
 #include "model.hpp"
 
-// using POLICY_FACTORY = Factory<Policy,Constructor<Policy>>;
-// using EVALUATION_FACTORY = Factory<Evaluation,Constructor<Evaluation>>;
-// using PARSER_FACTORY = Factory<Parser,Constructor<Parser>>;
-// using SOLVER_FACTORY = Factory<Solver,Constructor<Solver>>;
-
 template<typename T, typename Tconstruct>
 class Factory{
 
@@ -19,7 +14,8 @@ class Factory{
             static Factory factory;
             return factory;
         }    
-        T* createInstance(const std::string name, const Model& model){
+        //not a const model here because parser alters the model
+        T* createInstance(const std::string name, Model& model){ 
 
             Tconstruct* constructorInstance = nullptr;
             auto search = supportedTypes.find(name);
@@ -44,6 +40,5 @@ class Factory{
 
         std::map<std::string,Tconstruct*> supportedTypes;
 };
-
 
 #endif

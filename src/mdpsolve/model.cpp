@@ -27,11 +27,19 @@ und vor dem 2ten Aufruf zurückzusetzen?
 Erstmal so lassen!
 */
 
-MODEL_SIZE Model::InitModel(const std::string filepath, const Parser& parser){
+// MODEL_SIZE Model::InitModel(const std::string filepath, const Parser& parser){
     
-    parser.parseParams(filepath,*this);
-    CheckConsistency("");
-    SetArrays();
-    parser.parseData(filepath,*this);
-    return MODEL_SIZE(this->num_of_states,this->num_of_actions);
-}
+//     parser.parseParams(filepath,*this);
+//     CheckConsistency("");
+//     SetArrays();
+//     parser.parseData(filepath,*this);
+//     return MODEL_SIZE(this->num_of_states,this->num_of_actions);
+// }
+
+// Model::Model(const std::string filepath, const Parser& parser){
+
+//     parser.parseParams(filepath,*this);
+//     CheckConsistency("");
+//     SetArrays();
+//     parser.parseData(filepath,*this);
+// }

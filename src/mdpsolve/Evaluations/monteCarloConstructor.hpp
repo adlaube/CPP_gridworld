@@ -11,7 +11,7 @@ class MonteCarloConstructor final: public Constructor<Evaluation>{
             factory.add("montecarlo",this);
         }
 
-        MonteCarlo* create(const Model &model) const override{
+        MonteCarlo* create(Model &model) override{
             return new MonteCarlo(model);
         }
 };

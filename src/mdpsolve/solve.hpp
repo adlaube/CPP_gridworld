@@ -5,13 +5,10 @@
 #include <string>
 
 //das sollte nicht notwendig sein über die factory 
-#include "Environments/gridWorld.hpp"
-#include "Evaluations/monteCarlo.hpp"
-#include "Solvers/policyIteration.hpp"
 #include "constructor.hpp"
+#include "solver.hpp"
 #include "policy.hpp"
 #include "factory.hpp"
-#include "Parsers/cassandra.hpp"
 #include "model.hpp"
 
 int run_mdpsolve(std::string filepath);

@@ -31,11 +31,10 @@ enum optimizationGoal{
 
 class Model{
 
-    private:
+    public:
         void SetArrays();
         void CheckConsistency(const std::string key);         
 
-    public:
         Array3d<double> state_transition_matrix;
         Array3d<double> reward_matrix;    
         float discount_rate = 0;
@@ -44,7 +43,8 @@ class Model{
         std::vector<std::string> action_strings; 
         enum optimizationGoal optGoal = OPT_UNDEFINED;
 
-        MODEL_SIZE InitModel(const std::string filepath, const Parser& parser);
+        //Model(const std::string filepath, const Parser& parser);
+        //MODEL_SIZE InitModel(const std::string filepath, const Parser& parser);
         
 };
 

@@ -18,12 +18,18 @@
 class Cassandra : public Parser{
 
     public:
-        void parseParams (std::string filepath, Model& model) const final;
-        void parseData(std::string filepath, Model& model) const final;
+        void parseFile (std::string filepath) final;
+
+        Cassandra(Model& model):
+            Parser(model){
+            }
 
     private:
-        void parseTransitionMatrix(std::ifstream* inputstream,Model& model,const ACTION_ID action) const;
-        void parseRewardMatrix(std::istringstream* iss,Model& model) const;
+        void parseParams (std::string filepath);
+        void parseData(std::string filepath);    
+        void parseTransitionMatrix(std::ifstream* inputstream,const ACTION_ID action);
+        void parseRewardMatrix(std::istringstream* iss);
+        
 };
 
 

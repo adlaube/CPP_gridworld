@@ -7,9 +7,9 @@
 template<typename T>
 class Constructor{
 
-    public:
-        virtual T* create(const Model& model) const = 0;
+    public:        
+        virtual T* create(Model& model) = 0;
+              
 };
-
 
 #endif

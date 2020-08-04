@@ -1,5 +1,6 @@
 #include "../factory.hpp"
 #include "../constructor.hpp"
+#include "../policy.hpp"
 #include "greedy.hpp"
 
 class GreedyConstructor final: public Constructor<Policy>{
@@ -10,7 +11,7 @@ class GreedyConstructor final: public Constructor<Policy>{
             factory.add("greedy",this);
         }
 
-        Greedy* create(const Model &model) const override{
+        Greedy* create(Model &model) override{
             return new Greedy(model);
         }
 };
