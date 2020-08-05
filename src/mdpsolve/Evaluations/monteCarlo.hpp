@@ -26,7 +26,9 @@ class MonteCarlo : public Evaluation{
             
         }
 
-    
+    MonteCarlo(const MonteCarlo& greedy) = delete;
+    MonteCarlo& operator= (const MonteCarlo&) = delete;          
+
 };
 
 #endif

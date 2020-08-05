@@ -9,7 +9,6 @@ template<typename T, typename Tconstruct>
 class Factory{
 
     public:
-
         static Factory& getInstance(){
             static Factory factory;
             return factory;
@@ -17,14 +16,12 @@ class Factory{
         //not a const model here because parser alters the model
         T* createInstance(const std::string name, Model& model){ 
 
-            Tconstruct* constructorInstance = nullptr;
-            auto search = supportedTypes.find(name);
+            auto iterator = supportedTypes.find(name);
             
-            if (search != supportedTypes.end()) {
-                std::cout << "Found " << search->first << " " << search->second << '\n';
-                auto constructor = search->second ;
-                constructorInstance = (Tconstruct* ) constructor;
-                return constructorInstance->create(model);
+            if (iterator != supportedTypes.end()) {
+                std::cout << "Found " << iterator->first << " " << iterator->second << '\n';
+                auto constructor = iterator->second ;
+                return constructor->create(model);
             } else {
                 std::cout << "Not found\n";
                 return nullptr;
@@ -36,8 +33,11 @@ class Factory{
             supportedTypes.insert(std::make_pair(name,constructor));
         }
 
-    private:
+        Factory(const Factory& factory) = delete;
+        Factory& operator= (const Factory&) = delete;               
 
+    private:
+        Factory() = default;
         std::map<std::string,Tconstruct*> supportedTypes;
 };
 

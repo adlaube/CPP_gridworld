@@ -5,7 +5,7 @@
 //iterate for each state over all possible actions, 
 //iterate for each action over all possible following states
 
-void Greedy::updatePolicy(const Model& mdp, const Evaluation& eval, uint16_t max_iterations) {
+void Greedy::updatePolicy(const Model& mdp, const Evaluation& eval, std::size_t max_iterations) {
 
     uint16_t num_of_states = mdp.num_of_states;
     double reward, state_probability,total_reward, highest_reward;
@@ -37,5 +37,16 @@ ACTION_ID Greedy::getActionOfState(STATE_ID state_idx) const {
 
     return (ACTION_ID) policy_mapping_(0,0,state_idx);
 
+}
+
+void Greedy::printPolicy() const{
+
+    ACTION_ID action_idx;
+    for(STATE_ID state_idx = 0; state_idx<model_.num_of_states;state_idx++){
+
+        action_idx = getActionOfState(state_idx);
+        std::cout<<"STATE : " << state_idx  << "  ACTION: " << model_.action_strings[action_idx] << std::endl;
+
+    }   
 }
 

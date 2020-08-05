@@ -19,8 +19,6 @@ class Evaluation{
             value_function_(std::vector<double>(model.num_of_states)){            
         }
 
-        Evaluation() = delete;
-
     protected:
         std::vector<double> value_function_; 
 };

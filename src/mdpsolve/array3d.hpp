@@ -11,20 +11,20 @@ class Array3d{
 
     public:
         Array3d(std::size_t x_length, std::size_t y_length, std::size_t z_length): 
-        xdim_(x_length),
-        ydim_(y_length),
-        zdim_(z_length),
-        length_(x_length*y_length*z_length),
-        data_(new T[x_length*y_length*z_length]){
+            xdim_(x_length),
+            ydim_(y_length),
+            zdim_(z_length),
+            length_(x_length*y_length*z_length),
+            data_(new T[x_length*y_length*z_length]()){
         }
 
         Array3d():
-        data_(nullptr){
+            data_(nullptr){
         }
 
         friend void swap(Array3d& a1, Array3d& a2) {
-        using std::swap;
-        swap(a1.data_, a2.data_);
+            using std::swap;
+            swap(a1.data_, a2.data_);
         }        
 
         //default copy constructor
@@ -50,9 +50,6 @@ class Array3d{
             a3d.data_ = nullptr;
             return *this;
         }
-
-
-
         ~Array3d(){
             delete [] data_;
         }

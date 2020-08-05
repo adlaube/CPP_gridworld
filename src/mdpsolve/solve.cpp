@@ -15,18 +15,13 @@ using SOLVER_FACTORY = Factory<Solver,SOLVER_CONSTRUCTOR>;
 int MdpSolve::solve_single_mdp(const MdpSolve::Params& params){
 
     Model newmdp;
-    auto parserFactory = PARSER_FACTORY::getInstance();
-    Parser* parser = parserFactory.createInstance(params.parser_,newmdp);
+    //auto parserFactory = ;
+    Parser* parser = PARSER_FACTORY::getInstance().createInstance(params.parser_,newmdp);
     parser->parseFile(params.filepath_);
 
-    POLICY_FACTORY policyFactory = POLICY_FACTORY::getInstance();
-    Policy* policy = policyFactory.createInstance(params.policy_,newmdp);
-
-    EVALUATION_FACTORY evaluationFactory = EVALUATION_FACTORY::getInstance();
-    Evaluation* eval = evaluationFactory.createInstance(params.eval_,newmdp);    
-
-    SOLVER_FACTORY solverFactory = SOLVER_FACTORY::getInstance();
-    Solver* solver = solverFactory.createInstance(params.solver_,newmdp);        
+    Policy* policy = POLICY_FACTORY::getInstance().createInstance(params.policy_,newmdp);
+    Evaluation* eval = EVALUATION_FACTORY::getInstance().createInstance(params.eval_,newmdp);    
+    Solver* solver = SOLVER_FACTORY::getInstance().createInstance(params.solver_,newmdp);        
 
     solver->solve(*eval,*policy,params.iteration_cnt_);
 

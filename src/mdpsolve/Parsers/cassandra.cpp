@@ -130,7 +130,6 @@ void Cassandra::parseParams(std::string filepath){
                 model_.num_of_states = std::atoi(value.c_str()); 
             }
             if (key == "actions"){ //count whitespaces and alloc accordingly
-                std::string action_string = key; //line with action
                 std::string value;
                 ACTION_ID action_cnt = 0;
                 std::getline(iss,value,' '); //skip first blank

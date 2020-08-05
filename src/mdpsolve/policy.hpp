@@ -2,6 +2,7 @@
 #define POLICY_HPP
 
 #include <cstdint>
+#include <iostream>
 #include "model.hpp"
 #include "evaluation.hpp"
 
@@ -11,7 +12,8 @@ class Policy{
 
     public:
         virtual ~Policy(){}    
-        virtual void updatePolicy(const Model& mdp, const Evaluation& eval, uint16_t max_iterations) = 0;
+        virtual void updatePolicy(const Model& mdp, const Evaluation& eval, std::size_t max_iterations) = 0;
+        virtual void printPolicy() const = 0;
         virtual ACTION_ID getActionOfState(STATE_ID state_idx) const = 0;
 
         Policy (const Model& model) :

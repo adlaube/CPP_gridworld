@@ -16,17 +16,23 @@ cppsrc= $(wildcard mdpsolve/*.cpp)\
 		$(wildcard mdpsolve/Solvers/*.cpp) \
 		$(wildcard mdpsolve/Parsers/*.cpp)
 obj=$(cppsrc:.cpp=.o)
+dep=$(obj:.o=.d)
 
 #all load in order to avoid dropping the static for registration
-example: $(lib) $(example_obj) 
+example: $(lib) $(example_obj)
 	$(CXX) $(example_obj) -L. -o $(BIN_DIR)$@ -Wl,-all_load -lmdpsolve $(CXXFLAGS)
 	cp $(lib) $(LIB_DIR)
 
 $(lib): $(obj)
 	ar rcs $(lib) $(obj)
+
+-include $(dep)
+
+%.d: %.cpp
+	@$(CPP) $(CXXFLAGS) $< -MM -MT $(@:.d=.o) >$@
 	
 	#$(CXX) -o $@ $^ $(CXXFLAGS)
 
 .PHONY:clean
 clean:
-	rm -f $(obj) $(example_obj) $(BIN_DIR)example $(LIB_DIR)$(lib) $(lib)
+	rm -f $(obj) $(example_obj) $(BIN_DIR)example $(LIB_DIR)$(lib) $(lib) $(dep)

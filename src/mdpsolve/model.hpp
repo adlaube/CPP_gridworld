@@ -11,15 +11,13 @@
 
 class Parser; //forward declaration
 
-typedef std::size_t STATE_ID;
-typedef std::size_t ACTION_ID;
+using STATE_ID  = std::size_t;
+using ACTION_ID = std::size_t;
 
-using MODEL_SIZE = std::tuple<STATE_ID,ACTION_ID>;
-
-#define DEF_ACTION_UNDEF    UINT16_MAX
+#define DEF_ACTION_UNDEF    SIZE_MAX
 #define DEF_ACTION_ALL      (DEF_ACTION_UNDEF - 1)
 
-#define DEF_STATE_UNDEF     UINT16_MAX
+#define DEF_STATE_UNDEF     SIZE_MAX
 #define DEF_STATE_ALL       (DEF_STATE_UNDEF - 1)
 
 enum optimizationGoal{
@@ -27,7 +25,6 @@ enum optimizationGoal{
     OPT_MINIMIZE,
     OPT_UNDEFINED
 };  
-
 
 class Model{
 
@@ -40,11 +37,12 @@ class Model{
         float discount_rate = 0;
         STATE_ID num_of_states = 0;
         ACTION_ID num_of_actions = 0;
-        std::vector<std::string> action_strings; 
+        std::vector<std::string> action_strings;
         enum optimizationGoal optGoal = OPT_UNDEFINED;
 
-        //Model(const std::string filepath, const Parser& parser);
-        //MODEL_SIZE InitModel(const std::string filepath, const Parser& parser);
+        Model() = default;
+        Model(const Model& model) = delete;
+        Model& operator= (const Model&) = delete;           
         
 };
 

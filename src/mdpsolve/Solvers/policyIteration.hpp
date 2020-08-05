@@ -15,7 +15,10 @@ class PolicyIteration : public Solver{
         PolicyIteration(Model& model):
             Solver(model){
 
-            }        
+            }
+
+        PolicyIteration(const PolicyIteration& solver) = delete;
+        PolicyIteration& operator= (const PolicyIteration&) = delete;      
 };
 
 #endif

@@ -24,6 +24,9 @@ class Cassandra : public Parser{
             Parser(model){
             }
 
+        Cassandra(const Cassandra& cassandra) = delete;
+        Cassandra& operator= (const Cassandra&) = delete;                    
+
     private:
         void parseParams (std::string filepath);
         void parseData(std::string filepath);    
