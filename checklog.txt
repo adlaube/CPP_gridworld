@@ -1,0 +1,5 @@
+src/mdpsolve/solve.cpp:15:0: style: The function 'solve_single_mdp' is never used. [unusedFunction]
+
+^
+nofile:0:0: information: Cppcheck cannot find all the include files (use --check-config for details) [missingInclude]
+

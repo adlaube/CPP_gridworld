@@ -9,7 +9,7 @@ class Greedy : public Policy{
         void printPolicy() const override;
         ACTION_ID getActionOfState(STATE_ID state_idx) const override;
 
-        Greedy(const Model& model): //call parent constructor
+        explicit Greedy(const Model& model): //call parent constructor
             Policy(model){
         }
 

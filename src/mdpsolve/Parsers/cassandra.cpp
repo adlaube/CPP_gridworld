@@ -137,12 +137,12 @@ void Cassandra::parseParams(std::ifstream& inputstream){
     }                    
 }
 
-void Cassandra::parseFile (std::string filepath){
+void Cassandra::parseFile (const std::string& filepath){
 
     std::ifstream inputstream;
     inputstream.open(filepath,std::ios::in);
     parseParams(inputstream);
-    model_.CheckConsistency(""); 
+    model_.CheckConsistency(); 
     model_.SetArrays();
 
     //set stream to beginning of file again

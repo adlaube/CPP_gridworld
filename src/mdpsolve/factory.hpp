@@ -16,7 +16,7 @@ class Factory{
             return factory;
         }    
         //not a const model here because parser alters the model
-        OBJECT_PTR createInstance(const std::string name, Model& model){ 
+        OBJECT_PTR createInstance(const std::string& name, Model& model){ 
 
             auto iterator = supportedTypes.find(name);
             
@@ -32,7 +32,7 @@ class Factory{
             
         }        
 
-        void add(const std::string name, Tconstruct* constructor){
+        void add(const std::string& name, Tconstruct* constructor){
             supportedTypes.insert(std::make_pair(name,constructor));
         }
 

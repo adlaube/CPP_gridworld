@@ -41,9 +41,9 @@ ACTION_ID Greedy::getActionOfState(STATE_ID state_idx) const {
 
 void Greedy::printPolicy() const{
 
-    ACTION_ID action_idx;
+    
     for(STATE_ID state_idx = 0; state_idx<model_.num_of_states;state_idx++){
-
+        ACTION_ID action_idx;
         action_idx = getActionOfState(state_idx);
         std::cout<<"STATE : " << state_idx  << "  ACTION: " << model_.action_strings[action_idx] << std::endl;
 

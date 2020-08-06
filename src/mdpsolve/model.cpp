@@ -11,14 +11,12 @@ void Model::SetArrays(){
                                                 num_of_states);
 }
 
-void Model::CheckConsistency(const std::string key){
+void Model::CheckConsistency(){
 
-    bool checkAll = false;
-    if(key=="") checkAll = true;
-    if(key=="discount" || checkAll ==true) assert(0 < discount_rate && discount_rate<=1);
-    if(key=="values" || checkAll == true) assert(optGoal != OPT_UNDEFINED);
-    if(key=="states" || checkAll == true) assert(num_of_states!= 0);
-    if(key=="actions" || checkAll == true) assert(num_of_actions != 0);
+    assert(0 < discount_rate && discount_rate<=1);
+    assert(optGoal != OPT_UNDEFINED);
+    assert(num_of_states!= 0);
+    assert(num_of_actions != 0);
 }
 
 /*

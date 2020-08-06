@@ -9,7 +9,7 @@ class Parser{
 
     public:
         virtual ~Parser(){};
-        virtual void parseFile(std::string filepath) = 0;
+        virtual void parseFile(const std::string& filepath) = 0;
         Parser(Model& model):
             model_(model){
 

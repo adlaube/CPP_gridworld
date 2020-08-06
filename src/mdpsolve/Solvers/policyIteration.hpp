@@ -12,7 +12,7 @@ class PolicyIteration : public Solver{
 
     public:
         void solve(Evaluation& eval, Policy& updater, const std::size_t max_number_of_iterations) override;
-        PolicyIteration(Model& model):
+        explicit PolicyIteration(Model& model):
             Solver(model){
 
             }

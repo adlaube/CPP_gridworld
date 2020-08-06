@@ -15,9 +15,9 @@
 class Cassandra : public Parser{
 
     public:
-        void parseFile (std::string filepath) final;
+        void parseFile (const std::string& filepath) final;
 
-        Cassandra(Model& model):
+        explicit Cassandra(Model& model):
             Parser(model){
             }
 
