@@ -64,7 +64,7 @@
         {
             "label": "make",
             "type": "shell",
-            "command": "cd src && make"
+            "command": "cd src && make OS=osx"
         }
     ]
 }

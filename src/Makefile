@@ -5,6 +5,7 @@ SRC_DIR = ./mdpsolve/
 
 CXXFLAGS = -Wall -std=c++17 -g -I$(SRC_DIR)
 CXX = g++
+CC = g++
 
 lib = libmdpsolve.a
 example_src = $(EXAMPLE_DIR)gridworld.cpp
@@ -20,7 +21,12 @@ dep=$(obj:.o=.d)
 
 #all load in order to avoid dropping the static for registration
 example: $(lib) $(example_obj)
+ifeq ($(OS),osx)
 	$(CXX) $(example_obj) -L. -o $(BIN_DIR)$@ -Wl,-all_load -lmdpsolve $(CXXFLAGS)
+else
+	$(CXX) $(example_obj) -L. -o $(BIN_DIR)$@ -Wl,-whole-archive -lmdpsolve -Wl,-no-whole-archive $(CXXFLAGS) 
+endif
+	
 	cp $(lib) $(LIB_DIR)
 
 $(lib): $(obj)
