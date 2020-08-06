@@ -12,6 +12,7 @@
 
 #include "../parser.hpp"
 
+
 class Cassandra : public Parser{
 
     public:
@@ -31,6 +32,5 @@ class Cassandra : public Parser{
         void parseRewardMatrix(std::istringstream& iss);
         
 };
-
 
 #endif

@@ -1,3 +1,6 @@
+#ifndef CASSANDRA_CONSTRUCTOR_HPP
+#define CASSANDRA_CONSTRUCTOR_HPP
+
 #include "../factory.hpp"
 #include "../constructor.hpp"
 #include "../parser.hpp"
@@ -20,6 +23,4 @@ class CassandraConstructor final: public PARSER_CONSTRUCTOR{
  
 };
 
-//since C++17 - inline makes sure that this is save
-static inline CassandraConstructor cassandra_constructor;
-
+#endif

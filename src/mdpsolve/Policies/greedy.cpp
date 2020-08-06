@@ -1,5 +1,7 @@
 #include "greedy.hpp"
+#include "greedyConstructor.hpp"
 
+static GreedyConstructor greedy_constructor;
 
 //iterate over all states, 
 //iterate for each state over all possible actions, 

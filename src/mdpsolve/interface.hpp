@@ -17,12 +17,7 @@ namespace MdpSolve{
         std::string solver_;
         std::size_t iteration_cnt_;
     };
-
-
-
     std::unique_ptr<Policy> solve_single_mdp(const Params& params );
-
-
 }
 
 

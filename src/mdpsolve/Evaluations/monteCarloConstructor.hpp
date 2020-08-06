@@ -19,6 +19,3 @@ class MonteCarloConstructor final: public EVALUATION_CONSTRUCTOR{
         }
 };
 
-
-static inline MonteCarloConstructor monte_carlo_constructor;
-

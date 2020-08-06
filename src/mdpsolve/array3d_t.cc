@@ -1,5 +1,4 @@
 #include "include/catch.hpp"
-
 #include "array3d.hpp"
 
 TEST_CASE("Test Array3d"){

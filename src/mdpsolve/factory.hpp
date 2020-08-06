@@ -21,14 +21,13 @@ class Factory{
             auto iterator = supportedTypes.find(name);
             
             if (iterator != supportedTypes.end()) {
-                std::cout << "Found " << iterator->first << " " << iterator->second << '\n';
                 auto constructor = iterator->second ;
                 auto object_pointer = OBJECT_PTR(constructor->create(model));
                 return object_pointer;
             } else {
-                std::cout << "Not found\n";
-                return nullptr;
-            }      
+                throw("class not registered with factory");
+                return nullptr; //unreachable code
+            }
             
         }        
 

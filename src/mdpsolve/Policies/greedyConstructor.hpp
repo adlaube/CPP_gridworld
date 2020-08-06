@@ -19,5 +19,3 @@ class GreedyConstructor final: public Constructor<Policy>{
         }
 };
 
-static inline GreedyConstructor greedy_constructor;
-

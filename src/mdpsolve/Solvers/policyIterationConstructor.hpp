@@ -19,5 +19,3 @@ class PolicyIterationConstructor final: public SOLVER_CONSTRUCTOR{
         }
 };
 
-static inline PolicyIterationConstructor policy_iteration_constructor;
-

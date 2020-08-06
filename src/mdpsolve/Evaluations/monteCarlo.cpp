@@ -1,4 +1,7 @@
 #include "monteCarlo.hpp"
+#include "monteCarloConstructor.hpp"
+
+static MonteCarloConstructor monte_carlo_constructor;
 
 void MonteCarlo::evaluatePolicyAtState(const Model& mdp, STATE_ID state, ACTION_ID selected_action )  {
 

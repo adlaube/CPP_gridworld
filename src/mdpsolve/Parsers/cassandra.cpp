@@ -1,4 +1,5 @@
 #include "cassandra.hpp"
+#include "cassandraConstructor.hpp"
 /*
 bool Cassandra::readDoubleFromString(std::string in_string, double& out_double){
     char* end_ptr;
@@ -10,6 +11,8 @@ bool Cassandra::readDoubleFromString(std::string in_string, double& out_double){
 
 }
 */
+
+static CassandraConstructor cassandra_constructor;
 
 void Cassandra::parseRewardMatrix(std::istringstream& iss){
 
