@@ -7,7 +7,9 @@ useable types: std::vector<TYPE> muss funktionieren, braucht default constructor
 static asserts
 header only vs compiled (https://www.youtube.com/watch?v=hcHUZE6buzE 45:00)
 wie enforcen dass Parser(Model) als erstes aufgerufen werden muss? Build pattern, muss in Doku
-parsen exception safety, double einlesen
+parsing, double einlesen
+exception safety:
+    - 2x new: array3d und constructor, in der factory abfangen? 
 
 Low Prio
 - state und action size auf enum oder sogar template umbauen

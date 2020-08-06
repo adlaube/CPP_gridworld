@@ -15,7 +15,6 @@ using SOLVER_FACTORY = Factory<Solver,SOLVER_CONSTRUCTOR>;
 std::unique_ptr<Policy> MdpSolve::solve_single_mdp(const MdpSolve::Params& params){
 
     Model newmdp;
-    //auto parserFactory = ;
     auto parser = PARSER_FACTORY::getInstance().createInstance(params.parser_,newmdp);
     parser->parseFile(params.filepath_);
 

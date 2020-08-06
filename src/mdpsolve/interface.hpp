@@ -4,6 +4,7 @@
 
 #include <string>
 #include <cstdint>
+#include <memory>
 #include "policy.hpp"
 
 namespace MdpSolve{

@@ -6,7 +6,6 @@ void PolicyIteration::solve(Evaluation& eval, Policy& updater, const std::size_t
     while (iteration_cnt_ < max_number_of_iterations){
         eval.evaluatePolicy(model_, updater);
         updater.updatePolicy(model_, eval);
-        updater.printPolicy();
         iteration_cnt_++;         
     }
     updater.printPolicy();

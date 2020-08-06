@@ -25,10 +25,6 @@ void MonteCarlo::evaluatePolicy(const Model& mdp, const Policy &policy) {
         selected_action = policy.getActionOfState(state_idx);
         evaluatePolicyAtState(mdp,state_idx,selected_action);
     }
-    for(STATE_ID state_idx = 0; state_idx < num_of_states;state_idx++)
-    {
-        std::cout<<"VALUE:  " << getValueOfState(state_idx) << std::endl;
-    }            
 }  
 
 double MonteCarlo::getValueOfState(STATE_ID state) const{

@@ -14,5 +14,5 @@ int main(){
     params.solver_          = "policyiteration";
     params.iteration_cnt_   = 100;    
     
-    MdpSolve::solve_single_mdp(params);
+    std::unique_ptr<Policy> ptr = solve_single_mdp(params);
 }
