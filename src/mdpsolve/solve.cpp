@@ -16,12 +16,12 @@ int MdpSolve::solve_single_mdp(const MdpSolve::Params& params){
 
     Model newmdp;
     //auto parserFactory = ;
-    Parser* parser = PARSER_FACTORY::getInstance().createInstance(params.parser_,newmdp);
+    auto parser = PARSER_FACTORY::getInstance().createInstance(params.parser_,newmdp);
     parser->parseFile(params.filepath_);
 
-    Policy* policy = POLICY_FACTORY::getInstance().createInstance(params.policy_,newmdp);
-    Evaluation* eval = EVALUATION_FACTORY::getInstance().createInstance(params.eval_,newmdp);    
-    Solver* solver = SOLVER_FACTORY::getInstance().createInstance(params.solver_,newmdp);        
+    auto policy = POLICY_FACTORY::getInstance().createInstance(params.policy_,newmdp);
+    auto eval = EVALUATION_FACTORY::getInstance().createInstance(params.eval_,newmdp);    
+    auto solver = SOLVER_FACTORY::getInstance().createInstance(params.solver_,newmdp);        
 
     solver->solve(*eval,*policy,params.iteration_cnt_);
 

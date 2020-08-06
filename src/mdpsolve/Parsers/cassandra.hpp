@@ -28,10 +28,10 @@ class Cassandra : public Parser{
         Cassandra& operator= (const Cassandra&) = delete;                    
 
     private:
-        void parseParams (std::string filepath);
-        void parseData(std::string filepath);    
-        void parseTransitionMatrix(std::ifstream* inputstream,const ACTION_ID action);
-        void parseRewardMatrix(std::istringstream* iss);
+        void parseParams (std::ifstream& inputstream);
+        void parseData(std::ifstream& inputstream);    
+        void parseTransitionMatrix(std::ifstream& inputstream,const ACTION_ID action);
+        void parseRewardMatrix(std::istringstream& iss);
         
 };
 

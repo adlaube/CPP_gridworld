@@ -3,25 +3,28 @@
 
 #include <iostream>
 #include <map>
+#include <memory>
 #include "model.hpp"
+
 
 template<typename T, typename Tconstruct>
 class Factory{
-
+    using OBJECT_PTR = std::unique_ptr<T>;
     public:
         static Factory& getInstance(){
             static Factory factory;
             return factory;
         }    
         //not a const model here because parser alters the model
-        T* createInstance(const std::string name, Model& model){ 
+        OBJECT_PTR createInstance(const std::string name, Model& model){ 
 
             auto iterator = supportedTypes.find(name);
             
             if (iterator != supportedTypes.end()) {
                 std::cout << "Found " << iterator->first << " " << iterator->second << '\n';
                 auto constructor = iterator->second ;
-                return constructor->create(model);
+                auto object_pointer = OBJECT_PTR(constructor->create(model));
+                return object_pointer;
             } else {
                 std::cout << "Not found\n";
                 return nullptr;

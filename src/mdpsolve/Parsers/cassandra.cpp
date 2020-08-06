@@ -11,26 +11,26 @@ bool Cassandra::readDoubleFromString(std::string in_string, double& out_double){
 }
 */
 
-void Cassandra::parseRewardMatrix(std::istringstream* iss){
+void Cassandra::parseRewardMatrix(std::istringstream& iss){
 
     std::string value;
     ACTION_ID action_idx = DEF_ACTION_UNDEF;
     STATE_ID start_state_idx = DEF_STATE_UNDEF;
     STATE_ID next_state_idx = DEF_STATE_UNDEF;
-    std::getline(*iss,value,':');
+    std::getline(iss,value,':');
     if (value==" * "){
         action_idx = DEF_ACTION_ALL;
     }
     
-    std::getline(*iss,value,':');
+    std::getline(iss,value,':');
     start_state_idx = atoi(value.c_str());
-    std::getline(*iss,value,':');
+    std::getline(iss,value,':');
     if (value==" * "){
         next_state_idx = DEF_STATE_ALL;
     }
 
-    std::getline(*iss,value,'*');//skip observation, we have full observability in a MDP
-    std::getline(*iss,value); 
+    std::getline(iss,value,'*');//skip observation, we have full observability in a MDP
+    std::getline(iss,value); 
     if(action_idx == DEF_ACTION_ALL && next_state_idx == DEF_STATE_ALL)
     {
         for (action_idx=0; action_idx<model_.num_of_actions;action_idx++){
@@ -42,12 +42,12 @@ void Cassandra::parseRewardMatrix(std::istringstream* iss){
 
 }
 
-void Cassandra::parseTransitionMatrix(std::ifstream* inputstream,const ACTION_ID action){
+void Cassandra::parseTransitionMatrix(std::ifstream& inputstream,const ACTION_ID action){
 
     std::string value, line;
 
     for (STATE_ID state_idx = 0;state_idx<model_.num_of_states;state_idx++){
-        std::getline(*inputstream,line); //access next line
+        std::getline(inputstream,line); //access next line
         std::istringstream iss(line);
         STATE_ID i = 0;
         while(std::getline(iss,value,' ')){ //&& value){
@@ -62,13 +62,11 @@ void Cassandra::parseTransitionMatrix(std::ifstream* inputstream,const ACTION_ID
 }
 
 //error handling
-void Cassandra::parseData(std::string filepath){
+void Cassandra::parseData(std::ifstream& inputstream){
          
     std::string line;
     std::string value;
-    std::ifstream inputstream;
-    inputstream.open(filepath,std::ios::in);
-    
+   
     while( std::getline( inputstream, line ) ){
         std::istringstream iss( line );
 
@@ -87,35 +85,32 @@ void Cassandra::parseData(std::string filepath){
                     throw("invalid action");
                 }
                 ACTION_ID action = result - model_.action_strings.begin();
-                parseTransitionMatrix(&inputstream,action);
+                parseTransitionMatrix(inputstream,action);
             }  
             //processes one line
             if (key == "R"){
 
                 //call
-                parseRewardMatrix(&iss);
+                parseRewardMatrix(iss);
             }                     
         }
     }    
 }
 
-void Cassandra::parseParams(std::string filepath){
+void Cassandra::parseParams(std::ifstream& inputstream){
     
-    std::ifstream inputstream;
-    inputstream.open(filepath,std::ios::in);
     std::string line;
+    std::string value;
     while( std::getline( inputstream, line ) ){
         std::istringstream iss( line );
         std::string key;
         std::getline(iss,key,':');
         if(key[0] != '#'){
             if (key == "discount"){
-                std::string value;
                 std::getline(iss,value);
                 model_.discount_rate = std::atof(value.c_str());
             }
             if (key == "values"){
-                std::string value;
                 std::getline(iss,value);
                 if(value == " reward"){
                     model_.optGoal = OPT_MAXIMIZE;
@@ -125,12 +120,11 @@ void Cassandra::parseParams(std::string filepath){
                 }
             }            
             if (key == "states"){
-                std::string value;
                 std::getline(iss,value);
                 model_.num_of_states = std::atoi(value.c_str()); 
             }
             if (key == "actions"){ //count whitespaces and alloc accordingly
-                std::string value;
+                
                 ACTION_ID action_cnt = 0;
                 std::getline(iss,value,' '); //skip first blank
                 while(std::getline(iss,value,' ')){ 
@@ -145,8 +139,14 @@ void Cassandra::parseParams(std::string filepath){
 
 void Cassandra::parseFile (std::string filepath){
 
-    parseParams(filepath);
+    std::ifstream inputstream;
+    inputstream.open(filepath,std::ios::in);
+    parseParams(inputstream);
     model_.CheckConsistency(""); 
     model_.SetArrays();
-    parseData(filepath);
+
+    //set stream to beginning of file again
+    inputstream.clear();
+    inputstream.seekg(0);
+    parseData(inputstream);
 }
