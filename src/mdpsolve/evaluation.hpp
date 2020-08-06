@@ -11,7 +11,7 @@ class Evaluation{
 
 
     public:
-        virtual void evaluatePolicy(const Model& mdp, const Policy& policy, uint16_t max_iterations) = 0;
+        virtual void evaluatePolicy(const Model& mdp, const Policy& policy) = 0;
         virtual double getValueOfState(STATE_ID state)const = 0;        
         virtual ~Evaluation(){};
 

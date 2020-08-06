@@ -4,6 +4,7 @@
 
 #include <string>
 #include <cstdint>
+#include "policy.hpp"
 
 namespace MdpSolve{
 
@@ -18,7 +19,7 @@ namespace MdpSolve{
 
 
 
-    int solve_single_mdp(const Params& params );
+    std::unique_ptr<Policy> solve_single_mdp(const Params& params );
 
 
 }

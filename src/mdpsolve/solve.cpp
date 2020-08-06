@@ -12,7 +12,7 @@ using EVALUATION_FACTORY = Factory<Evaluation,EVALUATION_CONSTRUCTOR>;
 using SOLVER_CONSTRUCTOR = Constructor<Solver>;
 using SOLVER_FACTORY = Factory<Solver,SOLVER_CONSTRUCTOR>; 
 
-int MdpSolve::solve_single_mdp(const MdpSolve::Params& params){
+std::unique_ptr<Policy> MdpSolve::solve_single_mdp(const MdpSolve::Params& params){
 
     Model newmdp;
     //auto parserFactory = ;
@@ -25,5 +25,5 @@ int MdpSolve::solve_single_mdp(const MdpSolve::Params& params){
 
     solver->solve(*eval,*policy,params.iteration_cnt_);
 
-    return 1;
+    return policy;
 }

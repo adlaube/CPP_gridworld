@@ -18,7 +18,7 @@ class MonteCarlo : public Evaluation{
         //std::uniform_int_distribution<unsigned long> distribution;
     void evaluatePolicyAtState(const Model& mdp, STATE_ID state, ACTION_ID selected_action);
     public:
-    void evaluatePolicy(const Model& mdp, const Policy &policy, uint16_t max_iterations) override;
+    void evaluatePolicy(const Model& mdp, const Policy &policy) override;
     double getValueOfState(STATE_ID state) const override;
 
     MonteCarlo(const Model& model):

@@ -5,7 +5,7 @@
 
 class Greedy : public Policy{
     public:
-        void updatePolicy(const Model& mdp, const Evaluation& eval, std::size_t max_iterations) override;
+        void updatePolicy(const Model& mdp, const Evaluation& eval) override;
         void printPolicy() const override;
         ACTION_ID getActionOfState(STATE_ID state_idx) const override;
 
