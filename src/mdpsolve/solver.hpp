@@ -7,19 +7,18 @@
 #include "policy.hpp"
 #include <cstdint>
 
-class Solver{  
+class Solver : public Module{  
 
     public:
         virtual void solve(Evaluation& eval, Policy& updater, const std::size_t max_number_of_iterations) = 0;
         virtual ~Solver(){};
 
         Solver(Model& model):
-            model_(model){
+            Module(model){
         
             }
 
     protected:
-        const Model& model_;
         std::size_t iteration_cnt_ = 0;
         
 };

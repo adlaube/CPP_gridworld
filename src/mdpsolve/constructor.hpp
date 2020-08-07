@@ -8,7 +8,7 @@
 #include "module.hpp"
 #include "model.hpp"
 
-//enfore constructor to comply with modular interface
+//enforce constructor to comply with modular interface
 template <typename T>
 concept ModularType = requires(T a){
     {a(Model())} -> std::convertible_to<Module>;

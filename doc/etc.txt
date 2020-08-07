@@ -1,6 +1,7 @@
 Checkliste
 
 7.4 Polymorphe Iteratoren --> für reward und state matrix sinnvoll?
+Fileopen -> keine exception bisher?
 Statischen Polymorphismus einschränken über concepts, für Array und Constructor und Factory
 Exceptions überall prüfen
 mehr library denke
