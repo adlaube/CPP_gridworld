@@ -22,13 +22,13 @@ class Array3d{
 
         Array3d() = default;
 
-        friend void swap(Array3d& a1, Array3d& a2) {
-            using std::swap;
-            swap(a1.data_, a2.data_);
-        }        
+        // friend void swap(Array3d& a1, Array3d& a2) {
+        //     using std::swap;
+        //     swap(a1.data_, a2.data_);
+        // }        
 
         //default copy constructor
-        Array3d(const Array3d& a3d) = delete;
+        // Array3d(const Array3d& a3d) = delete;
         // xdim_(a3d.xdim_),
         // ydim_(a3d.ydim_),
         // zdim_(a3d.zdim_),
@@ -40,14 +40,14 @@ class Array3d{
         // }
 
         //define move assignment operator
-        Array3d& operator=(Array3d&& a3d){
-            xdim_ = a3d.xdim_;
-            ydim_ = a3d.ydim_;
-            zdim_ = a3d.zdim_;
-            length_ = a3d.length_;
-            data_ = a3d.data_;  //vector copy operation
-            return *this;
-        }
+        // Array3d& operator=(Array3d&& a3d){
+        //     xdim_ = a3d.xdim_;
+        //     ydim_ = a3d.ydim_;
+        //     zdim_ = a3d.zdim_;
+        //     length_ = a3d.length_;
+        //     data_ = a3d.data_;  //vector copy operation
+        //     return *this;
+        // }
         
         const T& operator()(const std::size_t x,const std::size_t y,const std::size_t z) const{
             if(x>=xdim_ || y >=ydim_ || z>=zdim_){

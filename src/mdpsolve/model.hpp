@@ -38,11 +38,7 @@ class Model{
         STATE_ID num_of_states = 0;
         ACTION_ID num_of_actions = 0;
         std::vector<std::string> action_strings;
-        enum optimizationGoal optGoal = OPT_UNDEFINED;
-
-        Model() = default;
-        Model(const Model& model) = delete;
-        Model& operator= (const Model&) = delete;           
+        enum optimizationGoal optGoal = OPT_UNDEFINED;         
         
 };
 

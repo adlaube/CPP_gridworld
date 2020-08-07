@@ -12,9 +12,7 @@ class Greedy : public Policy{
         explicit Greedy(Model& model): //call parent constructor
             Policy(model){
         }
-
-        Greedy(const Greedy& greedy) = delete;
-        Greedy& operator= (const Greedy&) = delete;         
+ 
 };
 
 #endif
