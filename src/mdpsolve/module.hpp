@@ -1,0 +1,21 @@
+#ifndef MODULE_HPP
+#define MODULE_HPP
+
+#include "model.hpp"
+
+class Model;
+
+class Module {
+    public:
+        Module(Model& model):
+            model_(model){
+
+        }
+
+    protected:
+        Model& model_;
+
+};
+
+
+#endif

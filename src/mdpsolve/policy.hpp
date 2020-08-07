@@ -8,7 +8,7 @@
 
 class Evaluation; //forward declaration
 
-class Policy{
+class Policy : public Module{
 
     public:
         virtual ~Policy(){}    
@@ -16,16 +16,15 @@ class Policy{
         virtual void printPolicy() const = 0;
         virtual ACTION_ID getActionOfState(STATE_ID state_idx) const = 0;
 
-        Policy (const Model& model) :
-            model_(model) {
+        Policy (Model& model) :
+            Module(model) {
             policy_mapping_ =  Array3d<double>(1,  //assign since copy constructor is not implemented
                                                 model_.num_of_actions,
                                                 model_.num_of_states);                                       
         }
 
     protected:  
-        Array3d<double> policy_mapping_; //is 2d but 3d causes almost no overhead  
-        const Model& model_;    
+        Array3d<double> policy_mapping_; //is 2d but 3d causes almost no overhead    
 };
 
 #endif

@@ -1,18 +1,24 @@
 #include "include/catch.hpp"
 #include "factory.hpp"
 #include "policy.hpp"
+#include "Policies/greedyConstructor.hpp"
+
+ //make sure constructor is registered
 
 TEST_CASE("Test Factory"){
 
-    // Model* testptr = nullptr;
-    // REQUIRE_THROW(Factory<int,int>::getInstance().createInstance("testclass",testptr););
+    Model testmodel;
+    testmodel.num_of_actions = 1;
+    testmodel.num_of_states = 2;
+    GreedyConstructor greedy;
 
-    // REQUIRE_THROW(Factory<Policy,int>::getInstance().createInstance("testclass",testptr););
+    
+    REQUIRE_THROWS(Factory<int,int>::getInstance().createInstance("testclass",testmodel));
 
-    // Array3d<double> a3d (3,3,3);
-    // CHECK_THROWS(a3d(4,3,3)); 
+    REQUIRE_THROWS(Factory<Policy,POLICY_CONSTRUCTOR>::getInstance().createInstance("testclass",testmodel));
+    
+    REQUIRE_NOTHROW(Factory<Policy,POLICY_CONSTRUCTOR>::getInstance().createInstance("greedy",testmodel));
 
-    //SECTION("bla") have all the same unaltered inputs      
 }
 
 

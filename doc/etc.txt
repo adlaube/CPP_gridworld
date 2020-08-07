@@ -1,5 +1,7 @@
 Checkliste
 
+7.4 Polymorphe Iteratoren --> für reward und state matrix sinnvoll?
+Statischen Polymorphismus einschränken über concepts, für Array und Constructor und Factory
 Exceptions überall prüfen
 mehr library denke
 bound checking: at für vectors, für Array3d ausstellen?
@@ -34,3 +36,7 @@ Evtl auch Klasse wie Run der alle Module als Member hat und die Factory steuert
 2. factories einbinden
 
 Falls Optionen weggelassen werden, sollen im Programm Standardwerte festgelegt sein, die da-für verwendet werden. Außerdem soll beim Aufruf mit der Option „-?“ eine „Usage“-Meldungausgegeben werden, d. h. eine Auflistung der verfügbaren Optionen mit ihren Bedeutungen.Erwartet wird ein strukturierter Umgang mit den verfügbaren Parametern. Definieren Sie ei-ne geeignete Datenstruktur, die einen Parameter beschreibt und den Umgang damit erleichtert.Für die verfügbaren Parameter soll dann eine entsprechende Tabelle angelegt werden, die mitHilfe einer Initialisierung gefüllt wird. Das Verarbeiten der Parameter soll dann tabellengesteu-ert erfolgen
+
+
+
+Wenn Sie auf der Theon mit C++20 experimentieren möchten, sollten Sie die Verzeichnisse/opt/ulm/cork/cmd,gefolgt von/opt/ulm/cork/bin, vorne in IhremPATHunterbringen. Dann steht Ihnen derg++in der Version 10.1zur Verfügung, der die Option „-std=c++20“ unterstützt

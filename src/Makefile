@@ -3,7 +3,7 @@ EXAMPLE_DIR = ../examples/
 LIB_DIR = ../lib/
 SRC_DIR = ./mdpsolve/
 
-CXXFLAGS = -Wall -std=c++17 -g -I$(SRC_DIR)
+CXXFLAGS = -Wall -std=c++20 -g -I$(SRC_DIR)
 CXX = g++
 CC = g++
 

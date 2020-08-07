@@ -4,10 +4,16 @@
 #include <iostream>
 #include <map>
 #include <memory>
+#include <concepts>
+#include <type_traits>
 #include "model.hpp"
 
+template <typename T>
+concept TConstructor = requires(T a){
+    {a.create(Model())} -> std::convertible_to<std::unique_ptr<T>>;
+};
 
-template<typename T, typename Tconstruct>
+template<typename T, typename TConstructor>
 class Factory{
     using OBJECT_PTR = std::unique_ptr<T>;
     public:
@@ -31,7 +37,7 @@ class Factory{
             
         }        
 
-        void add(const std::string& name, Tconstruct* constructor){
+        void add(const std::string& name, TConstructor* constructor){
             supportedTypes.insert(std::make_pair(name,constructor));
         }
 
@@ -40,7 +46,7 @@ class Factory{
 
     private:
         Factory() = default;
-        std::map<std::string,Tconstruct*> supportedTypes;
+        std::map<std::string,TConstructor*> supportedTypes;
 };
 
 #endif

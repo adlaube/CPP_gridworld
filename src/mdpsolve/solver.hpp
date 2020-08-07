@@ -13,7 +13,7 @@ class Solver{
         virtual void solve(Evaluation& eval, Policy& updater, const std::size_t max_number_of_iterations) = 0;
         virtual ~Solver(){};
 
-        Solver(const Model& model):
+        Solver(Model& model):
             model_(model){
         
             }

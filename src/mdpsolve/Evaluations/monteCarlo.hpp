@@ -21,7 +21,7 @@ class MonteCarlo : public Evaluation{
     void evaluatePolicy(const Model& mdp, const Policy &policy) override;
     double getValueOfState(STATE_ID state) const override;
 
-    explicit MonteCarlo(const Model& model):
+    explicit MonteCarlo(Model& model):
         Evaluation(model){
             
         }
