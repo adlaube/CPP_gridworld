@@ -7,16 +7,15 @@
 #include <concepts>
 #include <type_traits>
 #include "model.hpp"
+#include "constructor.hpp"
+#include "module.hpp"
 
-template <typename T>
-concept TConstructor = requires(T a){
-    {a.create(Model())} -> std::convertible_to<std::unique_ptr<T>>;
-};
-
-template<typename T, typename TConstructor>
+template<ModularType T> // ModularType concept defined in module.hpp
 class Factory{
-    using OBJECT_PTR = std::unique_ptr<T>;
+
     public:
+        using OBJECT_PTR = std::unique_ptr<T>;
+        using CONSTRUCTOR = Constructor<T>;    
         static Factory& getInstance(){
             static Factory factory;
             return factory;
@@ -37,7 +36,7 @@ class Factory{
             
         }        
 
-        void add(const std::string& name, TConstructor* constructor){
+        void add(const std::string& name, CONSTRUCTOR* constructor){
             supportedTypes.insert(std::make_pair(name,constructor));
         }
 
@@ -46,7 +45,7 @@ class Factory{
 
     private:
         Factory() = default;
-        std::map<std::string,TConstructor*> supportedTypes;
+        std::map<std::string,CONSTRUCTOR*> supportedTypes;
 };
 
 #endif

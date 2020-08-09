@@ -6,10 +6,9 @@
 #include "../parser.hpp"
 #include "cassandra.hpp"
 
-using PARSER_CONSTRUCTOR = Constructor<Parser>;
-using PARSER_FACTORY = Factory<Parser,PARSER_CONSTRUCTOR>;
+using PARSER_FACTORY = Factory<Parser>;
 
-class CassandraConstructor final: public PARSER_CONSTRUCTOR{
+class CassandraConstructor final: public Constructor<Parser>{
 
     public:
         CassandraConstructor(){

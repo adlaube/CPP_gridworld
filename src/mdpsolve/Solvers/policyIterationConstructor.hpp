@@ -3,10 +3,9 @@
 #include "../solver.hpp"
 #include "policyIteration.hpp"
 
-using SOLVER_CONSTRUCTOR = Constructor<Solver>;
-using SOLVER_FACTORY = Factory<Solver,SOLVER_CONSTRUCTOR>;  
+using SOLVER_FACTORY = Factory<Solver>;  
 
-class PolicyIterationConstructor final: public SOLVER_CONSTRUCTOR{
+class PolicyIterationConstructor final: public Constructor<Solver>{
 
     public:
         PolicyIterationConstructor(){

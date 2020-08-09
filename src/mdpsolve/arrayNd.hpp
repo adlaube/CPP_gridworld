@@ -4,12 +4,12 @@
 #include <stdexcept>
 #include <vector>
 
-template<typename T>
-class Array3d{
+template<typename T, typename N>
+class ArrayNd{
 
     public:
         using DATA_VECTOR = std::vector<T>;
-        Array3d(std::size_t x_length, std::size_t y_length, std::size_t z_length): 
+        ArrayNd(std::size_t x_length, std::size_t y_length, std::size_t z_length): 
             xdim_(x_length),
             ydim_(y_length),
             zdim_(z_length),

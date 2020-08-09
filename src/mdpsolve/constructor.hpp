@@ -4,21 +4,15 @@
 
 #include <concepts>
 #include <type_traits>
-#include "factory.hpp"
 #include "module.hpp"
 #include "model.hpp"
 
-//enforce constructor to comply with modular interface
-template <typename T>
-concept ModularType = requires(T a){
-    {a(Model())} -> std::convertible_to<Module>;
-};
 
-template<typename ModularType>
+template <ModularType T> // ModularType concept defined in module.hpp
 class Constructor{
 
     public:        
-        virtual ModularType* create(Model& model) = 0;
+        virtual T* create(Model& model) = 0;
               
 };
 

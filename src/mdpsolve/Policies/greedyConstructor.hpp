@@ -3,14 +3,13 @@
 #include "../policy.hpp"
 #include "greedy.hpp"
 
-using POLICY_CONSTRUCTOR = Constructor<Policy>;
-using POLICY_FACTORY = Factory<Policy,POLICY_CONSTRUCTOR>;  
+using POLICY_FACTORY = Factory<Policy>;  
 
 class GreedyConstructor final: public Constructor<Policy>{
 
     public:
         GreedyConstructor(){
-            Factory<Policy,Constructor<Policy>>& factory(Factory<Policy,Constructor<Policy>>::getInstance());
+            POLICY_FACTORY& factory(POLICY_FACTORY::getInstance());
             factory.add("greedy",this);
         }
 

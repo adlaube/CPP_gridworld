@@ -17,5 +17,8 @@ class Module {
 
 };
 
+template <typename T>
+concept ModularType  = std::is_base_of<Module,T>::value;
+
 
 #endif

@@ -1,16 +1,9 @@
 #include "solve.hpp"
 
-using PARSER_CONSTRUCTOR = Constructor<Parser>;
-using PARSER_FACTORY = Factory<Parser,PARSER_CONSTRUCTOR>;
-
-using POLICY_CONSTRUCTOR = Constructor<Policy>;
-using POLICY_FACTORY = Factory<Policy,POLICY_CONSTRUCTOR>;
-
-using EVALUATION_CONSTRUCTOR = Constructor<Evaluation>;
-using EVALUATION_FACTORY = Factory<Evaluation,EVALUATION_CONSTRUCTOR>;
-
-using SOLVER_CONSTRUCTOR = Constructor<Solver>;
-using SOLVER_FACTORY = Factory<Solver,SOLVER_CONSTRUCTOR>; 
+using PARSER_FACTORY = Factory<Parser>;
+using POLICY_FACTORY = Factory<Policy>;
+using EVALUATION_FACTORY = Factory<Evaluation>;
+using SOLVER_FACTORY = Factory<Solver>; 
 
 std::unique_ptr<Policy> MdpSolve::solve_single_mdp(const MdpSolve::Params& params){
 
