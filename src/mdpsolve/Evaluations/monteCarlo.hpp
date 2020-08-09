@@ -24,10 +24,7 @@ class MonteCarlo : public Evaluation{
     explicit MonteCarlo(Model& model):
         Evaluation(model){
             
-        }
-
-    MonteCarlo(const MonteCarlo& greedy) = delete;
-    MonteCarlo& operator= (const MonteCarlo&) = delete;          
+        }        
 
 };
 

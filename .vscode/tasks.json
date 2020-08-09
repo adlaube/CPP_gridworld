@@ -43,7 +43,9 @@
                 "-I",
                 "${fileDirname}",
                 "-I",
-                "${workspaceFolder}/",
+                "${workspaceFolder}/src/mdpsolve",
+                "-I",
+                "${workspaceFolder}",
                 "-std=c++20",
                 "-Wall"
                 //"--coverage"

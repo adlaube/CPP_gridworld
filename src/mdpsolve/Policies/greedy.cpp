@@ -10,10 +10,19 @@ static GreedyConstructor greedy_constructor;
 void Greedy::updatePolicy(const Model& mdp, const Evaluation& eval) {
 
     uint16_t num_of_states = mdp.num_of_states;
-    double reward, state_probability,total_reward, best_reward_value;
+    double reward, state_probability,total_reward;
 
     for (STATE_ID current_state = 0;current_state<num_of_states;current_state++){
-        for(ACTION_ID   action_idx = 0,best_action_idx=0,best_reward_value=0;
+
+        double best_reward_value;
+        if(mdp.optGoal == OPT_MAXIMIZE){
+            best_reward_value = std::numeric_limits<double>::min();
+        }
+        if(mdp.optGoal == OPT_MINIMIZE){
+            best_reward_value = std::numeric_limits<double>::max();
+        }        
+
+        for(ACTION_ID   action_idx = 0,best_action_idx=0;
                         action_idx<mdp.num_of_actions;
                         action_idx++){
             total_reward = 0;

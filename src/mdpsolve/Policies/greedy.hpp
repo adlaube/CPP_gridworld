@@ -1,7 +1,9 @@
 #ifndef GREEDY_HPP
 #define GREEDY_HPP
 
+#include <limits>
 #include "../policy.hpp"
+
 
 class Greedy : public Policy{
     public:
