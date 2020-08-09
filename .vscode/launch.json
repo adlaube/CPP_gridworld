@@ -28,7 +28,9 @@
             "environment": [],
             "externalConsole": false,
             "MIMode": "lldb",
-            "preLaunchTask": "C++ build catch test"
+            "preLaunchTask": "C++ build catch test",
+                                     
+           // "postDebugTask": "coverage" - does not work because no gcov for gcc available
         },        
         {
             "name": "g++ make, run example",

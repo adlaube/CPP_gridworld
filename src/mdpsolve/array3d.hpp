@@ -5,15 +5,15 @@
 #include <vector>
 
 template<typename T>
-class Array3d{
+class Array3d{ 
 
     public:
         using DATA_VECTOR = std::vector<T>;
         Array3d(std::size_t x_length, std::size_t y_length, std::size_t z_length): 
-            xdim_(x_length),
-            ydim_(y_length),
-            zdim_(z_length),
-            length_(x_length*y_length*z_length),
+            xdim_(x_length > 0 ? x_length : throw("invalid dimension")),
+            ydim_(y_length > 0 ? y_length : throw("invalid dimension")),
+            zdim_(z_length > 0 ? z_length : throw("invalid dimension")),
+            length_(x_length>y_length*z_length),
             data_(DATA_VECTOR(x_length*y_length*z_length,0)){
         }
 

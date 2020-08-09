@@ -41,4 +41,4 @@ $(lib): $(obj)
 
 .PHONY:clean
 clean:
-	rm -f $(obj) $(example_obj) $(BIN_DIR)example $(LIB_DIR)$(lib) $(lib) $(dep)
+	rm -f $(obj) $(example_obj) $(BIN_DIR)example $(LIB_DIR)$(lib) $(lib) $(dep) *.gcno *gcda

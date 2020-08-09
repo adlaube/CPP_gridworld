@@ -5,6 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/src/**",
                 "${workspaceFolder}/**",
+                "${workspaceFolder}/src/mdpsolve/**",                
                 "${default}"
             ],
             "defines": [],
@@ -16,7 +17,8 @@
             "browse": {
                 "path": [
                     "${workspaceFolder}/**",
-                    "${workspaceFolder}/src/**"
+                    "${workspaceFolder}/src/**",
+                    "${workspaceFolder}/src/mdpsolve/**"
                 ]            
         }            
             
