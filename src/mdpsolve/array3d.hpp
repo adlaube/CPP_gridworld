@@ -13,17 +13,16 @@ class Array3d{
         std::size_t ydim_ = 0;
         std::size_t zdim_ = 0;
                         
-        std::size_t length_ = 0;
         DATA_VECTOR data_;    
 
     public:
-        
+        std::size_t length_ = 0;
         Array3d(std::size_t x_length, std::size_t y_length, std::size_t z_length): 
             xdim_(x_length > 0 ? x_length : throw("invalid dimension")),
             ydim_(y_length > 0 ? y_length : throw("invalid dimension")),
             zdim_(z_length > 0 ? z_length : throw("invalid dimension")),
-            length_(x_length*y_length*z_length),
-            data_(DATA_VECTOR(x_length*y_length*z_length,0)){
+            data_(DATA_VECTOR(x_length*y_length*z_length,0)),
+            length_(x_length*y_length*z_length){
         }
 
         Array3d() = default;
@@ -45,7 +44,7 @@ class Array3d{
             else{
                 return data_[z + y * ydim_ + x * ydim_ * zdim_];  //no boundary check here, faster
             }
-        }        
+        }
 
 };
 
