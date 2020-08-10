@@ -7,40 +7,41 @@ static GreedyConstructor greedy_constructor;
 //iterate for each state over all possible actions, 
 //iterate for each action over all possible following states
 
-void Greedy::updatePolicy(const Model& mdp, const Evaluation& eval) {
+void Greedy::updatePolicy(const Evaluation& eval) {
 
-    uint16_t num_of_states = mdp.num_of_states;
+    STATE_ID num_of_states = model_.num_of_states;
+    ACTION_ID num_of_actions = model_.num_of_actions;
     double reward, state_probability,total_reward;
 
     for (STATE_ID current_state = 0;current_state<num_of_states;current_state++){
 
         double best_reward_value;
-        if(mdp.optGoal == OPT_MAXIMIZE){
+        if(model_.optGoal == OPT_MAXIMIZE){
             best_reward_value = std::numeric_limits<double>::min();
         }
-        if(mdp.optGoal == OPT_MINIMIZE){
+        if(model_.optGoal == OPT_MINIMIZE){
             best_reward_value = std::numeric_limits<double>::max();
         }        
 
         for(ACTION_ID   action_idx = 0,best_action_idx=0;
-                        action_idx<mdp.num_of_actions;
+                        action_idx<num_of_actions;
                         action_idx++){
             total_reward = 0;
             for(STATE_ID state_idx = 0;state_idx<num_of_states;state_idx++){
 
-                state_probability = mdp.state_transition_matrix(action_idx,current_state,state_idx);
-                reward = mdp.reward_matrix(action_idx,current_state,state_idx);
+                state_probability = model_.state_transition_matrix(action_idx,current_state,state_idx);
+                reward = model_.reward_matrix(action_idx,current_state,state_idx);
                 total_reward =  total_reward 
                                 + state_probability * 
                                 (reward + eval.getValueOfState(state_idx));
             }
 
-            if(mdp.optGoal == OPT_MAXIMIZE && total_reward > best_reward_value){
+            if(model_.optGoal == OPT_MAXIMIZE && total_reward > best_reward_value){
                 best_action_idx = action_idx;
                 best_reward_value = total_reward;
             }
 
-            if(mdp.optGoal == OPT_MINIMIZE && total_reward < best_reward_value){
+            if(model_.optGoal == OPT_MINIMIZE && total_reward < best_reward_value){
                 best_action_idx = action_idx;
                 best_reward_value = total_reward;                
             }

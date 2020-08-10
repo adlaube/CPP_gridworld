@@ -12,15 +12,15 @@ class Policy : public Module{
 
     public:
         virtual ~Policy(){}    
-        virtual void updatePolicy(const Model& mdp, const Evaluation& eval) = 0;
+        virtual void updatePolicy(const Evaluation& eval) = 0;
         virtual void printPolicy() const = 0;
         virtual ACTION_ID getActionOfState(STATE_ID state_idx) const = 0;
 
         Policy (Model& model) :
-            Module(model) {
-            policy_mapping_ =  Array3d<double>(1,  //assign since copy constructor is not implemented
-                                                model_.num_of_actions,
-                                                model_.num_of_states);                                       
+            Module(model),
+            policy_mapping_(Array3d<double>(Array3d<double>(1,  
+                                                model.num_of_actions,
+                                                model.num_of_states))) {                             
         }
 
     protected:  
