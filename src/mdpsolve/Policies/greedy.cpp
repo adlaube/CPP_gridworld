@@ -18,6 +18,7 @@ void Greedy::updatePolicy(const Evaluation& eval) {
         double best_reward_value;
         ACTION_ID best_action_idx = 0;
 
+        //init reference value to max or min value to force initalization
         if(model_.optGoal == OPT_MAXIMIZE){
             best_reward_value = -1 * std::numeric_limits<double>::max();
         }
