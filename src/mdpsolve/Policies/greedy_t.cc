@@ -2,7 +2,7 @@
 #include "greedy.hpp"
 #include "Evaluations/monteCarlo.hpp"
 
-TEST_CASE("Test policy iteration"){
+TEST_CASE("Test greedy policy"){
 
         Model testmodel;
         testmodel.num_of_actions                = 2;

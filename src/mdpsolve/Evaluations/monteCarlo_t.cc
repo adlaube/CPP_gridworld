@@ -3,7 +3,7 @@
 #include "monteCarlo.hpp"
 #include "../model.hpp"
 
-TEST_CASE("Test policy iteration"){
+TEST_CASE("Test monte carlo"){
 
         Model testmodel;
         testmodel.num_of_actions                = 2;
