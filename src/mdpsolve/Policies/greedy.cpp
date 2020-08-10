@@ -16,7 +16,7 @@ void Greedy::updatePolicy(const Evaluation& eval) {
     for (STATE_ID current_state = 0;current_state<num_of_states;current_state++){
 
         double best_reward_value;
-        ACTION_ID best_action_idx;
+        ACTION_ID best_action_idx = 0;
 
         if(model_.optGoal == OPT_MAXIMIZE){
             best_reward_value = -1 * std::numeric_limits<double>::max();
@@ -29,7 +29,6 @@ void Greedy::updatePolicy(const Evaluation& eval) {
                         action_idx<num_of_actions;
                         action_idx++){
             total_reward = 0;
-            best_action_idx = 0;
             for(STATE_ID state_idx = 0;state_idx<num_of_states;state_idx++){
 
                 state_probability = model_.state_transition_matrix(action_idx,current_state,state_idx);

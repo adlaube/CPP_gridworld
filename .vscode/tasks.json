@@ -38,6 +38,7 @@
                 "${workspaceFolder}/tests/unit_tests.o",
                 "-L",
                 "${workspaceFolder}/src",
+                "-Wl,-all_load",
                 "-l",
                 "mdpsolve",                
                 "-I",

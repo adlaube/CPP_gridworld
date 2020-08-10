@@ -5,7 +5,7 @@ static MonteCarloConstructor monte_carlo_constructor;
 
 void MonteCarlo::evaluatePolicyAtState(STATE_ID state, ACTION_ID selected_action )  {
 
-    double V_current = value_function_[state];
+    double V_current = 0;
     STATE_ID num_of_states = model_.num_of_states;    
 
     for (STATE_ID state_idx = 0;state_idx<num_of_states;state_idx++){

@@ -12,7 +12,7 @@ int main(){
     params.eval_            = "montecarlo";
     params.policy_          = "greedy";
     params.solver_          = "policyiteration";
-    params.iteration_cnt_   = 100;    
+    params.iteration_cnt_   = 20;    
     
     std::unique_ptr<Policy> ptr = solve_single_mdp(params);
 }
