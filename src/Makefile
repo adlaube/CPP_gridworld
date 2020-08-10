@@ -1,6 +1,5 @@
 BIN_DIR = ../bin/
 EXAMPLE_DIR = ../examples/
-LIB_DIR = ../lib/
 SRC_DIR = ./mdpsolve/
 
 CXXFLAGS = -Wall -std=c++20 -g -I$(SRC_DIR)
@@ -20,25 +19,21 @@ obj=$(cppsrc:.cpp=.o)
 dep=$(obj:.o=.d)
 
 #all load in order to avoid dropping the static for registration
-example: $(lib) $(example_obj)
+example: $(lib) $(example_obj) $(obj)
 ifeq ($(OS),osx)
 	$(CXX) $(example_obj) -L. -o $(BIN_DIR)$@ -Wl,-all_load -lmdpsolve $(CXXFLAGS)
 else
 	$(CXX) $(example_obj) -L. -o $(BIN_DIR)$@ -Wl,-whole-archive -lmdpsolve -Wl,-no-whole-archive $(CXXFLAGS) 
 endif
-	
-	cp $(lib) $(LIB_DIR)
 
 $(lib): $(obj)
-	ar rcs $(lib) $(obj)
+	ar rcs $@ $^
 
 -include $(dep)
 
 %.d: %.cpp
 	@$(CPP) $(CXXFLAGS) $< -MM -MT $(@:.d=.o) >$@
-	
-	#$(CXX) -o $@ $^ $(CXXFLAGS)
 
 .PHONY:clean
 clean:
-	rm -f $(obj) $(example_obj) $(BIN_DIR)example $(LIB_DIR)$(lib) $(lib) $(dep) *.gcno *gcda
+	rm -f $(obj) $(example_obj) $(BIN_DIR)example $(lib) $(dep) *.gcno *gcda
