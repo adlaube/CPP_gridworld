@@ -11,23 +11,27 @@ TEST_CASE("Test policy iteration"){
         testmodel.state_transition_matrix       = Array3d<double> (2,2,2);
         testmodel.reward_matrix                 = Array3d<double> (2,2,2);
         testmodel.action_strings                = {"west","east"};
+        testmodel.optGoal                       = OPT_MAXIMIZE;
         Greedy policy(testmodel);
         MonteCarlo eval(testmodel); 
 
-        testmodel.state_transition_matrix(1,1,1) = 1; //stay in west
-        testmodel.state_transition_matrix(1,1,2) = 0;
-        testmodel.state_transition_matrix(1,2,1) = 1; //transfer to west
-        testmodel.state_transition_matrix(1,2,2) = 0;
+        //ACTION 0 : west
+        //ACTION 1 : east
+        testmodel.state_transition_matrix(0,0,0) = 1; //stay in west
+        testmodel.state_transition_matrix(0,0,1) = 0;
+        testmodel.state_transition_matrix(0,1,0) = 1; //transfer to west
+        testmodel.state_transition_matrix(0,1,1) = 0;
 
-        testmodel.state_transition_matrix(2,1,1) = 0;
-        testmodel.state_transition_matrix(2,1,2) = 1; //transfer to east
-        testmodel.state_transition_matrix(2,2,2) = 1; //stay in east
+        testmodel.state_transition_matrix(1,0,0) = 0;
+        testmodel.state_transition_matrix(1,0,1) = 1; //transfer to east
+        testmodel.state_transition_matrix(1,1,0) = 0; //transfer to east
+        testmodel.state_transition_matrix(1,1,1) = 1; //stay in east
 
-        testmodel.reward_matrix(2,1,2) = 1; //only give reward when going from east to west
-
+        testmodel.reward_matrix(1,0,1) = 1; //going from west to east
+        testmodel.reward_matrix(1,1,1) = 1; //staying 
         //value function is 0 for all states
         policy.updatePolicy(eval);
-        REQUIRE(greedy.getActionOfState(1))
-
+        REQUIRE(policy.getActionOfState(0) == 1);
+        REQUIRE(policy.getActionOfState(1) == 1);
 
 }

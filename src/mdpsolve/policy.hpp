@@ -18,9 +18,9 @@ class Policy : public Module{
 
         Policy (Model& model) :
             Module(model),
-            policy_mapping_(Array3d<double>(Array3d<double>(1,  
+            policy_mapping_(Array3d<double>(1,  
                                                 model.num_of_actions,
-                                                model.num_of_states))) {                             
+                                                model.num_of_states)) {                             
         }
 
     protected:  
