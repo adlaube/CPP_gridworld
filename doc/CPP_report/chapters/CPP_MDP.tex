@@ -1,0 +1,11 @@
+\chapter{Markov Decision Process}
+
+Markov Decision Processes describe a time-discrete and stochastic process that can be used to model different decision-making problems. MDPs are used in all kinds of domains and multiple algorithms have been proposed to solve a particular MDP. In the field of Reinforcement Learning MDPs are a tool \cite{Sutton2018} to describe the problem of learning. \emph{Agent-Environment interface} where the agent interacts with the environment  is to find an optimal strategy with respect to a defined 
+
+\section{Definition}
+
+A MDP is defined by a state-transition-function $P_a(s,s')$ that gives the probability of transferring to a consecutive state $s'$ when in state $s$ and applying action $a$. For a given state $s$ and action $a$ the probability is independent from former states or actions. This property is referred to as the \emph{Markov property}. The goal of optimization is a scalar value referred to as the \emph{cost} or \emph{reward} which is either minimized (in case a problem defined by costs) or maximized (for rewards). This optimization metric is a function of the current state $s$ and consecutive state $s'$ given an action: $R_a(s,s')$
+
+\section{Algorithms}
+
+For finite state and action spaces 
