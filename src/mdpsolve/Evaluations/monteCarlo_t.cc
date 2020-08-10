@@ -1,6 +1,7 @@
 #include "include/catch.hpp"
-#include "greedy.hpp"
-#include "Evaluations/monteCarlo.hpp"
+#include "Policies/greedy.hpp"
+#include "monteCarlo.hpp"
+#include "../model.hpp"
 
 TEST_CASE("Test policy iteration"){
 
@@ -11,6 +12,7 @@ TEST_CASE("Test policy iteration"){
         testmodel.state_transition_matrix       = Array3d<double> (2,2,2);
         testmodel.reward_matrix                 = Array3d<double> (2,2,2);
         testmodel.action_strings                = {"west","east"};
+        testmodel.optGoal                       = OPT_MAXIMIZE;
         Greedy policy(testmodel);
         MonteCarlo eval(testmodel); 
 
@@ -27,16 +29,15 @@ TEST_CASE("Test policy iteration"){
         testmodel.state_transition_matrix(1,1,1) = 1; //stay in east
 
         testmodel.reward_matrix(1,0,1) = 1; //going from west to east
-        testmodel.reward_matrix(1,1,1) = 1; //staying 
+        testmodel.reward_matrix(1,1,1) = 1; //staying east
 
-        testmodel.optGoal                       = OPT_MAXIMIZE;
-        policy.updatePolicy(eval);
-        REQUIRE(policy.getActionOfState(0) == 1);
-        REQUIRE(policy.getActionOfState(1) == 1);
+        testmodel.reward_matrix(0,1,0) = -1; //going from east to west
+        testmodel.reward_matrix(0,0,0) = -1; //staying west
+        //policy says always take action #0
+        //values are all 0
+        eval.evaluatePolicy(policy);
 
-        testmodel.optGoal                       = OPT_MINIMIZE;
-        policy.updatePolicy(eval);
-        REQUIRE(policy.getActionOfState(0) == 0);
-        REQUIRE(policy.getActionOfState(1) == 0);        
+        REQUIRE(eval.getValueOfState(0) == -1);
+        REQUIRE(eval.getValueOfState(1) == -2);  
 
 }
