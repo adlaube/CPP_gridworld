@@ -1,4 +1,4 @@
-#include "include/catch.hpp"
+#include "tests/catch.hpp"
 #include "factory.hpp"
 #include "policy.hpp"
 #include "model.hpp"

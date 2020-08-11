@@ -1,4 +1,4 @@
-#include "include/catch.hpp"
+#include "tests/catch.hpp"
 #include "policyIteration.hpp"
 #include "Policies/greedy.hpp"
 #include "Evaluations/monteCarlo.hpp"

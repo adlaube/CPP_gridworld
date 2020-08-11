@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.10.22)  11 AUG 2020 09:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.10.22)  11 AUG 2020 10:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1084,8 +1084,12 @@ Overfull \vbox (1.17493pt too high) has occurred while \output is active []
 
 
 [6]
+Overfull \vbox (1.17493pt too high) has occurred while \output is active []
+
+
+[7]
 chapter 4.
-) [7
+) [8
 
 ]
 chapter without number
@@ -1095,7 +1099,7 @@ LaTeX Font Info:    Try loading font information for T1+cmtt on input line 170.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) [8
+) [9
 
 
 
@@ -1113,10 +1117,10 @@ Package logreq Info: Writing requests to 'cpp_report.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18573 strings out of 492616
- 312041 string characters out of 6129480
+ 18577 strings out of 492616
+ 312134 string characters out of 6129480
  787320 words of memory out of 5000000
- 22184 multiletter control sequences out of 15000+600000
+ 22186 multiletter control sequences out of 15000+600000
  48733 words of font info for 72 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
  44i,8n,67p,9167b,1843s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1134,10 +1138,10 @@ xmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2019/texm
 f-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2019/texmf-dist/
 fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/t
 ype1/urw/helvetic/uhvro8a.pfb>
-Output written on cpp_report.pdf (11 pages, 310395 bytes).
+Output written on cpp_report.pdf (12 pages, 314965 bytes).
 PDF statistics:
- 228 PDF objects out of 1000 (max. 8388607)
- 188 compressed objects within 2 object streams
- 32 named destinations out of 1000 (max. 500000)
+ 235 PDF objects out of 1000 (max. 8388607)
+ 194 compressed objects within 2 object streams
+ 34 named destinations out of 1000 (max. 500000)
  136 words of extra memory for PDF output out of 10000 (max. 10000000)
 

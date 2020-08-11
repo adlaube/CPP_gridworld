@@ -1,4 +1,4 @@
-#include "include/catch.hpp"
+#include "tests/catch.hpp"
 #include "model.hpp"
 
 TEST_CASE("test model"){

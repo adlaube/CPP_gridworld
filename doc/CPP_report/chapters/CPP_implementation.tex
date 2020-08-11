@@ -46,7 +46,13 @@ In order to make use of std::vector without causing fragmented memory the \emph{
 
 \section{Build}
 
+A makefile is used for compiling the library and linking it to the example (binary: example) as well as the unit tests (binary: tests). The compiler is set to \emph{-std=c++20} since \emph{Concepts} are a \emph{C++20} feature. 
+
+Due to the modular concept, the concrete implementations are not referenced anywhere in the rest of the codebase. Since registration of all modules is done via instantiating unreferenced, static variables, the linker has to be told to not drop any unreferenced symbols. This is achieved using the \emph{-whole-archive} flag. The linker on macOS requires a different flag. This is considered by setting an OS variable when executing make: \emph{make OS=osx}.
+
+
+
 \section{Testing}
 
-\emph{Catch2} has been chosen as a test framework. It is a header only library which eases integration. The unit tests for a file  
-
+\emph{Catch2}\autocite{Catch} has been chosen as a test framework. It is a header only library which eases integration. Test cases for each class are located in the same directory with a \emph{\_t.cc} suffix. The build process generates an executable containing all tests in the \emph{bin} directory. Overall 48 assertions in 8 different test cases are evaluated. 
+Testing the \emph{concepts and constraints} is split up from the overall testing since the expected outcome is a compile-timer error. Manual compilation and review of following file is required to validate the introduced concept: concepts\_t.cxx.

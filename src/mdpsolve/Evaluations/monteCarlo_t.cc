@@ -1,4 +1,4 @@
-#include "include/catch.hpp"
+#include "tests/catch.hpp"
 #include "Policies/greedy.hpp"
 #include "monteCarlo.hpp"
 #include "../model.hpp"
