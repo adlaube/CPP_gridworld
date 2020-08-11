@@ -14,9 +14,19 @@ BCOR15mm               % Bindekorrektur
 \usepackage{blindtext}
 
 % für Texte in deutscher Sprache
-\usepackage[ngerman]{babel}
+\usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset { %
+	language=[11]C++,
+	backgroundcolor=\color{white!5}, % set backgroundcolor
+	basicstyle=\footnotesize,% basic font setting
+	keywordstyle = \color{blue},
+}
+
 
 % Helvetica als Standard-Dokumentschrift
 \usepackage[scaled]{helvet}

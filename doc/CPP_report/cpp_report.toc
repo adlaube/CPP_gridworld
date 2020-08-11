@@ -1,16 +1,32 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
-\babel@toc {ngerman}{}
+\babel@toc {english}{}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {2}Markov Decision Process}{2}{chapter.2}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Implementation}{3}{chapter.3}% 
+\contentsline {section}{\numberline {2.1}Definition}{2}{section.2.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Classes}{3}{section.3.1}% 
+\contentsline {section}{\numberline {2.2}Algorithms}{2}{section.2.2}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Build}{3}{section.3.2}% 
+\contentsline {chapter}{\numberline {3}Implementation}{4}{chapter.3}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Testing}{3}{section.3.3}% 
+\contentsline {section}{\numberline {3.1}Model}{4}{section.3.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Extensibility}{4}{chapter.4}% 
+\contentsline {section}{\numberline {3.2}Modules}{4}{section.3.2}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.3}Module factory}{5}{section.3.3}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3.1}Constructor}{5}{subsection.3.3.1}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3.2}Factory}{6}{subsection.3.3.2}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.4}Array3D}{6}{section.3.4}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.5}Build}{6}{section.3.5}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.6}Testing}{6}{section.3.6}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}Extensibility}{7}{chapter.4}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\nonumberline Bibliography}{8}{chapter*.2}% 

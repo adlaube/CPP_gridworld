@@ -1,7 +1,52 @@
 \chapter{Implementation}
 
-\section{Classes}
+\section{Model}
+
+The model class is the core element of library because it holds information about the MDP to be solved. It is initialized using the default constructor and a Parser-Module (\autoref{chaptermodule}) is parsing the MDP definition from the input file to the model class. Since memory for the model class members has to be allocated dynamically, the parsing model class object offers a public method to allocate the required memory for the object. Once the Parser-Module has determined the size of the state and action space, \emph{SetArrays()} can be called to initialize the array data structures of the state transition matrix and the reward matrix. A method to validate the model data is offered by the model class and is called by the Parser-Module to abort parsing if an inconsistency has been detected. 
+
+//MODEL UML
+
+\section{Modules}
+\label{chaptermodule}
+
+In order to achieve a high level of extensibility this a base class acts a blue print for classes to read or write the model. Using this common interface enables easy integration which is described in detail in \autoref{integration}. The module class consists of a protected constructor to set its only member: a reference to the model. 
+
+The abstract \emph{Parser} class acts as an interface for concrete Parser implementations. There exist several file formats to describe MDPs. For the sake of a running example, a rudimentary implementation to parse \emph{POMDP} file format \autocite{Cassandra} is provided. 
+
+The abstract \emph{Policy} class as a interface and base class for different variations of \emph{policy improvement}. The \emph{policy mapping } member is an Array3D object in order to both support deterministic policies and stochastic policies. A method is provided to select an action given a certain state. This is needed by Evaluation-implementations. The policy class is also used as a return type for the external interface of the library. This way an external application can use the reference to directly integrate the optimal strategy for the environment. 
+The simplest form of policy improvement where always the most promising action is selected has been implemented. 
+
+The abstract \emph{Evaluation} class is also both interface and base class for different ways to evaluate a policy. A simple form of policy evaluation is provided in the library: \emph{iterative policy evaluation}. This method applies \autoref{valuefunction} to update the value of each state. 
+
+The \emph{Solver} interface and base class provides a general solve method. Solving algorithms combine policy evaluation and policy improvement to find the optimal policy. \emph{policy iteration/monte carlo planning} is implemented as an example.
+
+\section{Module factory}
+\label{integration}
+
+In order to minimize the amount of effort to integrate for example an additional Parser or Solver, a factory is implemented. This enables integration without adding any references in existing code. To ensure scalability for 
+
+For each new module two classes are necessary.
+
+\begin{itemize}
+	\item Class with new functionality, inheriting from Module Class
+	\item Constructor class, inheriting from Constructor template
+\end{itemize}
+
+\subsection{Constructor}
+Each new module 
+
+
+\subsection{Factory}
+
+
+\section{Array3D}
+
+To process the state transition matrix and reward structure of a MDP, a multidimensional array implementation is needed. One option is to use \emph{std::vector} holding another std::vector for the two-dimensional case. The std::vector class manages its own resources following RAII (Resource Acquisition Is Initialization)making this a simple and robust solution but performance-wise there is a drawback. The memory for this nested structure will be fragmented which will slow down access. 
+In order to make use of std::vector without causing fragmented memory the \emph{Array3d} template class acts as a wrapper to a one-dimensional std::vector. The () operator accepts three indices and maps those to the 1d std:.vector member. The wrapper performs a boundary check on the 3d indices. If successful, the access to the 1d vector can be performed without the need for a boundary check. This further enhances the performance.  
 
 \section{Build}
 
 \section{Testing}
+
+\emph{Catch2} has been chosen as a test framework. It is a header only library which eases integration. The unit tests for a file  
+

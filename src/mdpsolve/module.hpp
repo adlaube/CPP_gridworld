@@ -6,7 +6,7 @@
 class Model;
 
 class Module {
-    public:
+    protected:
         Module(Model& model):
             model_(model){
 

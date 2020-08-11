@@ -16,5 +16,51 @@
   {}
 \endgroup
 
-\datalist[entry]{nty/global//global/global}\enddatalist
+\datalist[entry]{nty/global//global/global}
+  \entry{Cassandra}{online}{}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{P}
+    \field{sortinithash}{P}
+    \field{title}{POMDP file format}
+    \verb{url}
+    \verb http://pomdp.org/code/pomdp-file-spec.html
+    \endverb
+    \field{year}{2020}
+  \endentry
+
+  \entry{Sutton2018}{book}{}
+    \name{editor}{2}{}{%
+      {{hash=SRS}{%
+         family={Sutton},
+         familyi={S\bibinitperiod},
+         given={Richard\bibnamedelima S.},
+         giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=BA}{%
+         family={Barto},
+         familyi={B\bibinitperiod},
+         given={Andrew},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {MIT Press}%
+    }
+    \keyw{Künstliche Intelligenz. Wissenserwerb}
+    \strng{namehash}{SRSBA1}
+    \strng{fullhash}{SRSBA1}
+    \field{labelnamesource}{editor}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{isbn}{9780262039246}
+    \field{pages}{XVIII, 322 Seiten}
+    \field{series}{Adaptive computation and machine learning}
+    \field{title}{Reinforcement learning: an introduction}
+    \list{location}{1}{%
+      {Cambridge, Mass. [u.a.]}%
+    }
+    \field{year}{2018}
+  \endentry
+\enddatalist
 \endinput
