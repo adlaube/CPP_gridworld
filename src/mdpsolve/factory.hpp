@@ -17,13 +17,13 @@ class Factory{
             static Factory factory;
             return factory;
         }    
-        //not a const model here because parser alters the model
         OBJECT_PTR createInstance(const std::string& name, Model& model){ 
 
             auto iterator = supportedTypes.find(name);
             
             if (iterator != supportedTypes.end()) {
                 auto constructor = iterator->second ;
+                //constructor is called, factory creates unique_ptr that is passed to user
                 auto object_pointer = OBJECT_PTR(constructor->create(model));
                 return object_pointer;
             } else {

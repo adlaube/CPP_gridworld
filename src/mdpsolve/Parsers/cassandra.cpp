@@ -89,7 +89,9 @@ void Cassandra::parseData(std::ifstream& inputstream){
             if (key == "T"){
                 std::getline(iss,value,' '); //skip first blank    
                 std::getline(iss,value);
-                auto result = std::find(model_.action_strings.begin(),model_.action_strings.end(),value);
+                auto result = std::find(model_.action_strings.begin(),
+                                        model_.action_strings.end(),
+                                        value);
                 if(result == model_.action_strings.end()){
                     throw("invalid action");
                 }

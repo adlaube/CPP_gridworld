@@ -4,18 +4,25 @@
 #include <string>
 #include <memory>
 #include "policy.hpp"
+#include "model.hpp"
 
 namespace MdpSolve{
-
     struct Params{
-        std::string filepath_;
-        std::string parser_;
-        std::string eval_;
-        std::string policy_;
-        std::string solver_;
-        std::size_t iteration_cnt_;
+        std::string mdp_filepath_;
+        std::string module_parser_;
+        std::string module_eval_;
+        std::string module_policy_;
+        std::string module_solver_;
+        std::size_t solver_iteration_cnt_;
     };
-    std::unique_ptr<Policy> solve_single_mdp(const Params& params );
+    /*
+    Solve mdp that is defined in a file on the filesystem
+    */
+    std::unique_ptr<Policy> solve_filebased_mdp(const Params& params);
+    /*
+    Solve mdp that has been defined by the application
+    */
+    std::unique_ptr<Policy> solve_external_mdp(Model& model,const Params& params);
 }
 
 

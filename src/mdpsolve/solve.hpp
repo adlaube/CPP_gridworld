@@ -10,6 +10,7 @@
 #include "factory.hpp"
 #include "model.hpp"
 
-std::unique_ptr<Policy> MdpSolve::solve_single_mdp(const MdpSolve::Params& params);
+std::unique_ptr<Policy> MdpSolve::solve_filebased_mdp(const MdpSolve::Params& params);
+std::unique_ptr<Policy> solve_external_mdp(Model& model,const MdpSolve::Params& params);
 
 #endif

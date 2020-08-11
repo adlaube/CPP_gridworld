@@ -41,3 +41,7 @@ Falls Optionen weggelassen werden, sollen im Programm Standardwerte festgelegt s
 
 
 Wenn Sie auf der Theon mit C++20 experimentieren möchten, sollten Sie die Verzeichnisse/opt/ulm/cork/cmd,gefolgt von/opt/ulm/cork/bin, vorne in IhremPATHunterbringen. Dann steht Ihnen derg++in der Version 10.1zur Verfügung, der die Option „-std=c++20“ unterstützt
+
+
+
+.:/opt/ulm/ballinrobe/cmd:/opt/ulm/ballinrobe/bin:/usr/bin:/usr/perl5/5.12/bin
