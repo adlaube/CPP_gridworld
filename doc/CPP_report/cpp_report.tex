@@ -17,16 +17,24 @@ BCOR15mm               % Bindekorrektur
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{listings}
+
 \usepackage{xcolor}
 
-\lstset { %
-	language=[11]C++,
-	backgroundcolor=\color{white!5}, % set backgroundcolor
-	basicstyle=\footnotesize,% basic font setting
-	keywordstyle = \color{blue},
-}
-
+\definecolor{textblue}{rgb}{.2,.2,.7}
+\definecolor{textred}{rgb}{0.54,0,0}
+\definecolor{textgreen}{rgb}{0,0.43,0}
+\usepackage{listings}
+\lstloadlanguages{C,C++}
+\lstset{language=[11]C++}
+\lstset{morekeywords={concept}}
+\lstset{breaklines=true,numbersep=10pt,stepnumber=1,captionpos=t}
+\lstset{basewidth={0.60em,0.48em},columns=[l]fullflexible,flexiblecolumns=true}
+\lstset{frame=tb,numbers=left,numberstyle=\tiny,escapechar=`,extendedchars=true}
+\lstset{basicstyle={},%
+	keywordstyle=\bfseries,
+	identifierstyle=\itshape,
+	commentstyle=\color{gray}\itshape,
+	stringstyle=}
 
 % Helvetica als Standard-Dokumentschrift
 \usepackage[scaled]{helvet}
@@ -56,14 +64,6 @@ BCOR15mm               % Bindekorrektur
 % Tiefe, bis zu der Überschriften in das Inhaltsverzeichnis kommen
 \setcounter{tocdepth}{3}      % ist Standard
 
-% Beispiele für Quellcode
-\usepackage{listings}
-\lstset{language=Java,
-  showstringspaces=false,
-  frame=single,
-  numbers=left,
-  basicstyle=\ttfamily,
-  numberstyle=\tiny}
 
 % hier Namen etc. einsetzen
 \newcommand{\fullname}{Adrian Lauber}

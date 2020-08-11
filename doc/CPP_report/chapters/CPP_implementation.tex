@@ -32,6 +32,13 @@ For each new module two classes are necessary.
 	\item Constructor class, inheriting from Constructor template
 \end{itemize}
 
+
+asd
+\begin{lstlisting}
+template <typename T>
+concept ModularType  = std::is_base_of<Module,T>::value;
+\end{lstlisting}
+
 \subsection{Constructor}
 Each new module 
 

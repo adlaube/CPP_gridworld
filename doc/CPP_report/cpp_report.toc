@@ -17,7 +17,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.3}Module factory}{5}{section.3.3}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.1}Constructor}{5}{subsection.3.3.1}% 
+\contentsline {subsection}{\numberline {3.3.1}Constructor}{6}{subsection.3.3.1}% 
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.3.2}Factory}{6}{subsection.3.3.2}% 
 \defcounter {refsection}{0}\relax 
@@ -29,4 +29,10 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {4}Extensibility}{8}{chapter.4}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Bibliography}{9}{chapter*.2}% 
+\contentsline {section}{\numberline {4.1}Modules}{8}{section.4.1}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.2}Partial Observability}{8}{section.4.2}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.3}Reinforcement Learning}{8}{section.4.3}% 
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\nonumberline Bibliography}{10}{chapter*.2}% 
