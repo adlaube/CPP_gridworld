@@ -25,8 +25,8 @@ enum optimizationGoal{
 class Model{
 
     public:
-        void SetArrays();
-        void CheckConsistency();         
+        void setArrays();
+        void checkConsistency();         
 
         Array3d<double> state_transition_matrix;
         Array3d<double> reward_matrix;    

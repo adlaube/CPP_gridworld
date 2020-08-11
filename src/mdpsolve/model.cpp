@@ -1,7 +1,7 @@
 #include "model.hpp"
 
 
-void Model::SetArrays(){
+void Model::setArrays(){
 
 	state_transition_matrix =   Array3d<double>(num_of_actions,
 								num_of_states,
@@ -11,7 +11,7 @@ void Model::SetArrays(){
 								num_of_states);
 }
 
-void Model::CheckConsistency(){
+void Model::checkConsistency(){
 
 	if((0 >= discount_rate || 1 < discount_rate) 	||
 		(optGoal == OPT_UNDEFINED)            	||

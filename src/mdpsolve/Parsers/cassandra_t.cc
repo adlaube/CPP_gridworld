@@ -7,9 +7,10 @@ TEST_CASE("Test Parser"){
 
     double epsilon = 0.001;
     Model testmodel;
+    REQUIRE_NOTHROW(Cassandra(testmodel));
     Cassandra parser(testmodel);
-    parser.parseFile("./data/4x3.95.POMDP");
-
+    REQUIRE_THROWS(parser.parseFile("notexistingfile"));
+    REQUIRE_NOTHROW(parser.parseFile("./data/4x3.95.POMDP"));
     REQUIRE(testmodel.num_of_actions == 4);
     REQUIRE(testmodel.num_of_states == 11);
     REQUIRE(testmodel.optGoal == OPT_MAXIMIZE);

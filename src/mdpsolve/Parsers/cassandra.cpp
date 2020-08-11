@@ -3,6 +3,23 @@
 
 static CassandraConstructor cassandra_constructor;
 
+void Cassandra::parseFile (const std::string& filepath){
+
+    std::ifstream inputstream;
+    inputstream.open(filepath,std::ios::in);
+    if (!inputstream) {
+        throw("error opening file");
+    }    
+    parseParams(inputstream);
+    model_.checkConsistency(); 
+    model_.setArrays();
+
+    inputstream.clear(); //reset error bits
+    inputstream.seekg(0); 
+    inputstream.exceptions();
+    parseData(inputstream);
+}
+
 void Cassandra::parseRewardMatrix(std::istringstream& iss){
 
     std::string value;
@@ -129,16 +146,3 @@ void Cassandra::parseParams(std::ifstream& inputstream){
     }                    
 }
 
-void Cassandra::parseFile (const std::string& filepath){
-
-    std::ifstream inputstream;
-    inputstream.open(filepath,std::ios::in);
-    parseParams(inputstream);
-    model_.CheckConsistency(); 
-    model_.SetArrays();
-
-    //set stream to beginning of file again
-    inputstream.clear();
-    inputstream.seekg(0);
-    parseData(inputstream);
-}
