@@ -45,28 +45,47 @@ std::unique_ptr<Policy> solve_external_mdp(Model& model,const Params& params);
 
 \section{Model}
 
-The model class is the core element of library because it holds information about the MDP to be solved. It is initialized using the default constructor and a Parser-Module (\autoref{chaptermodule}) is parsing the MDP definition from the input file to the model class. Since memory for the model class members has to be allocated dynamically, the parsing model class object offers a public method to allocate the required memory for the object. Once the Parser-Module has determined the size of the state and action space, \emph{SetArrays()} can be called to initialize the array data structures of the state transition matrix and the reward matrix. A method to validate the model data is offered by the model class and is called by the Parser-Module to abort parsing if an inconsistency has been detected. 
+The model class is the core element of library because it holds information about the MDP to be solved. It is initialized using the default constructor and a Parser-Module (\autoref{chaptermodule}) is parsing the MDP definition from the input file to the model class. Since memory for the model class members has to be allocated dynamically, the parsing model class object offers a public method to allocate the required memory for the object. Once the Parser-Module has determined the size of the state and action space, \emph{setArrays()} can be called to initialize the array data structures of the state transition matrix and the reward matrix. A method to validate the model data is offered by the model class and is called by the Parser-Module to abort parsing if an inconsistency has been detected. 
 
-//MODEL UML
+The state transition matrix and reward matrix are represented using the \emph{Array3d template class} (\autoref{array}).
+Both matrices are used to look up transition probabilities and rewards.
+
+\begin{equation}
+P_a(s,s') = state\_transition\_matrix[a,s,s']
+\end{equation}
+
+\begin{equation}
+R_a(s,s') = reward\_matrix[a,s,s']
+\end{equation}
+
+
 
 \section{Modules}
 \label{chaptermodule}
 
-In order to achieve a high level of extensibility this a base class acts a blue print for classes to read or write the model. Using this common interface enables easy integration which is described in detail in \autoref{integration}. The module class consists of a protected constructor to set its only member: a reference to the model. 
+In order to achieve a high level of extensibility this  base class acts a blue print for classes to read or write the model. Using this common interface enables easy integration which is described in detail in \autoref{integration}. The module class consists of a protected constructor to set its most important member: a reference to the model. 
+
+Four interfaces inherit from the module class and describe different types of modules:
+
+\begin{itemize}
+	\item Parser
+	\item Policy
+	\item Evaluation
+	\item Solver
+\end{itemize}
 
 The abstract \emph{Parser} class acts as an interface for concrete Parser implementations. There exist several file formats to describe MDPs. For the sake of a running example, a rudimentary implementation to parse \emph{POMDP} file format \autocite{Cassandra} is provided. 
 
-The abstract \emph{Policy} class as a interface and base class for different variations of \emph{policy improvement}. The \emph{policy mapping } member is an Array3D object in order to both support deterministic policies and stochastic policies. A method is provided to select an action given a certain state. This is needed by Evaluation-implementations. The policy class is also used as a return type for the external interface of the library. This way an external application can use the reference to directly integrate the optimal strategy for the environment. 
-The simplest form of policy improvement where always the most promising action is selected has been implemented. 
+The abstract \emph{Policy} class as a interface for different variations of \emph{policy improvement}. The \emph{policy mapping} member is a multdimensional matrix represented as an \emph{Array3d Object} (\autoref{array}) in order to both support deterministic policies and stochastic policies. A method is provided to select an action given a certain state. This is needed by Evaluation-implementations. The policy class is also used as a return type for the external interface of the library. This way an external application can use the reference to directly integrate the optimal strategy for the environment. 
 
-The abstract \emph{Evaluation} class is also both interface and base class for different ways to evaluate a policy. A simple form of policy evaluation is provided in the library: \emph{iterative policy evaluation}. This method applies \autoref{valuefunction} to update the value of each state. 
+The abstract \emph{Evaluation} class is an interface for different implementatons of policy evaluation. A simple form of policy evaluation is provided in the library: \emph{iterative policy evaluation}. This method applies \autoref{valuefunction} to update the value of each state. 
 
-The \emph{Solver} interface and base class provides a general solve method. Solving algorithms combine policy evaluation and policy improvement to find the optimal policy. \emph{policy iteration/monte carlo planning} is implemented as an example.
+The \emph{Solver} interface and base class provides a general solve method. Solving algorithms combine policy evaluation and policy improvement to find the optimal policy. \emph{Policy iteration} is implemented as an example.
 
 \section{Module factory}
 \label{integration}
 
-In order to minimize the amount of effort to integrate for example an additional Parser or Solver, a factory is implemented. This enables integration without adding any references in existing code. To ensure scalability for 
+In order to minimize the amount of effort to integrate for example an additional Parser or Solver, a factory is implemented. This enables integration without adding any references in existing code. To ensure scalability it has been decided to use a template class as a factory and instantiate a factory for each module category (Parser, Policy, Evaluation, Solver). This reduces the risk of name conflicts between modules.
 
 For each new module two classes are necessary.
 
@@ -76,12 +95,13 @@ For each new module two classes are necessary.
 %On the other hand, if the client is going to need a std::shared_ptr anyway, it would be more efficient to have the factory use std::make_shared to avoid the additional dynamic memory allocation. Also, there are situations where you simply must use a std::shared_ptr for example, if the destructor of the managed object is non-virtual and the smart pointer is to be converted to a smart pointer to a base class. But a std::shared_ptr has more overhead than a std::unique_ptr so if the latter is sufficient, we would rather avoid that if possible.
 
 \begin{itemize}
-	\item Class with new functionality, inheriting from Module Class
-	\item Constructor class, inheriting from Constructor template
+	\item Class with new functionality, inheriting from module class
+	\item Constructor class, inheriting from Constructor template class
 \end{itemize}
 
+The constructor class has to override the create(..) method and register to its factory.
 
-asd
+
 \begin{lstlisting}
 template <typename T>
 concept ModularType  = std::is_base_of<Module,T>::value;
@@ -95,7 +115,7 @@ Each new module
 
 
 \section{Array3D}
-
+\label{array}
 To process the state transition matrix and reward structure of a MDP, a multidimensional array implementation is needed. One option is to use \emph{std::vector} holding another std::vector for the two-dimensional case. The std::vector class manages its own resources following RAII (Resource Acquisition Is Initialization)making this a simple and robust solution but performance-wise there is a drawback. The memory for this nested structure will be fragmented which will slow down access. 
 In order to make use of std::vector without causing fragmented memory the \emph{Array3d} template class acts as a wrapper to a one-dimensional std::vector. The () operator accepts three indices and maps those to the 1d std:.vector member. The wrapper performs a boundary check on the 3d indices. If successful, the access to the 1d vector can be performed without the need for a boundary check. This further enhances the performance.  
 
