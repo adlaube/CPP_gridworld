@@ -1,16 +1,5 @@
 #include "cassandra.hpp"
 #include "cassandraConstructor.hpp"
-/*
-bool Cassandra::readDoubleFromString(std::string in_string, double& out_double){
-    char* end_ptr;
-    errno = 0;
-    double result = strtod(in_string.c_str(), &end_ptr);
-    if (errno != 0 || *end_ptr != '\0') {
-        fprintf(stderr, "the value could not be represented as a double exactly\n");
-    }
-
-}
-*/
 
 static CassandraConstructor cassandra_constructor;
 

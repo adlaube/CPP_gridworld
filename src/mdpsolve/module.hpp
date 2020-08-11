@@ -1,9 +1,9 @@
 #ifndef MODULE_HPP
 #define MODULE_HPP
 
+#include <type_traits>
+#include <concepts>
 #include "model.hpp"
-
-class Model;
 
 class Module {
     protected:

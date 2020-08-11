@@ -1,9 +1,9 @@
 #ifndef POLICY_HPP
 #define POLICY_HPP
 
-#include <cstdint>
 #include <iostream>
 #include "model.hpp"
+#include "module.hpp"
 #include "evaluation.hpp"
 
 class Evaluation; //forward declaration

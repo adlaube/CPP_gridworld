@@ -3,9 +3,9 @@
 
 #include <vector>
 #include "model.hpp"
+#include "module.hpp"
 #include "evaluation.hpp"
 #include "policy.hpp"
-#include <cstdint>
 
 class Solver : public Module{  
 
@@ -17,7 +17,6 @@ class Solver : public Module{
             Module(model){
         
             }
-
 
     protected:
         std::size_t iteration_cnt_ = 0;

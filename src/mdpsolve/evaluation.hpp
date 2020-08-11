@@ -2,8 +2,8 @@
 #define EVALUATION_HPP
 
 #include "model.hpp"
+#include "module.hpp"
 #include "policy.hpp"
-#include <cstdint>
 
 class Policy; //forward declaration
 

@@ -2,14 +2,10 @@
 #define MODEL_HPP
 
 #include <string>
-#include <cassert>
 #include <vector>
-#include <tuple>
 
-#include "parser.hpp"
 #include "array3d.hpp"
 
-class Parser; //forward declaration
 
 using STATE_ID  = std::size_t;
 using ACTION_ID = std::size_t;

@@ -1,5 +1,9 @@
 \chapter{Implementation}
 
+\section{Design goals}
+
+
+
 \section{Model}
 
 The model class is the core element of library because it holds information about the MDP to be solved. It is initialized using the default constructor and a Parser-Module (\autoref{chaptermodule}) is parsing the MDP definition from the input file to the model class. Since memory for the model class members has to be allocated dynamically, the parsing model class object offers a public method to allocate the required memory for the object. Once the Parser-Module has determined the size of the state and action space, \emph{SetArrays()} can be called to initialize the array data structures of the state transition matrix and the reward matrix. A method to validate the model data is offered by the model class and is called by the Parser-Module to abort parsing if an inconsistency has been detected. 
@@ -26,6 +30,11 @@ The \emph{Solver} interface and base class provides a general solve method. Solv
 In order to minimize the amount of effort to integrate for example an additional Parser or Solver, a factory is implemented. This enables integration without adding any references in existing code. To ensure scalability for 
 
 For each new module two classes are necessary.
+
+
+%Returning a std::unique_ptr is lightweight (no overhead compared to returning a raw pointer) and conveys the correct semantics of a factory function. Whoever called the function obtains exclusive ownership over the fabricated object. If needed, the client can construct a std::shared_ptr out of a std::unique_ptr at the cost of a dynamic memory allocation.
+%
+%On the other hand, if the client is going to need a std::shared_ptr anyway, it would be more efficient to have the factory use std::make_shared to avoid the additional dynamic memory allocation. Also, there are situations where you simply must use a std::shared_ptr for example, if the destructor of the managed object is non-virtual and the smart pointer is to be converted to a smart pointer to a base class. But a std::shared_ptr has more overhead than a std::unique_ptr so if the latter is sufficient, we would rather avoid that if possible.
 
 \begin{itemize}
 	\item Class with new functionality, inheriting from Module Class
