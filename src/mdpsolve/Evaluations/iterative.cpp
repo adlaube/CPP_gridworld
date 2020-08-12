@@ -1,9 +1,9 @@
-#include "monteCarlo.hpp"
-#include "monteCarloConstructor.hpp"
+#include "iterative.hpp"
+#include "iterativeConstructor.hpp"
 
-static MonteCarloConstructor monte_carlo_constructor;
+static IterativeConstructor monte_carlo_constructor;
 
-void MonteCarlo::evaluatePolicyAtState(STATE_ID state, ACTION_ID selected_action )  {
+void Iterative::evaluatePolicyAtState(STATE_ID state, ACTION_ID selected_action )  {
 
     double V_current = 0;
     STATE_ID num_of_states = model_.num_of_states;    
@@ -20,7 +20,7 @@ void MonteCarlo::evaluatePolicyAtState(STATE_ID state, ACTION_ID selected_action
 }
 
 
-void MonteCarlo::evaluatePolicy(const Policy &policy) {
+void Iterative::evaluatePolicy(const Policy &policy) {
     
     STATE_ID num_of_states = model_.num_of_states;
     
@@ -31,7 +31,7 @@ void MonteCarlo::evaluatePolicy(const Policy &policy) {
     }
 }  
 
-double MonteCarlo::getValueOfState(STATE_ID state) const{
+double Iterative::getValueOfState(STATE_ID state) const{
 
     return value_function_[state];
 }

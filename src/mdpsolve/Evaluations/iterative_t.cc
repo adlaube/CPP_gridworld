@@ -1,9 +1,9 @@
 #include "tests/catch.hpp"
 #include "Policies/greedy.hpp"
-#include "monteCarlo.hpp"
+#include "iterative.hpp"
 #include "../model.hpp"
 
-TEST_CASE("Test monte carlo"){
+TEST_CASE("Test iterative"){
 
         Model testmodel;
         testmodel.num_of_actions                = 2;
@@ -14,7 +14,7 @@ TEST_CASE("Test monte carlo"){
         testmodel.action_strings                = {"west","east"};
         testmodel.optGoal                       = OPT_MAXIMIZE;
         Greedy policy(testmodel);
-        MonteCarlo eval(testmodel); 
+        Iterative eval(testmodel); 
 
         //ACTION 0 : west
         //ACTION 1 : east

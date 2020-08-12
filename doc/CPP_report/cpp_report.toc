@@ -21,22 +21,20 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.5}Module factory}{7}{section.3.5}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.5.1}Constructor}{8}{subsection.3.5.1}% 
+\contentsline {section}{\numberline {3.6}Array3d}{9}{section.3.6}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.5.2}Factory}{8}{subsection.3.5.2}% 
+\contentsline {section}{\numberline {3.7}Example}{10}{section.3.7}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.6}Array3D}{8}{section.3.6}% 
+\contentsline {section}{\numberline {3.8}Build}{11}{section.3.8}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.7}Build}{8}{section.3.7}% 
+\contentsline {section}{\numberline {3.9}Testing}{11}{section.3.9}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.8}Testing}{9}{section.3.8}% 
+\contentsline {chapter}{\numberline {4}Extensibility}{12}{chapter.4}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Extensibility}{10}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Modules}{12}{section.4.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Modules}{10}{section.4.1}% 
+\contentsline {section}{\numberline {4.2}Partial Observability}{12}{section.4.2}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Partial Observability}{10}{section.4.2}% 
+\contentsline {section}{\numberline {4.3}Reinforcement Learning}{12}{section.4.3}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Reinforcement Learning}{10}{section.4.3}% 
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Bibliography}{12}{chapter*.2}% 
+\contentsline {chapter}{\nonumberline Bibliography}{14}{chapter*.2}% 

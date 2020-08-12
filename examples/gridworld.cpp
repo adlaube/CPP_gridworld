@@ -9,7 +9,7 @@ int main(){
     
     params.mdp_filepath_           = "./data/4x3.95.POMDP";
     params.module_parser_          = "cassandra";
-    params.module_eval_            = "montecarlo";
+    params.module_eval_            = "iterative";
     params.module_policy_          = "greedy";
     params.module_solver_          = "policyiteration";
     params.solver_iteration_cnt_   = 20;    

@@ -15,8 +15,8 @@ For the definition of the MDP there are two main use cases. It has either been f
 A structure containing all necessary parameters shall be exposed in the interface so that the application can setup the structure to its needs and then pass it for solving. 
 
 After solving the typical use case is to analyze the resulting strategy and/or deploy it to the environment it has been created for. This requirement shall be fulfilled by transferring the ownership to an object containing the policy. Owning this object shall enable the application to draw actions for a given state. This requirement is especially crucial for stochastic policies, where the policy object also depends on random number generators. Providing the application with the ownership of a policy enables easy deployment of the optimized strategy. An alternative would have been the transfer of a data structure defining the resulting stochastic or deterministic policy. In case of a stochastic policy this can be a heavily complex data structure (for example when using neural networks as a policy) and has consequently not been considered. 
-
 Since many different solving methods exist, new functionality shall be easy to integrate.
+The library shall guarantee \emph{basic exception safety}. 
 
 \section{Interface}
 
@@ -42,6 +42,7 @@ std::unique_ptr<Policy> solve_external_mdp(Model& model,const Params& params);
 
 \end{lstlisting}
 
+The functionality provided in the interface is implemented in \emph{solve.cpp}. 
 
 \section{Model}
 
@@ -68,66 +69,110 @@ In order to achieve a high level of extensibility this  base class acts a blue p
 Four interfaces inherit from the module class and describe different types of modules:
 
 \begin{itemize}
-	\item Parser
-	\item Policy
-	\item Evaluation
-	\item Solver
+	\item Parser (parser.hpp)
+	\item Policy (policy.hpp)
+	\item Evaluation (evaluation.hpp)
+	\item Solver (solver.hpp)
 \end{itemize}
 
-The abstract \emph{Parser} class acts as an interface for concrete Parser implementations. There exist several file formats to describe MDPs. For the sake of a running example, a rudimentary implementation to parse \emph{POMDP} file format \autocite{Cassandra} is provided. 
+The abstract \emph{Parser} class acts as an interface for concrete Parser implementations. There exist several file formats to describe MDPs. For the sake of a running example, a rudimentary implementation to parse \emph{POMDP} file format \autocite{Cassandra} is provided. This class only parses a minimal subset of the POMDP grammar and lacks validation. 
 
 The abstract \emph{Policy} class as a interface for different variations of \emph{policy improvement}. The \emph{policy mapping} member is a multdimensional matrix represented as an \emph{Array3d Object} (\autoref{array}) in order to both support deterministic policies and stochastic policies. A method is provided to select an action given a certain state. This is needed by Evaluation-implementations. The policy class is also used as a return type for the external interface of the library. This way an external application can use the reference to directly integrate the optimal strategy for the environment. 
 
 The abstract \emph{Evaluation} class is an interface for different implementatons of policy evaluation. A simple form of policy evaluation is provided in the library: \emph{iterative policy evaluation}. This method applies \autoref{valuefunction} to update the value of each state. 
 
-The \emph{Solver} interface and base class provides a general solve method. Solving algorithms combine policy evaluation and policy improvement to find the optimal policy. \emph{Policy iteration} is implemented as an example.
+The \emph{Solver} interface and base class provides a general solve method. Solving algorithms combine policy evaluation and policy improvement in different ways to find the optimal policy. \emph{Policy iteration} is implemented as an example.
+
+Classes implementing the required interface of these interfaces are located in the according subdirectories. 
 
 \section{Module factory}
 \label{integration}
 
-In order to minimize the amount of effort to integrate for example an additional Parser or Solver, a factory is implemented. This enables integration without adding any references in existing code. To ensure scalability it has been decided to use a template class as a factory and instantiate a factory for each module category (Parser, Policy, Evaluation, Solver). This reduces the risk of name conflicts between modules.
+In order to minimize the amount of effort to integrate for example an additional Parser or Solver, a factory (\emph{factory.hpp}) is implemented. This enables integration without adding any references in existing code. To ensure scalability it has been decided to use a template class as a factory and instantiate a factory for each module category (Parser, Policy, Evaluation, Solver). Based on the factory template, customized factories can be implemented if needed. The factory template class is designed as a singleton and follows the \emph{construct on first use idiom}. A given name defined in the constructor of a new module is used as an identifer within the factory to decide which object to create. Using multiple factories reduces the risk of name conflicts between modules.  Alternatively a global factory could have been used with the category name encorporated in the given name. A global factory would have offered lower flexibility and was disregarded. 
 
-For each new module two classes are necessary.
+The constructor (\emph{constructor.hpp})is a template class and used as a type in the factory as well as a base class for concrete constructors. The concrete constructor class has to override the virtual create(..) method and register to its factory.
+In order to minimize necessary code changes when including a new type, it has been decided to implement self registering types by instantiating a static constructor object. This has drawbacks when it comes to building since the static objects and new functionality remains unreferenced and dropping it has to be avoided as described in \autoref{build}. 
+It has been decided that the advantage of not having to touch any existing code overweighs. 
 
+\autoref{SolverFactory} depicts a factory of type Solver and a new Solver implementation ("NewSolver"). 
 
-%Returning a std::unique_ptr is lightweight (no overhead compared to returning a raw pointer) and conveys the correct semantics of a factory function. Whoever called the function obtains exclusive ownership over the fabricated object. If needed, the client can construct a std::shared_ptr out of a std::unique_ptr at the cost of a dynamic memory allocation.
-%
-%On the other hand, if the client is going to need a std::shared_ptr anyway, it would be more efficient to have the factory use std::make_shared to avoid the additional dynamic memory allocation. Also, there are situations where you simply must use a std::shared_ptr for example, if the destructor of the managed object is non-virtual and the smart pointer is to be converted to a smart pointer to a base class. But a std::shared_ptr has more overhead than a std::unique_ptr so if the latter is sufficient, we would rather avoid that if possible.
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=.6\textwidth]{images/SolverFactory.png}
+	\caption{\label{fig:bild2}Solver factory}
+	\label{SolverFactory}
+\end{figure}
+
+For each new module two classes have to be added:
 
 \begin{itemize}
-	\item Class with new functionality, inheriting from module class
+	\item Class with new functionality, inheriting from module class or a module category
 	\item Constructor class, inheriting from Constructor template class
 \end{itemize}
 
-The constructor class has to override the create(..) method and register to its factory.
+After the constructor is succesfully registered, the factory can call its create(..) method which returns a pointer to the new object. In order to avoid memory leaks, the factory creates a std::unique\_ptr object for the returned pointer. The factory then returns this std::unique\_ptr to the caller which will also transfer exclusive ownership. By using a unique\_ptr the caller does not have to handle deletion of the created object. The drawback of this solution is that if the caller happens to need a std::shared\_ptr for distribution the construction of it comes at the cost of a dynamic memory allocation. 
+Since the unique\_ptr is more lightweight and no use case for a shared\_ptr could be identified, it has been favored. 
 
+Both constructor and factory enforce that new classes inherit from the module class when using the module factory. This is achieved with a new C++20 feature named \emph{concepts}. Concepts ease the implementation of compile-time validation of template arguments and provide meaningful compile errors to the user. 
+Following concept enforces the template argument to inherit from the module class:
 
 \begin{lstlisting}
 template <typename T>
 concept ModularType  = std::is_base_of<Module,T>::value;
 \end{lstlisting}
 
-\subsection{Constructor}
-Each new module 
+The concept of a \emph{ModularType} is used for the factory and constructor template classes. 
 
-
-\subsection{Factory}
-
-
-\section{Array3D}
+\section{Array3d}
 \label{array}
 To process the state transition matrix and reward structure of a MDP, a multidimensional array implementation is needed. One option is to use \emph{std::vector} holding another std::vector for the two-dimensional case. The std::vector class manages its own resources following RAII (Resource Acquisition Is Initialization)making this a simple and robust solution but performance-wise there is a drawback. The memory for this nested structure will be fragmented which will slow down access. 
-In order to make use of std::vector without causing fragmented memory the \emph{Array3d} template class acts as a wrapper to a one-dimensional std::vector. The () operator accepts three indices and maps those to the 1d std:.vector member. The wrapper performs a boundary check on the 3d indices. If successful, the access to the 1d vector can be performed without the need for a boundary check. This further enhances the performance.  
+In order to make use of std::vector without causing fragmented memory the \emph{Array3d} template class (\emph{array3d.hpp}) acts as a wrapper to a one-dimensional std::vector. The () operator accepts three indices and maps those to the 1d std:.vector member. The wrapper performs a boundary check on the 3d indices. If successful, the access to the 1d vector can be performed without the need for a boundary check. This enhances the performance.  
+
+The Array3d template class does not constrain the template argument in any way. Since internally a std::vector object with the same type has to be instantiated, the restrictions that the vector class provides are sufficient. 
+
+\section{Example}
+
+A sample mdp is provided in the \emph{data} directory: "4x3.95.POMDP" \autocite{Cassandra}. The mdp describes a 4x3 gridworld (\autoref{maze}) with a blocked cell (\#), a cell with high positive reward(+1) and a cell with high negative reward(-1). The cell field is not in the state space and the states of the cells with high rewards cause the transition to a random state (restarting). The action space consists of four move actions: north(N), south(S), east(E), west(W). Moving into the wall or into the blocked cell will return the same state. With a probability of 20\% an move into a direction which is perpendicular to the intended direction is happening. The mdp is used with full observability. 
+
+The example application (directory: \emph{examples}) performs 20 steps of policy iteration on the defined mdp and then prints the expected optimal policy (\autoref{mazesolution}).
+
+\begin{table}[]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		-0.04 & -0.04                      & -0.04 & \cellcolor[HTML]{9AFF99}+1 \\ \hline
+		-0.04 & \cellcolor[HTML]{C0C0C0}\# & -0.04 & \cellcolor[HTML]{FFCCC9}-1 \\ \hline
+		-0.04 & -0.04                      & -0.04 & -0.04                      \\ \hline
+	\end{tabular}
+	\caption{4x3.95.POMDP by Stuart Russel}
+	\label{maze}
+\end{table}
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		E & E                          & E & \cellcolor[HTML]{9AFF99}N \\ \hline
+		N & \cellcolor[HTML]{C0C0C0}\# & N & \cellcolor[HTML]{FFCCC9}N \\ \hline
+		N & E                          & N & W                         \\ \hline
+	\end{tabular}
+	\caption{Solution of the example mdp}
+	\label{mazesolution}
+\end{table}
 
 \section{Build}
+\label{build}
 
-A makefile is used for compiling the library and linking it to the example (binary: example) as well as the unit tests (binary: tests). The compiler is set to \emph{-std=c++20} since \emph{Concepts} are a \emph{C++20} feature. 
+A makefile is used for compiling the library and linking it to the example (binary: example) as well as the unit tests (binary: tests). The compiler is set to \emph{-std=c++20} since \emph{Concepts} are a \emph{C++20} feature. Binaries have to be executed in the main directory (./bin/example) since relative paths are used for solving a mdp from file. 
 
-Due to the modular concept, the concrete implementations are not referenced anywhere in the rest of the codebase. Since registration of all modules is done via instantiating unreferenced, static variables, the linker has to be told to not drop any unreferenced symbols. This is achieved using the \emph{-whole-archive} flag. The linker on macOS requires a different flag. This is considered by setting an OS variable when executing make: \emph{make OS=osx}.
-
+Due to the modular concept, the concrete implementations are not referenced anywhere in the rest of the codebase. Since registration of all modules is done via instantiating unreferenced, static variables, the linker has to be told to not drop any unreferenced symbols. This is achieved using the \emph{-whole-archive} flag. The linker on macOS requires a different flag. This is considered by setting an OS variable when executing make: \emph{make OS=osx}. Using this option causes the binary to be bloated. For lightweight binaries the modules have to registered in the main code base in order to allow the linker to drop unreferenced symbols. 
 
 
 \section{Testing}
 
-\emph{Catch2}\autocite{Catch} has been chosen as a test framework. It is a header only library which eases integration. Test cases for each class are located in the same directory with a \emph{\_t.cc} suffix. The build process generates an executable containing all tests in the \emph{bin} directory. Overall 48 assertions in 8 different test cases are evaluated. 
+\emph{Catch2}\autocite{Catch} has been chosen as a test framework. It is a header only library which eases integration. Test cases for each class are located in the same directory with a \emph{\_t.cc} suffix. The build process generates an executable containing all tests in the \emph{bin} directory. Overall 62 assertions in 9 different test cases are evaluated. 
 Testing the \emph{concepts and constraints} is split up from the overall testing since the expected outcome is a compile-timer error. Manual compilation and review of following file is required to validate the introduced concept: concepts\_t.cxx.

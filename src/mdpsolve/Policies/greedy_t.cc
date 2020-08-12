@@ -1,6 +1,6 @@
 #include "tests/catch.hpp"
 #include "greedy.hpp"
-#include "Evaluations/monteCarlo.hpp"
+#include "Evaluations/Iterative.hpp"
 
 TEST_CASE("Test greedy policy"){
 
@@ -12,7 +12,7 @@ TEST_CASE("Test greedy policy"){
         testmodel.reward_matrix                 = Array3d<double> (2,2,2);
         testmodel.action_strings                = {"west","east"};
         Greedy policy(testmodel);
-        MonteCarlo eval(testmodel); 
+        Iterative eval(testmodel); 
 
         //ACTION 0 : west
         //ACTION 1 : east

@@ -1,21 +1,21 @@
 #include "../factory.hpp"
 #include "../constructor.hpp"
 #include "../evaluation.hpp"
-#include "monteCarlo.hpp"
+#include "iterative.hpp"
 
 //using EVALUATION_CONSTRUCTOR = Constructor<Evaluation>;
 using EVALUATION_FACTORY = Factory<Evaluation>;
 
-class MonteCarloConstructor final: public Constructor<Evaluation>{
+class IterativeConstructor final: public Constructor<Evaluation>{
 
     public:
-        MonteCarloConstructor(){
+        IterativeConstructor(){
             EVALUATION_FACTORY& factory(EVALUATION_FACTORY::getInstance());
-            factory.add("montecarlo",this);
+            factory.add("iterative",this);
         }
 
-        MonteCarlo* create(Model &model) override{
-            return new MonteCarlo(model);
+        Iterative* create(Model &model) override{
+            return new Iterative(model);
         }
 };
 

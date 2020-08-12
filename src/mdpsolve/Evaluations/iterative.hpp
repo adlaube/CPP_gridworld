@@ -1,9 +1,9 @@
-#ifndef MONTECARLO_HPP
-#define MONTECARLO_HPP
+#ifndef ITERATIVE_HPP
+#define ITERATIVE_HPP
 
 #include "../evaluation.hpp"
 
-class MonteCarlo : public Evaluation{
+class Iterative : public Evaluation{
 
     private:
         void evaluatePolicyAtState(STATE_ID state, ACTION_ID selected_action);
@@ -11,7 +11,7 @@ class MonteCarlo : public Evaluation{
         void evaluatePolicy(const Policy &policy) override;
         double getValueOfState(STATE_ID state) const override;
 
-        explicit MonteCarlo(Model& model):
+        explicit Iterative(Model& model):
             Evaluation(model){
                 
             }        

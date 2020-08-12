@@ -1,7 +1,7 @@
 #include "tests/catch.hpp"
 #include "policyIteration.hpp"
 #include "Policies/greedy.hpp"
-#include "Evaluations/monteCarlo.hpp"
+#include "Evaluations/Iterative.hpp"
 
 TEST_CASE("Test policy iteration"){
 
@@ -13,7 +13,7 @@ TEST_CASE("Test policy iteration"){
         testmodel.reward_matrix                 = Array3d<double> (2,2,2);
         testmodel.action_strings                = {"west","east"};
         PolicyIteration pi1(testmodel);
-        MonteCarlo dummyeval(testmodel);
+        Iterative dummyeval(testmodel);
         Greedy dummypolicy(testmodel);
 
         pi1.solve(dummyeval,dummypolicy,100);
