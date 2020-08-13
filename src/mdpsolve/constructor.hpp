@@ -2,16 +2,14 @@
 
 #define CONSTRUCTOR_HPP
 
-#include "module.hpp"
 #include "model.hpp"
-
+#include "module.hpp"
 
 template <ModularType T> // ModularType concept defined in module.hpp
-class Constructor{
-
-    public:        
-        virtual T* create(Model& model) = 0;
-              
+class Constructor
+{
+      public:
+	virtual T *create(Model &model) = 0;
 };
 
 #endif

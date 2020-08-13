@@ -1,20 +1,21 @@
-#include "../factory.hpp"
 #include "../constructor.hpp"
+#include "../factory.hpp"
 #include "../solver.hpp"
 #include "policyIteration.hpp"
 
-using SOLVER_FACTORY = Factory<Solver>;  
+using SOLVER_FACTORY = Factory<Solver>;
 
-class PolicyIterationConstructor final: public Constructor<Solver>{
+class PolicyIterationConstructor final : public Constructor<Solver>
+{
+      public:
+	PolicyIterationConstructor()
+	{
+		SOLVER_FACTORY &factory(SOLVER_FACTORY::getInstance());
+		factory.add("policyiteration", this);
+	}
 
-    public:
-        PolicyIterationConstructor(){
-            SOLVER_FACTORY& factory(SOLVER_FACTORY::getInstance());
-            factory.add("policyiteration",this);
-        }
-
-        PolicyIteration* create(Model &model) override{
-            return new PolicyIteration(model);
-        }
+	PolicyIteration *create(Model &model) override
+	{
+		return new PolicyIteration(model);
+	}
 };
-
