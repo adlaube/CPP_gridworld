@@ -5,9 +5,8 @@
 
 using SOLVER_FACTORY = Factory<Solver>;
 
-class PolicyIterationConstructor final : public Constructor<Solver>
-{
-      public:
+class PolicyIterationConstructor final : public Constructor<Solver> {
+    public:
 	PolicyIterationConstructor()
 	{
 		SOLVER_FACTORY &factory(SOLVER_FACTORY::getInstance());

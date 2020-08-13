@@ -8,9 +8,8 @@
 
 using PARSER_FACTORY = Factory<Parser>;
 
-class CassandraConstructor final : public Constructor<Parser>
-{
-      public:
+class CassandraConstructor final : public Constructor<Parser> {
+    public:
 	CassandraConstructor()
 	{
 		PARSER_FACTORY &factory(PARSER_FACTORY::getInstance());

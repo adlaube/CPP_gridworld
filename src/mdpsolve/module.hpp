@@ -5,12 +5,13 @@
 #include <concepts>
 #include <type_traits>
 
-class Module
-{
-      protected:
-	Module(Model &model) : model_(model) {}
+class Module {
+    protected:
+	Module(Model &model) : model_(model)
+	{
+	}
 
-      protected:
+    protected:
 	Model &model_;
 };
 

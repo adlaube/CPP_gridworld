@@ -11,7 +11,7 @@ TEST_CASE("Test policy iteration")
 	testmodel.discount_rate = 1;
 	testmodel.state_transition_matrix = Array3d<double>(2, 2, 2);
 	testmodel.reward_matrix = Array3d<double>(2, 2, 2);
-	testmodel.action_strings = {"west", "east"};
+	testmodel.action_strings = { "west", "east" };
 	PolicyIteration pi1(testmodel);
 	Iterative dummyeval(testmodel);
 	Greedy dummypolicy(testmodel);

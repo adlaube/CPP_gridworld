@@ -6,9 +6,8 @@
 #include "module.hpp"
 
 template <ModularType T> // ModularType concept defined in module.hpp
-class Constructor
-{
-      public:
+class Constructor {
+    public:
 	virtual T *create(Model &model) = 0;
 };
 

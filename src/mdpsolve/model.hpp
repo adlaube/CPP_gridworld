@@ -17,9 +17,8 @@ using ACTION_ID = std::size_t;
 
 enum optimizationGoal { OPT_MAXIMIZE, OPT_MINIMIZE, OPT_UNDEFINED };
 
-class Model
-{
-      public:
+class Model {
+    public:
 	void setArrays();
 	void checkConsistency();
 

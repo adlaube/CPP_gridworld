@@ -41,7 +41,7 @@ TEST_CASE("test solving external mdp")
 	Model newmdp;
 	using PARSER_FACTORY = Factory<Parser>;
 	auto parser = PARSER_FACTORY::getInstance().createInstance(
-	    params.module_parser_, newmdp);
+		params.module_parser_, newmdp);
 	parser->parseFile(params.mdp_filepath_);
 	auto policy = MdpSolve::solve_external_mdp(newmdp, params);
 

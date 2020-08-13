@@ -39,8 +39,8 @@ void Cassandra::parseRewardMatrix(std::istringstream &iss)
 	}
 
 	std::getline(
-	    iss, value,
-	    '*'); // skip observation, we have full observability in a MDP
+		iss, value,
+		'*'); // skip observation, we have full observability in a MDP
 	std::getline(iss, value);
 	if (action_idx == DEF_ACTION_ALL && next_state_idx == DEF_STATE_ALL) {
 		for (action_idx = 0; action_idx < model_.num_of_actions;
@@ -48,9 +48,10 @@ void Cassandra::parseRewardMatrix(std::istringstream &iss)
 			for (next_state_idx = 0;
 			     next_state_idx < model_.num_of_states;
 			     next_state_idx++) {
-				model_.reward_matrix(
-				    action_idx, start_state_idx,
-				    next_state_idx) = atof(value.c_str());
+				model_.reward_matrix(action_idx,
+						     start_state_idx,
+						     next_state_idx) =
+					atof(value.c_str());
 			}
 		}
 	}
@@ -68,7 +69,7 @@ void Cassandra::parseTransitionMatrix(std::ifstream &inputstream,
 		STATE_ID i = 0;
 		while (std::getline(iss, value, ' ')) { //&& value){
 			model_.state_transition_matrix(action, state_idx, i) =
-			    atof(value.c_str());
+				atof(value.c_str());
 			i++;
 		}
 		if (i != model_.num_of_states) {
@@ -95,14 +96,15 @@ void Cassandra::parseData(std::ifstream &inputstream)
 				std::getline(iss, value,
 					     ' '); // skip first blank
 				std::getline(iss, value);
-				auto result = std::find(
-				    model_.action_strings.begin(),
-				    model_.action_strings.end(), value);
+				auto result =
+					std::find(model_.action_strings.begin(),
+						  model_.action_strings.end(),
+						  value);
 				if (result == model_.action_strings.end()) {
 					throw("invalid action");
 				}
 				ACTION_ID action =
-				    result - model_.action_strings.begin();
+					result - model_.action_strings.begin();
 				parseTransitionMatrix(inputstream, action);
 			}
 			// processes one line
@@ -140,7 +142,7 @@ void Cassandra::parseParams(std::ifstream &inputstream)
 				model_.num_of_states = std::atoi(value.c_str());
 			}
 			if (key == "actions") { // count whitespaces and alloc
-						// accordingly
+				// accordingly
 
 				ACTION_ID action_cnt = 0;
 				std::getline(iss, value,

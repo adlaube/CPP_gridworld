@@ -12,17 +12,18 @@
 
 #include "../parser.hpp"
 
-class Cassandra : public Parser
-{
-      public:
+class Cassandra : public Parser {
+    public:
 	void parseFile(const std::string &filepath) final;
 
-	explicit Cassandra(Model &model) : Parser(model) {}
+	explicit Cassandra(Model &model) : Parser(model)
+	{
+	}
 
 	Cassandra(const Cassandra &cassandra) = delete;
 	Cassandra &operator=(const Cassandra &) = delete;
 
-      private:
+    private:
 	void parseParams(std::ifstream &inputstream);
 	void parseData(std::ifstream &inputstream);
 	void parseTransitionMatrix(std::ifstream &inputstream,

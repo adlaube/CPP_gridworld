@@ -3,9 +3,9 @@
 void Model::setArrays()
 {
 	state_transition_matrix =
-	    Array3d<double>(num_of_actions, num_of_states, num_of_states);
+		Array3d<double>(num_of_actions, num_of_states, num_of_states);
 	reward_matrix =
-	    Array3d<double>(num_of_actions, num_of_states, num_of_states);
+		Array3d<double>(num_of_actions, num_of_states, num_of_states);
 }
 
 void Model::checkConsistency()

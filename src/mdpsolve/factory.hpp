@@ -8,9 +8,8 @@
 #include <memory>
 
 template <ModularType T> // ModularType concept defined in module.hpp
-class Factory
-{
-      public:
+class Factory {
+    public:
 	using OBJECT_PTR = std::unique_ptr<T>;
 	using CONSTRUCTOR = Constructor<T>;
 	static Factory &getInstance()
@@ -27,7 +26,7 @@ class Factory
 			// constructor is called, factory creates unique_ptr
 			// that is passed to user
 			auto object_pointer =
-			    OBJECT_PTR(constructor->create(model));
+				OBJECT_PTR(constructor->create(model));
 			return object_pointer;
 		} else {
 			throw("class not registered with factory");
@@ -43,7 +42,7 @@ class Factory
 	Factory(const Factory &factory) = delete;
 	Factory &operator=(const Factory &) = delete;
 
-      private:
+    private:
 	Factory() = default;
 	std::map<std::string, CONSTRUCTOR *> supportedTypes;
 };

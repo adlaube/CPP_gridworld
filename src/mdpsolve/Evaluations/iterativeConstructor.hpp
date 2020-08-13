@@ -6,9 +6,8 @@
 // using EVALUATION_CONSTRUCTOR = Constructor<Evaluation>;
 using EVALUATION_FACTORY = Factory<Evaluation>;
 
-class IterativeConstructor final : public Constructor<Evaluation>
-{
-      public:
+class IterativeConstructor final : public Constructor<Evaluation> {
+    public:
 	IterativeConstructor()
 	{
 		EVALUATION_FACTORY &factory(EVALUATION_FACTORY::getInstance());

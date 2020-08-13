@@ -10,7 +10,7 @@ TEST_CASE("Test greedy policy")
 	testmodel.discount_rate = 1;
 	testmodel.state_transition_matrix = Array3d<double>(2, 2, 2);
 	testmodel.reward_matrix = Array3d<double>(2, 2, 2);
-	testmodel.action_strings = {"west", "east"};
+	testmodel.action_strings = { "west", "east" };
 	Greedy policy(testmodel);
 	Iterative eval(testmodel);
 

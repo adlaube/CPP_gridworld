@@ -6,12 +6,13 @@
 
 class Model; // forward declaration
 
-class Parser : public Module
-{
-      public:
+class Parser : public Module {
+    public:
 	virtual ~Parser(){};
 	virtual void parseFile(const std::string &filepath) = 0;
-	Parser(Model &model) : Module(model) {}
+	Parser(Model &model) : Module(model)
+	{
+	}
 	Parser() = delete;
 };
 
