@@ -93,7 +93,7 @@ Classes implementing the required interface of these interfaces are located in t
 \section{Module factory}
 \label{integration}
 
-In order to minimize the amount of effort to integrate and instantiate additional functionality, a factory (\emph{factory.hpp}) is implemented. This enables integration without adding any references in existing code. To ensure scalability it has been decided to use a template class as a factory and instantiate a factory for each module category (Parser, Policy, Evaluation, Solver). Based on the factory template, customized factories can be implemented if needed. The factory template class is designed as a singleton and follows the \emph{construct on first use idiom}. A given name defined in the constructor of a new module is used as an identifer within the factory to decide which object to create. Using multiple factories reduces the risk of name conflicts between modules.  Alternatively a global factory could have been used with the category name encorporated in the given name. A global factory would have offered lower flexibility and was disregarded. 
+In order to minimize the amount of effort to integrate and instantiate additional functionality, a factory (\emph{factory.hpp}) is implemented. The implementation for the factory and constructor is based on the lecture material \autocite{lectureFactory}. A factory pattern combined with self registering types enables integration of new functionality without adding any references in existing code. To ensure scalability it has been decided to use a template class as a factory and instantiate a factory for each module category (Parser, Policy, Evaluation, Solver). Based on the factory template, customized factories can be implemented if needed. The factory template class is designed as a singleton and follows the \emph{construct on first use idiom}. A given name defined in the constructor of a new module is used as an identifer within the factory to decide which object to create. Using multiple factories reduces the risk of name conflicts between modules.  Alternatively a global factory could have been used with the category name encorporated in the given name. A global factory would have offered lower flexibility and was disregarded. 
 
 The constructor (\emph{constructor.hpp})is a template class and used as a type in the factory as well as a base class for concrete constructors. The concrete constructor class has to override the virtual create(..) method and register to its factory.
 In order to minimize necessary code changes when including a new type, it has been decided to implement self registering types by instantiating a static constructor object. This has drawbacks when it comes to building since the static objects and new functionality remains unreferenced and dropping it has to be avoided as described in \autoref{build}. 
@@ -103,7 +103,7 @@ It has been decided that the advantage of not having to touch any existing code 
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=.6\textwidth]{images/SolverFactory.png}
+	\includegraphics[width=.8\textwidth]{images/SolverFactory.png}
 	\caption{\label{fig:bild2}Solver factory}
 	\label{SolverFactory}
 \end{figure}

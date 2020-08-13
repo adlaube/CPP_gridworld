@@ -17,6 +17,27 @@
 \endgroup
 
 \datalist[entry]{nty/global//global/global}
+  \entry{lectureFactory}{unpublished}{}
+    \name{author}{1}{}{%
+      {{hash=BPA}{%
+         family={Borchert},
+         familyi={B\bibinitperiod},
+         given={Prof.\bibnamedelima Andreas},
+         giveni={P\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BPA1}
+    \strng{fullhash}{BPA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{title}{Vorlesungsbegleiter zu Objektorientierte Programmierung mit
+  C++ Kapitel 5: Design-Patterns und Techniken zum dynamischen Polymorphismus}
+    \warn{\item Invalid format of field 'date' \item Invalid format of field
+  'date'}
+  \endentry
+
   \entry{guideline}{online}{}
     \field{labeltitlesource}{title}
     \field{sortinit}{C}
@@ -105,6 +126,18 @@
       {Cambridge, Mass. [u.a.]}%
     }
     \field{year}{2018}
+  \endentry
+
+  \entry{format}{online}{}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{title}{clang-format style of Linux Kernel}
+    \verb{url}
+    \verb https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tr
+    \verb ee/.clang-format
+    \endverb
+    \field{year}{2020}
   \endentry
 \enddatalist
 \endinput

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.10.22)  13 AUG 2020 11:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.10.22)  13 AUG 2020 16:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -932,13 +932,19 @@ Package biblatex Info: Data encoding 'utf8' specified.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'cpp_report.bbl' found.
 
-(./cpp_report.bbl)
+(./cpp_report.bbl
+
+Package biblatex Warning: BibTeX reported the following issues
+(biblatex)                with 'lectureFactory':
+(biblatex)                - Invalid format of field 'date' 
+(biblatex)                - Invalid format of field 'date'.
+
+)
 Package biblatex Info: Reference section=0 on input line 109.
 Package biblatex Info: Reference segment=0 on input line 109.
 \AtBeginShipoutBox=\box36
 Package hyperref Info: Link coloring OFF on input line 109.
-
-(/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 
 (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
@@ -1080,13 +1086,15 @@ LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <17.28> not available
 (Font)              Font shape `T1/phv/b/n' tried instead on input line 5.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 16.41594pt on input line 5.
+LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 10.
 [2
 
 ]
 <images/GPI2.png, id=99, 421.575pt x 243.91125pt>
 File: images/GPI2.png Graphic file (type png)
 <use images/GPI2.png>
-Package pdftex.def Info: images/GPI2.png  used on input line 27.
+Package pdftex.def Info: images/GPI2.png  used on input line 35.
 (pdftex.def)             Requested size: 249.6755pt x 144.4572pt.
 ) (./chapters/CPP_design.tex
 Overfull \vbox (1.17493pt too high) has occurred while \output is active []
@@ -1094,11 +1102,9 @@ Overfull \vbox (1.17493pt too high) has occurred while \output is active []
 
 [3 <./images/GPI2.png>]
 chapter 3.
-LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 7.
-) (./chapters/CPP_implementation.tex [4
+[4
 
-]
+]) (./chapters/CPP_implementation.tex
 Overfull \vbox (1.17493pt too high) has occurred while \output is active []
 
 
@@ -1120,7 +1126,7 @@ Overfull \vbox (1.17493pt too high) has occurred while \output is active []
 
 
 [7]
-<images/Modules.png, id=162, 790.955pt x 596.2275pt>
+<images/Modules.png, id=165, 790.955pt x 596.2275pt>
 File: images/Modules.png Graphic file (type png)
 <use images/Modules.png>
 Package pdftex.def Info: images/Modules.png  used on input line 78.
@@ -1134,11 +1140,11 @@ Overfull \vbox (1.17493pt too high) has occurred while \output is active []
 
 
 [9]
-<images/SolverFactory.png, id=179, 640.3925pt x 453.695pt>
+<images/SolverFactory.png, id=184, 640.3925pt x 453.695pt>
 File: images/SolverFactory.png Graphic file (type png)
 <use images/SolverFactory.png>
 Package pdftex.def Info: images/SolverFactory.png  used on input line 106.
-(pdftex.def)             Requested size: 249.6755pt x 176.88495pt.
+(pdftex.def)             Requested size: 332.89856pt x 235.8466pt.
 
 Overfull \vbox (1.17493pt too high) has occurred while \output is active []
 
@@ -1215,10 +1221,10 @@ Package logreq Info: Writing requests to 'cpp_report.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 19199 strings out of 492616
- 318724 string characters out of 6129480
+ 19207 strings out of 492616
+ 318965 string characters out of 6129480
  754136 words of memory out of 5000000
- 22753 multiletter control sequences out of 15000+600000
+ 22759 multiletter control sequences out of 15000+600000
  47739 words of font info for 71 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
  44i,9n,66p,9167b,2013s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1237,10 +1243,10 @@ f-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2019/texmf-
 dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2019/texmf-dist/fo
 nts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/typ
 e1/urw/helvetic/uhvro8a.pfb>
-Output written on cpp_report.pdf (20 pages, 431569 bytes).
+Output written on cpp_report.pdf (20 pages, 434243 bytes).
 PDF statistics:
- 359 PDF objects out of 1000 (max. 8388607)
- 303 compressed objects within 4 object streams
- 76 named destinations out of 1000 (max. 500000)
+ 366 PDF objects out of 1000 (max. 8388607)
+ 310 compressed objects within 4 object streams
+ 78 named destinations out of 1000 (max. 500000)
  186 words of extra memory for PDF output out of 10000 (max. 10000000)
 
