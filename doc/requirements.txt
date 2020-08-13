@@ -4,12 +4,5 @@ Exceptions
 10 Seiten doc
 Zitieren!
 Abgabe 14. August 24 Uhr
+submit cpp hausarbeit hausarbeit.tar
 
-Der Text sollte aus einer Einleitung oder Motivation mit der Problemstellung beginnen,
-dann mögliche Umsetzungen diskutieren, um dann auszuführen, 
-wo die Vorteile undmöglicherweise Einschränkungen bei dem Entwurf der zentralen Abstraktionen und
-Schnittstellen liegen. Es sollte dabei insbesondere auch ausgeführt werden, 
-in welcheRichtung sich die Abstraktionen und Schnittstellen erweitern oder anpassen lassen, 
-oh-ne vorhandenen Code zu verändern. Danach kann die Implementierung, 
-die Test-Suite(sofernvorhanden)und/oderdieBeispielanwendungvorgestelltwerden.
-Abschließendist eine kurze Zusammenfassung oder ein Ausblick denkbar.
