@@ -1,0 +1,15 @@
+\chapter{Environments}
+\section{Build}
+\label{build}
+
+A makefile is used for compiling the library and linking it to the example (binary: example) as well as the unit tests (binary: tests). Binaries can be found in the \emph{bin} directory. The compiler is set to \emph{-std=c++20} since \emph{Concepts} are a \emph{C++20} feature. Binaries have to be executed in the main directory (./bin/example) since relative paths are used for solving a mdp from file. 
+
+Due to the modular concept, the concrete implementations are not referenced anywhere in the rest of the codebase. Since registration of all modules is done via instantiating unreferenced, static variables, the linker has to be told to not drop any unreferenced symbols. This is achieved using the \emph{-whole-archive} flag. The linker on macOS requires a different flag. This is considered by setting an OS variable when executing make: \emph{make OS=osx}. Using this linker option causes the binary to be bloated. To reduce the bloating effect a separate library could be build only consisting of modules. 
+
+Manual registration would not need any of the mentioned measures and should be considered when releasing an application. 
+
+
+\section{Testing}
+
+\emph{Catch2}\autocite{Catch} has been chosen as a test framework. It is a header only library which eases integration. Test cases for each class are located in the same directory with a \emph{\_t.cc} suffix. The build process generates an executable containing all tests in the \emph{bin} directory. Overall 62 assertions in 9 different test cases are evaluated. 
+Testing the \emph{concepts and constraints} is split up from the overall testing since the expected outcome is a compile-timer error. Manual compilation and review of following file is required to validate the introduced concept: concepts\_t.cxx.

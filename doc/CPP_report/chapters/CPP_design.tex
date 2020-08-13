@@ -1,0 +1,18 @@
+\chapter {Design Goals}
+\label{goals}
+
+Considering potential use cases is an important step when creating the interface and architecture of a library. The purpose of the developed library is to solve a defined decision making problem and in order to do that following input is needed:
+
+\begin{itemize}
+	\item Definition of the Markov decision process
+	\item Configuration and parameters for solving
+\end{itemize}
+
+For the definition of the MDP there are two main use cases. It has either been formally described in a file or it lives within an application. For the first use case it has been decided that the library shall provide functionality to parse a MDP from a file and that additional parsers for other formats can be easily added. For the other use case the library shall expose the model class in the interface so that an external application can create and setup a MDP and then pass it to the library for solving. For this use case a wrapper class would have been an alternative to directly exposing the model class. This alternative has drawbacks due to the different representations possible and also the sizes of the data structures that need to defined. For example providing a wrapper method to set the probability value of a single state transition for a given action would require infeasible many calls for a MDP with a large state and action space. 
+
+A structure containing all necessary parameters shall be exposed in the interface so that the application can setup the structure to its needs and then pass it for solving. 
+
+After solving the typical use case is to analyze the resulting strategy and/or deploy it to the environment it has been created for. This requirement shall be fulfilled by transferring the ownership to an object containing the policy. Owning this object shall enable the application to draw actions for a given state. This requirement is especially crucial for stochastic policies, where the policy object also depends on random number generators. Providing the application with the ownership of a policy enables easy deployment of the optimized strategy. An alternative would have been the transfer of a data structure defining the resulting stochastic or deterministic policy. In case of a stochastic policy this can be a heavily complex data structure (for example when using neural networks as a policy) and has consequently not been considered. 
+Since many different solving methods exist, new functionality shall be easy to integrate.
+The library shall guarantee \emph{basic exception safety}. 
+To ensure high code quality a common C++ guideline has been followed \autocite{guideline} as well as a style guide for naming conventions \autocite{style}. The project layout has been chosen according to another guideline \autocite{layout}.

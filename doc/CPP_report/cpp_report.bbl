@@ -17,6 +17,28 @@
 \endgroup
 
 \datalist[entry]{nty/global//global/global}
+  \entry{guideline}{online}{}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{title}{C++ Core Guidelines}
+    \verb{url}
+    \verb https://github.com/isocpp/CppCoreGuidelines
+    \endverb
+    \field{year}{2020}
+  \endentry
+
+  \entry{layout}{online}{}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{title}{C++ project layout guide}
+    \verb{url}
+    \verb https://github.com/vector-of-bool/pitchfork
+    \endverb
+    \field{year}{2020}
+  \endentry
+
   \entry{Catch}{online}{}
     \field{labeltitlesource}{title}
     \field{sortinit}{C}
@@ -24,6 +46,17 @@
     \field{title}{Catch2 test framework}
     \verb{url}
     \verb https://github.com/catchorg/Catch2
+    \endverb
+    \field{year}{2020}
+  \endentry
+
+  \entry{style}{online}{}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{title}{Google C++ Style Guide}
+    \verb{url}
+    \verb https://google.github.io/styleguide/cppguide.html
     \endverb
     \field{year}{2020}
   \endentry

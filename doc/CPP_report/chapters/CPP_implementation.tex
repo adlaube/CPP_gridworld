@@ -1,26 +1,24 @@
 \chapter{Implementation}
 
-\section{Design goals}
-\label{goals}
+\begin{minipage}{12cm}
 
-Considering potential use cases is an important step when creating the interface and architecture of a library. The purpose of the developed library is to solve a defined decision making problem and in order to do that following input is needed:
-
-\begin{itemize}
-	\item Definition of the Markov decision process
-	\item Configuration and parameters for solving
-\end{itemize}
-
-For the definition of the MDP there are two main use cases. It has either been formally described in a file or it lives within an application. For the first use case it has been decided that the library shall provide functionality to parse a MDP from a file and that additional parsers for other formats can be easily added. For the other use case the library shall expose the model class in the interface so that an external application can create and setup a MDP and then pass it to the library for solving. For this use case a wrapper class would have been an alternative to directly exposing the model class. This alternative has drawbacks due to the different representations possible and also the sizes of the data structures that need to defined. For example providing a wrapper method to set the probability value of a single state transition for a given action would require infeasible many calls for a MDP with a large state and action space. 
-
-A structure containing all necessary parameters shall be exposed in the interface so that the application can setup the structure to its needs and then pass it for solving. 
-
-After solving the typical use case is to analyze the resulting strategy and/or deploy it to the environment it has been created for. This requirement shall be fulfilled by transferring the ownership to an object containing the policy. Owning this object shall enable the application to draw actions for a given state. This requirement is especially crucial for stochastic policies, where the policy object also depends on random number generators. Providing the application with the ownership of a policy enables easy deployment of the optimized strategy. An alternative would have been the transfer of a data structure defining the resulting stochastic or deterministic policy. In case of a stochastic policy this can be a heavily complex data structure (for example when using neural networks as a policy) and has consequently not been considered. 
-Since many different solving methods exist, new functionality shall be easy to integrate.
-The library shall guarantee \emph{basic exception safety}. 
-
+\dirtree{%
+	.1 /.
+	.1 bin\DTcomment{binaries}.
+	.1 data\DTcomment{filebased MDPs}.
+	.1 examples\DTcomment{example applications}.
+	.1 src.
+	.2 mdpsolve\DTcomment{library code}.
+	.3 Evaluations\DTcomment{policy evaluation modules}.
+	.3 Parser\DTcomment{mdp parsing modules}.
+	.3 Policies\DTcomment{policy improvement modules}.
+	.3 Solvers\DTcomment{solving algorithms modules}.
+	.1 tests\DTcomment{test environment}.
+}
+\end{minipage}
 \section{Interface}
 
-Considering the requirements from \autoref{goals} the header \emph{interface.hpp} is provided to the application:
+Considering the requirements from \autoref{goals} the header \emph{interface.hpp} shall be provided to the application:
 
 \begin{lstlisting}
 struct Params{
@@ -75,7 +73,14 @@ Four interfaces inherit from the module class and describe different types of mo
 	\item Solver (solver.hpp)
 \end{itemize}
 
-The abstract \emph{Parser} class acts as an interface for concrete Parser implementations. There exist several file formats to describe MDPs. For the sake of a running example, a rudimentary implementation to parse \emph{POMDP} file format \autocite{Cassandra} is provided. This class only parses a minimal subset of the POMDP grammar and lacks validation. 
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=.9\textwidth]{images/Modules.png}
+	\caption{\label{fig:bild2}Model and Modules}
+	\label{Modules}
+\end{figure}
+
+The abstract \emph{Parser} class acts as an interface for concrete Parser implementations. There exist several file formats to describe MDPs. For the sake of a running example, a rudimentary implementation to parse \emph{POMDP} file format \autocite{Cassandra} is provided. This format is referred to in the code by the name of the author: \emph{Cassandra}. This class only parses a minimal subset of the POMDP grammar and lacks validation. 
 
 The abstract \emph{Policy} class as a interface for different variations of \emph{policy improvement}. The \emph{policy mapping} member is a multdimensional matrix represented as an \emph{Array3d Object} (\autoref{array}) in order to both support deterministic policies and stochastic policies. A method is provided to select an action given a certain state. This is needed by Evaluation-implementations. The policy class is also used as a return type for the external interface of the library. This way an external application can use the reference to directly integrate the optimal strategy for the environment. 
 
@@ -88,7 +93,7 @@ Classes implementing the required interface of these interfaces are located in t
 \section{Module factory}
 \label{integration}
 
-In order to minimize the amount of effort to integrate for example an additional Parser or Solver, a factory (\emph{factory.hpp}) is implemented. This enables integration without adding any references in existing code. To ensure scalability it has been decided to use a template class as a factory and instantiate a factory for each module category (Parser, Policy, Evaluation, Solver). Based on the factory template, customized factories can be implemented if needed. The factory template class is designed as a singleton and follows the \emph{construct on first use idiom}. A given name defined in the constructor of a new module is used as an identifer within the factory to decide which object to create. Using multiple factories reduces the risk of name conflicts between modules.  Alternatively a global factory could have been used with the category name encorporated in the given name. A global factory would have offered lower flexibility and was disregarded. 
+In order to minimize the amount of effort to integrate and instantiate additional functionality, a factory (\emph{factory.hpp}) is implemented. This enables integration without adding any references in existing code. To ensure scalability it has been decided to use a template class as a factory and instantiate a factory for each module category (Parser, Policy, Evaluation, Solver). Based on the factory template, customized factories can be implemented if needed. The factory template class is designed as a singleton and follows the \emph{construct on first use idiom}. A given name defined in the constructor of a new module is used as an identifer within the factory to decide which object to create. Using multiple factories reduces the risk of name conflicts between modules.  Alternatively a global factory could have been used with the category name encorporated in the given name. A global factory would have offered lower flexibility and was disregarded. 
 
 The constructor (\emph{constructor.hpp})is a template class and used as a type in the factory as well as a base class for concrete constructors. The concrete constructor class has to override the virtual create(..) method and register to its factory.
 In order to minimize necessary code changes when including a new type, it has been decided to implement self registering types by instantiating a static constructor object. This has drawbacks when it comes to building since the static objects and new functionality remains unreferenced and dropping it has to be avoided as described in \autoref{build}. 
@@ -130,6 +135,10 @@ In order to make use of std::vector without causing fragmented memory the \emph{
 
 The Array3d template class does not constrain the template argument in any way. Since internally a std::vector object with the same type has to be instantiated, the restrictions that the vector class provides are sufficient. 
 
+
+
+
+
 \section{Example}
 
 A sample mdp is provided in the \emph{data} directory: "4x3.95.POMDP" \autocite{Cassandra}. The mdp describes a 4x3 gridworld (\autoref{maze}) with a blocked cell (\#), a cell with high positive reward(+1) and a cell with high negative reward(-1). The cell field is not in the state space and the states of the cells with high rewards cause the transition to a random state (restarting). The action space consists of four move actions: north(N), south(S), east(E), west(W). Moving into the wall or into the blocked cell will return the same state. With a probability of 20\% an move into a direction which is perpendicular to the intended direction is happening. The mdp is used with full observability. 
@@ -148,10 +157,6 @@ The example application (directory: \emph{examples}) performs 20 steps of policy
 	\label{maze}
 \end{table}
 
-
-% Please add the following required packages to your document preamble:
-% \usepackage[table,xcdraw]{xcolor}
-% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
 \begin{table}[]
 	\centering
 	\begin{tabular}{|c|c|c|c|}
@@ -163,16 +168,3 @@ The example application (directory: \emph{examples}) performs 20 steps of policy
 	\caption{Solution of the example mdp}
 	\label{mazesolution}
 \end{table}
-
-\section{Build}
-\label{build}
-
-A makefile is used for compiling the library and linking it to the example (binary: example) as well as the unit tests (binary: tests). The compiler is set to \emph{-std=c++20} since \emph{Concepts} are a \emph{C++20} feature. Binaries have to be executed in the main directory (./bin/example) since relative paths are used for solving a mdp from file. 
-
-Due to the modular concept, the concrete implementations are not referenced anywhere in the rest of the codebase. Since registration of all modules is done via instantiating unreferenced, static variables, the linker has to be told to not drop any unreferenced symbols. This is achieved using the \emph{-whole-archive} flag. The linker on macOS requires a different flag. This is considered by setting an OS variable when executing make: \emph{make OS=osx}. Using this option causes the binary to be bloated. For lightweight binaries the modules have to registered in the main code base in order to allow the linker to drop unreferenced symbols. 
-
-
-\section{Testing}
-
-\emph{Catch2}\autocite{Catch} has been chosen as a test framework. It is a header only library which eases integration. Test cases for each class are located in the same directory with a \emph{\_t.cc} suffix. The build process generates an executable containing all tests in the \emph{bin} directory. Overall 62 assertions in 9 different test cases are evaluated. 
-Testing the \emph{concepts and constraints} is split up from the overall testing since the expected outcome is a compile-timer error. Manual compilation and review of following file is required to validate the introduced concept: concepts\_t.cxx.
