@@ -62,7 +62,7 @@ R_a(s,s') = reward\_matrix[a,s,s']
 \section{Modules}
 \label{chaptermodule}
 
-In order to achieve a high level of extensibility this  base class acts a blue print for classes to read or write the model. Using this common interface enables easy integration which is described in detail in \autoref{integration}. The module class consists of a protected constructor to set its most important member: a reference to the model. 
+In order to achieve a high level of extensibility this base class acts a blue print for classes to read or write the model. Using this common interface enables easy integration which is described in detail in \autoref{integration}. The module class consists of a protected constructor to set its most important member: a reference to the model. This class is totally independent from the new C++20 feature which is also called Modules. 
 
 Four interfaces inherit from the module class and describe different types of modules:
 

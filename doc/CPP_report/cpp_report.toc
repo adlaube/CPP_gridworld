@@ -25,18 +25,18 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.6}Example}{12}{section.4.6}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Environments}{13}{chapter.5}% 
+\contentsline {chapter}{\numberline {5}Environments}{14}{chapter.5}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Build}{13}{section.5.1}% 
+\contentsline {section}{\numberline {5.1}Build}{14}{section.5.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Testing}{13}{section.5.2}% 
+\contentsline {section}{\numberline {5.2}Testing}{14}{section.5.2}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Extensibility}{15}{chapter.6}% 
+\contentsline {chapter}{\numberline {6}Extensibility}{16}{chapter.6}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Modules}{15}{section.6.1}% 
+\contentsline {section}{\numberline {6.1}Modules}{16}{section.6.1}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Partial Observability}{15}{section.6.2}% 
+\contentsline {section}{\numberline {6.2}Partial Observability}{16}{section.6.2}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}Reinforcement Learning}{15}{section.6.3}% 
+\contentsline {section}{\numberline {6.3}Reinforcement Learning}{16}{section.6.3}% 
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Bibliography}{17}{chapter*.2}% 
+\contentsline {chapter}{\nonumberline Bibliography}{18}{chapter*.2}% 

@@ -2,11 +2,11 @@
 
 \section{Modules}
 
-The concept of modules enables to easily integrate additional functionality. By forcing new classes to inherit from module, information that is needed in all modules can be easily added, for example an internal version information. The integrated module categories (Solver, Policy,...) provide interfaces in order to avoid any changes in the existing code base. 
+The concept of modules enables to easily integrate additional functionality. By forcing new classes to inherit from module, information that is common over all modules can be easily added, for example an internal version information. The integrated module categories (Solver, Policy,...) provide interfaces in order to avoid any changes in the existing code base. 
 
 \section{Partial Observability}
 
-One variant of MDPs are with partial observable Markov decision processes, abbreviated by \emph{POMDP}. In addition to a MDP, the state cannot be directly observed. Instead \emph{observations} are accessible which can be assigned to a certain state with a probability. By inheriting from the Model class a POMDP class can be easily integrated. 
+One variant of MDPs are partial observable Markov decision processes, abbreviated by \emph{POMDP}. In addition to a MDP, the state cannot be directly observed. Instead \emph{observations} are accessible which can be assigned to a certain state with some probability. By inheriting from the Model class a POMDP class can be easily integrated. 
 
 \section{Reinforcement Learning}
 
