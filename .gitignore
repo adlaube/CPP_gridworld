@@ -1,7 +1,7 @@
 *
 !*/
 !*.*
-!src/Makefile
+!Makefile
 
 *.dSYM
 
