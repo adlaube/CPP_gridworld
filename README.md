@@ -1,6 +1,6 @@
 # CPP_gridworld
 
-[report](./hausarbeit/report.pdf)
+[report](/doc/CPP_report/cpp_report.pdf)
 
 To build on macOS:
 
