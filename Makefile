@@ -4,7 +4,7 @@ SRC_DIR = ./src/mdpsolve/
 INCLUDE_DIR = .
 TEST_DIR = ./tests/
 
-CXXFLAGS = -Wall -std=c++2a -g -I$(SRC_DIR) -I$(INCLUDE_DIR) -MMD
+CXXFLAGS = -Wall -std=c++20 -g -I$(SRC_DIR) -I$(INCLUDE_DIR) -MMD
 CXX = g++
 CC = g++
 
